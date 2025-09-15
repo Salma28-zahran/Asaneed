@@ -2,20 +2,24 @@
 import 'package:flutter/material.dart';
 
 class AppColor {
-  static const Color floatButtonbackgroundColor = Color(0xFF8B3D59); // Pink
+  static const Color floatButtonbackgroundColor = Color(0xff0F9585); // Pink
   static const Color backgroundIcon = Color(0xFFFFFFFF); // White
-  static const Color textColor = Color(0xFF333333); // Dark gray
+ // static const Color textColor = Color(0xFF333333); // Dark gray
   static const Color backgroundcolor = Color(0xFFF8F9FA); // Light gray
   static const Color textColorheadline1 = Color(0xFF000000); // Black
   static const Color textColorheadline2 = Color(0xFF424242); // Gray
   static const Color textColorbodyText1 = Color(0xFF666666); // Light gray
   static const Color textColorbodyText2 = Color(0xFF757575); // Medium gray
-  static const Color primary = Color(0xFF8B3D59);
-  static const Color smiRed = Color(0xFF8B3D57);
+  static const Color primary = Color(0xff0F9585);
+  static const Color primary2 = Color(0xffE8FFFC);
+  static const Color primary3 = Color(0xff61f18f);
+
+
+
 
   // You can define more colors as per your requirement
   static const ButtonThemeData buttonTheme = ButtonThemeData(
-    buttonColor: Colors.pink, // Button color
+    buttonColor: primary, // Button color
     textTheme: ButtonTextTheme.primary, // Use primary color for text
   );
 
@@ -28,6 +32,7 @@ class AppColor {
   static const Color white = Color(0xffF8F9FD);
   static const Color blue = Color(0xFF90CAF9);
   static const Color blue2 = Color(0xFF0059A1); //Color(0xFF42A5F5);
+
 
   static const Color deepPurple = Color(0xFF893253);
 
@@ -64,7 +69,7 @@ class AppColor {
 
   static const MaterialColor primarySwatchbackgroundColor = Colors.deepPurple;
 
-  static const Color titleColor = AppColor.primaryColor;
+  static const Color titleColor = AppColor.white;
 
   static const Color textColorAppbar = AppColor.blue2;
   static const Color textColorDisabled = AppColor.grey;
@@ -83,14 +88,14 @@ class AppColor {
   const RadialGradient(colors: [kLightGoldColor, mainColor], radius: 4);
 
   static const TextStyle titleStyle = TextStyle(
-      fontSize: 20, color: AppColor.titleColor, fontWeight: FontWeight.bold);
+      fontSize: 14, color: AppColor.titleColor, fontWeight: FontWeight.w400);
   static const TextStyle titleStyle2 = TextStyle(
-      fontSize: 20, color: AppColor.white, fontWeight: FontWeight.bold);
+      fontSize: 20, color: AppColor.black, fontWeight: FontWeight.bold);
   static const TextStyle titleStyle3 =
   TextStyle(color: AppColor.primaryColor, fontWeight: FontWeight.bold);
 
-  static const TextStyle titleStyle4 =
-  TextStyle(color: AppColor.white, fontWeight: FontWeight.bold);
+  static const TextStyle titleStyle4 =TextStyle(
+      fontSize: 20, color: AppColor.black, fontWeight: FontWeight.w400);
 
   static const TextStyle textStylesmall =
   TextStyle(color: AppColor.primaryColor, fontWeight: FontWeight.bold);
@@ -142,7 +147,7 @@ extension HexaColor on Color {
   static Color fromHexa(hexColorString) {
     hexColorString = hexColorString.replaceAll('#', '');
     if (hexColorString.length == 6) {
-      hexColorString = "FF$hexColorString"; // 8 char with opacity 100%
+      hexColorString = "FF$hexColorString";
     }
     return Color(int.parse(hexColorString, radix: 16));
   }

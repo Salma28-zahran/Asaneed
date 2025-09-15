@@ -1,11 +1,11 @@
-
-
-
 import 'package:flutter/material.dart';
+import 'core/route/routes_generator.dart';
+import 'core/route/routes.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -13,13 +13,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-     // initialRoute: ,
-      routes: {
-        // SuraDetailsScreen.routeName: (context) => const SuraDetailsScreen(),
-      },
 
+      initialRoute: PageRouteName.homeScreen,
 
-
+      onGenerateRoute: RoutesGenerator.onGenerateRoutes,
     );
   }
 }
