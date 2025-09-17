@@ -1,3 +1,4 @@
+import 'package:asaneed/core/resources/app_assets_manager.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -49,10 +50,13 @@ class CustomBottomNavBar extends StatelessWidget {
                   showUnselectedLabels: false,
                   iconSize: 24,
                   items: [
-                    _buildNavItem(Icons.menu_book, 0), // Book
-                    _buildNavItem(Icons.bookmark_border, 1), // Fav
-                    _buildNavItem(Icons.search, 2), // Search
-                    _buildNavItem(Icons.home, 3), // Home
+                    _buildNavItem(
+                      const ImageIcon(AssetImage(AssetsManager.book1)),
+                      0,
+                    ),
+                    _buildNavItem(const Icon(Icons.search), 1),
+                    _buildNavItem(const Icon(Icons.bookmark_border), 2),
+                    _buildNavItem(const Icon(Icons.home), 3),
                   ],
                 ),
               ),
@@ -63,7 +67,7 @@ class CustomBottomNavBar extends StatelessWidget {
     );
   }
 
-  BottomNavigationBarItem _buildNavItem(IconData icon, int index) {
+  BottomNavigationBarItem _buildNavItem(Widget icon, int index) {
     final bool isSelected = currentIndex == index;
 
     return BottomNavigationBarItem(
@@ -74,9 +78,12 @@ class CustomBottomNavBar extends StatelessWidget {
           color: isSelected ? AppColor.primary : Colors.transparent,
           shape: BoxShape.circle,
         ),
-        child: Icon(
-          icon,
-          color: isSelected ? Colors.white : Colors.grey,
+        child: IconTheme(
+          data: IconThemeData(
+            color: isSelected ? Colors.white : Colors.grey,
+            size: 24,
+          ),
+          child: icon,
         ),
       ),
     );

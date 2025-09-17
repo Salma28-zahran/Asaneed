@@ -1,4 +1,3 @@
-//import 'dart:js_util';
 import 'package:flutter/material.dart';
 
 class AppColor {
@@ -34,7 +33,10 @@ class AppColor {
   static const Color blue2 = Color(0xFF0059A1); //Color(0xFF42A5F5);
 
 
-  static const Color deepPurple = Color(0xFF893253);
+  static const Color purple = Color(0xFFF5F3FF);
+  static const Color purple2 = Color(0xFF8B5CF6);
+
+
 
   static const Color primaryColor = Color(0xFF0059A1); //Color(0xff5DB1DF);
 
