@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppColor {
   static const Color floatButtonbackgroundColor = Color(0xff0F9585); // Pink
@@ -35,6 +36,18 @@ class AppColor {
 
   static const Color purple = Color(0xFFF5F3FF);
   static const Color purple2 = Color(0xFF8B5CF6);
+  static const Color pink = Color(0xffFDF2F8);
+  static const Color pink2 = Color(0xffEC4899);
+  static const Color orange = Color(0xffFFF1E6);
+  static const Color orange2 = Color(0xffFF9B4D);
+
+
+
+
+
+
+
+
 
 
 
@@ -95,6 +108,21 @@ class AppColor {
       fontSize: 20, color: AppColor.black, fontWeight: FontWeight.bold);
   static const TextStyle titleStyle3 =
   TextStyle(color: AppColor.primaryColor, fontWeight: FontWeight.bold);
+
+
+  ///////////////الصحابه//////
+  static TextStyle titleSahaba =
+  GoogleFonts.inter(color: AppColor.purple2, fontWeight: FontWeight.w500,fontSize: 14);
+
+  static TextStyle titletabeen =
+  GoogleFonts.inter(color: AppColor.pink2, fontWeight: FontWeight.w500,fontSize: 14);
+
+  static TextStyle titletabeen2 =
+  GoogleFonts.inter(color: AppColor.orange2, fontWeight: FontWeight.w500,fontSize: 14);
+
+
+
+
 
   static const TextStyle titleStyle4 =TextStyle(
       fontSize: 20, color: AppColor.black, fontWeight: FontWeight.w400);
