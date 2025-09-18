@@ -1,9 +1,13 @@
 import 'package:asaneed/core/resources/app_assets_manager.dart';
+import 'package:asaneed/core/route/routes.dart';
+import 'package:asaneed/core/route/routes_generator.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final VoidCallback onCardTap;
+
+  const HomePage({super.key, required this.onCardTap});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -11,21 +15,23 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool isPressed = false;
+  bool isPressed2 = false;
+  bool isTreePressed = false;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _homePage(),
-    );
+    return Scaffold(body: _homePage());
   }
+
   Widget _homePage() {
-    return  SingleChildScrollView(
+    return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
+
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.all(16),
@@ -51,7 +57,9 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          SizedBox(height: 5),
+
+          const SizedBox(height: 5),
+
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: Align(
@@ -64,19 +72,18 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
 
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
 
-          // أول كارت
+          // 🔹 أول كارت
           InkWell(
-            onTap: () {
+            onTap: () async {
               setState(() {
-                isPressed = !isPressed;
+                isPressed = true;
               });
 
-             // Navigator.push(
-               // context,
-               // MaterialPageRoute(builder: (_) => const AnotherPage()),
-             // );
+              await Future.delayed(const Duration(milliseconds: 150));
+
+              widget.onCardTap();
             },
             child: Container(
               margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
@@ -91,20 +98,21 @@ class _HomePageState extends State<HomePage> {
                     width: 24,
                     height: 85,
                     decoration: BoxDecoration(
-                      color: AppColor.primary,
+                      color: isPressed ? Colors.white : AppColor.primary,
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(12),
                         bottomLeft: Radius.circular(12),
                       ),
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Icon(
                         Icons.arrow_back_ios,
-                        color: Colors.white,
+                        color: isPressed ? AppColor.primary : Colors.white,
                         size: 16,
                       ),
                     ),
                   ),
+
                   const SizedBox(width: 8),
                   Expanded(
                     child: Column(
@@ -115,7 +123,10 @@ class _HomePageState extends State<HomePage> {
                           style: AppColor.titleStyle2.copyWith(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
-                            color: isPressed ? AppColor.white : AppColor.titleStyle2.color,
+                            color:
+                                isPressed
+                                    ? Colors.white
+                                    : AppColor.titleStyle2.color,
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -123,7 +134,10 @@ class _HomePageState extends State<HomePage> {
                           "استعراض على شكل بطاقات",
                           style: AppColor.titleStyle2.copyWith(
                             fontSize: 12,
-                            color: isPressed ? AppColor.white : AppColor.titleStyle2.color,
+                            color:
+                                isPressed
+                                    ? Colors.white
+                                    : AppColor.titleStyle2.color,
                           ),
                         ),
                       ],
@@ -135,147 +149,176 @@ class _HomePageState extends State<HomePage> {
                     width: 40,
                     height: 40,
                     color: AppColor.primary3,
-                  )
+                  ),
                 ],
               ),
             ),
           ),
 
-
           // ثاني كارت
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-            //padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-            decoration: BoxDecoration(
-              color: AppColor.primary2,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: AppColor.primary, width: 1.5),
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 24,
-                  height: 85,
-                  decoration: BoxDecoration(
-                    color: AppColor.primary,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(12),
-                      bottomLeft: Radius.circular(12),
+          InkWell(
+            onTap: () {
+              setState(() {
+                isPressed2 = true; // أول ما تدوسي عليه يتثبت على اللون الجديد
+              });
+              Navigator.pushNamed(context, PageRouteName.circle1);
+              print("تم الضغط على كارت الدائرة الإسنادية");
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+              decoration: BoxDecoration(
+                color: isPressed2 ? AppColor.primary : AppColor.primary2,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: AppColor.primary, width: 1.5),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 24,
+                    height: 85,
+                    decoration: BoxDecoration(
+                      color: isPressed2 ? Colors.white : AppColor.primary,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        bottomLeft: Radius.circular(12),
+                      ),
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: isPressed2 ? AppColor.primary : Colors.white,
+                        size: 16,
+                      ),
                     ),
                   ),
-                  child: Center(
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                      size: 16,
-                    ),
-                  ),
-                ),
-
-                SizedBox(width: 8),
-
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        "الدائرة الإسنادية",
-                        style: AppColor.titleStyle2.copyWith(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "الدائرة الإسنادية",
+                          style: AppColor.titleStyle2.copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color:
+                                isPressed
+                                    ? Colors.white
+                                    : AppColor.titleStyle2.color,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        "استعراض الأسنايد على شكل دائرة متعددة الطبقات",
-                        style: AppColor.titleStyle2.copyWith(fontSize: 12),
-                      ),
-                    ],
+                        const SizedBox(height: 4),
+                        Text(
+                          "استعراض الأسنايد على شكل دائرة متعددة الطبقات",
+                          style: AppColor.titleStyle2.copyWith(
+                            fontSize: 12,
+                            color:
+                                isPressed
+                                    ? Colors.white
+                                    : AppColor.titleStyle2.color,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(width: 4,),
-
-                Image.asset(
-                  //color: AppColor.primary3,
-                  AssetsManager.circle,
-                  width:40 ,
-                  height:40 ,
-                )
-              ],
+                  const SizedBox(width: 4),
+                  Image.asset(
+                    AssetsManager.circle,
+                    width: 40,
+                    height: 40,
+                    //color: AppColor.primary,
+                  ),
+                ],
+              ),
             ),
           ),
 
           // ثالث كارت
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-            decoration: BoxDecoration(
-              color: AppColor.primary2,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: AppColor.primary, width: 1.5),
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 24,
-                  height: 85,
-                  decoration: BoxDecoration(
-                    color: AppColor.primary,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(12),
-                      bottomLeft: Radius.circular(12),
+
+          InkWell(
+            onTap: () {
+              setState(() {
+                isTreePressed = true;
+              });
+              print("تم الضغط على كارت شجرة الإسنادية");
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+              decoration: BoxDecoration(
+                color: isTreePressed ? AppColor.primary : AppColor.primary2,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: AppColor.primary, width: 1.5),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 24,
+                    height: 85,
+                    decoration: BoxDecoration(
+                      color: isTreePressed ? Colors.white : AppColor.primary,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        bottomLeft: Radius.circular(12),
+                      ),
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: isTreePressed ? AppColor.primary : Colors.white,
+                        size: 16,
+                      ),
                     ),
                   ),
-                  child: Center(
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                      size: 16,
-                    ),
-                  ),
-                ),
-
-                SizedBox(width: 8),
-
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        "شجرة الإسنادية",
-                        style: AppColor.titleStyle2.copyWith(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "شجرة الإسنادية",
+                          style: AppColor.titleStyle2.copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color:
+                                isTreePressed
+                                    ? Colors.white
+                                    : AppColor.titleStyle2.color,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        "استعراض الأسنايد على شكل شجري",
-                        style: AppColor.titleStyle2.copyWith(fontSize: 12),
-                      ),
-                    ],
+                        const SizedBox(height: 4),
+                        Text(
+                          "استعراض الأسنايد على شكل شجري",
+                          style: AppColor.titleStyle2.copyWith(
+                            fontSize: 12,
+                            color:
+                                isTreePressed
+                                    ? Colors.white
+                                    : AppColor.titleStyle2.color,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-
-                SizedBox(width: 12),
-
-                Image.asset(
-                  AssetsManager.tree,
-                  width: 40,
-                  height: 40,
-                ),
-
-                SizedBox(width: 8),
-              ],
+                  const SizedBox(width: 12),
+                  Image.asset(
+                    AssetsManager.tree,
+                    width: 40,
+                    height: 40,
+                    //color: AppColor.primary3,
+                  ),
+                  const SizedBox(width: 8),
+                ],
+              ),
             ),
           ),
 
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
 
+          // بوكس الشرح الأول
           Padding(
             padding: const EdgeInsets.only(left: 5, right: 5),
             child: Container(
-              margin:EdgeInsets.all(5),
-
+              margin: const EdgeInsets.all(5),
               width: 380,
               height: 90,
               decoration: BoxDecoration(
@@ -285,7 +328,7 @@ class _HomePageState extends State<HomePage> {
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
                     blurRadius: 6,
-                    offset: Offset(0, 3),
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
@@ -302,16 +345,17 @@ class _HomePageState extends State<HomePage> {
                     ),
                     children: [
                       TextSpan(
-                        text: "هذا المكان مخصص لشروحات وتعريفات بالدائرة الإسنادية\n",
+                        text:
+                            "هذا المكان مخصص لشروحات وتعريفات بالدائرة الإسنادية\n",
                         style: TextStyle(color: AppColor.primary),
                       ),
                       TextSpan(
                         text: "والحديث عنها\n",
                         style: TextStyle(color: AppColor.primary),
                       ),
-                      TextSpan(
+                      const TextSpan(
                         text:
-                        "يمكن استخدام هذا المكان كمرجع لمراجعة أهمية الدائرة الإسنادية.",
+                            "يمكن استخدام هذا المكان كمرجع لمراجعة أهمية الدائرة الإسنادية.",
                       ),
                     ],
                   ),
@@ -320,11 +364,13 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
 
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
+
+          // بوكس الشرح الثاني
           Padding(
             padding: const EdgeInsets.only(left: 5, right: 5),
             child: Container(
-              margin:EdgeInsets.all(5),
+              margin: const EdgeInsets.all(5),
               width: 384,
               height: 70,
               decoration: BoxDecoration(
@@ -334,7 +380,7 @@ class _HomePageState extends State<HomePage> {
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
                     blurRadius: 6,
-                    offset: Offset(0, 3),
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
@@ -350,18 +396,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-          )
-
-
-
-
-
-
-
-
-
-
-
+          ),
         ],
       ),
     );

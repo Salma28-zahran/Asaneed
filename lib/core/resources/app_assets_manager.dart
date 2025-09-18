@@ -7,6 +7,8 @@ abstract class AssetsManager {
   static const String sal = "assets/images/png/sal.png";
   static const String book2 = "assets/images/png/book2.png";
   static const String sal2 = "assets/images/png/sal2.png";
+  static const String search = "assets/images/png/search.png";
+
 
 
 

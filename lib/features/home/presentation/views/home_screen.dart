@@ -2,6 +2,7 @@ import 'package:asaneed/core/resources/app_assets_manager.dart';
 import 'package:asaneed/features/home/presentation/views/tabs/book_screen.dart';
 import 'package:asaneed/features/home/presentation/views/tabs/fav_screen.dart';
 import 'package:asaneed/features/home/presentation/views/tabs/home_page.dart';
+import 'package:asaneed/features/home/presentation/views/tabs/search_screen.dart';
 import 'package:asaneed/features/home/presentation/widgets/custom_app_bar.dart';
 import 'package:asaneed/features/home/presentation/widgets/custom_bottom_navbar.dart';
 import 'package:asaneed/theme/app_theme.dart';
@@ -16,20 +17,30 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 3;
-  final List<Widget> _pages = [
-    const BookScreen(),
-    const Center(child: Text("Search Page")),
-    const FavScreen(),
-    const HomePage(),
 
-  ];
-//n
+  late final List<Widget> _pages;
+
   @override
+  void initState() {
+    super.initState();
+    _pages = [
+      const BookScreen(),
+      const SearchScreen(),
+      const FavScreen(),
+      HomePage(
+        onCardTap: () {
+          setState(() {
+            _selectedIndex = 0; // BookScreen
+          });
+        },
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: (_selectedIndex == 0 || _selectedIndex == 2)
+      appBar: (_selectedIndex == 0 || _selectedIndex == 1 || _selectedIndex == 2)
           ? null
           : const CustomAppBar(),
       body: _pages[_selectedIndex],
@@ -43,5 +54,5 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-  }
+}
 
