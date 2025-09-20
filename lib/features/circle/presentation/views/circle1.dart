@@ -22,6 +22,7 @@ class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
     _tabController = TabController(length: 3, vsync: this);
     _tabController.index = 2;
   }
+
   void _onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
@@ -39,12 +40,13 @@ class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
   }
 
   Widget buildTab(
-      String title,
-      int index,
-      Color activeBgColor,
-      Color activeTextColor,
-      TextStyle baseStyle,
-      double width) {
+    String title,
+    int index,
+    Color activeBgColor,
+    Color activeTextColor,
+    TextStyle baseStyle,
+    double width,
+  ) {
     return AnimatedBuilder(
       animation: _tabController,
       builder: (context, _) {
@@ -124,17 +126,18 @@ class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
       ),
       body: TabBarView(
         controller: _tabController,
-        children: const [
-          const Tabeen2Screen(),
-          const Tabeen1Screen(),
-           SahabaScreen(),
+        children: [
+          Tabeen2Screen(tabController: _tabController),
+
+          Tabeen1Screen(tabController: _tabController),
+
+          SahabaScreen(tabController: _tabController),
         ],
       ),
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: _currentIndex,
         onTap: _onTabTapped,
       ),
-
     );
   }
 }

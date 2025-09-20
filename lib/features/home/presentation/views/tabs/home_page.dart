@@ -159,10 +159,10 @@ class _HomePageState extends State<HomePage> {
           InkWell(
             onTap: () {
               setState(() {
-                isPressed2 = true; // أول ما تدوسي عليه يتثبت على اللون الجديد
+                isPressed2 = true;
               });
               Navigator.pushNamed(context, PageRouteName.circle1);
-              print("تم الضغط على كارت الدائرة الإسنادية");
+             // print("تم الضغط على كارت الدائرة الإسنادية");
             },
             child: Container(
               margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
