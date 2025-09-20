@@ -2,17 +2,18 @@ import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class SahabaScreen extends StatelessWidget {
-  const SahabaScreen({super.key});
+  final TabController tabController;
+  const SahabaScreen({super.key, required this.tabController});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.white,
-      body: _sahabaContent(),
+      body: _sahabaContent(context),
     );
   }
 
-  Widget _sahabaContent() {
+  Widget _sahabaContent(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -95,18 +96,31 @@ class SahabaScreen extends StatelessWidget {
 
   /// المربع الصغير
   Widget _nameBox() {
-    return Container(
-      width: 82,
-      height: 82,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: Color(0xffe0bce6),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: const Text(
-        'جابر بن\nعبد الله\nالأنصاري',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 10, height: 1.3),
+    return GestureDetector(
+      onTap: () {
+        // ينقل للتاب بتاع "التابعين" (index = 1)
+        tabController.animateTo(1);
+      },
+      child: Container(
+        width: 82,
+        height: 82,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: AppColor.purple,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: const Center(
+          child: Text(
+            'جابر بن\nعبد الله\nالأنصاري',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 16,
+              height: 1.3,
+              fontFamily: "Arial Nova",
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -119,7 +133,7 @@ class SahabaScreen extends StatelessWidget {
       height: 172,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: Color(0xFFD2E8D2),
+        color: const Color(0xFFD8E6D8),
         borderRadius: BorderRadius.circular(12),
       ),
       child: const Center(

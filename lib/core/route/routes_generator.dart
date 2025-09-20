@@ -1,5 +1,6 @@
 import 'package:asaneed/core/route/routes.dart';
 import 'package:asaneed/features/circle/presentation/views/circle1.dart';
+import 'package:asaneed/features/details/presentation/views/sahaba_details.dart';
 import 'package:asaneed/features/home/presentation/views/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,12 @@ class RoutesGenerator {
           builder: (context) => const Circle1(),
           settings: settings,
        );
+      case PageRouteName.details:
+        return MaterialPageRoute(
+          builder: (context) => const SahabaDetails(),
+          settings: settings,
+        );
+
 
       default:
         return MaterialPageRoute(
