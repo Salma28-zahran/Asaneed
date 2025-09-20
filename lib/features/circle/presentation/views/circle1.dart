@@ -28,9 +28,7 @@ class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
       _currentIndex = index;
     });
 
-    // هنا تقدري تغيري الشاشة اللي بتظهر حسب index
-    // مثلاً:
-    // if (index == 0) { ... }
+
   }
 
   @override
@@ -75,6 +73,7 @@ class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,

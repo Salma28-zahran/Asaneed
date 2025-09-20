@@ -17,7 +17,8 @@ class _ExtraState extends State<Extra> {
     return Center(
       child: SingleChildScrollView(
         child: Container(
-          color: Color(0xffEFE8E8FF),
+
+          color: Colors.white70,
           width: 380,
           //height: 1028,
           child: Padding(
@@ -111,7 +112,6 @@ class _ExtraState extends State<Extra> {
       ),
     );
   }
-  // عنصر واحد (Row) زي اللي في الصورة
   Widget buildBioRow(String label, String value) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
@@ -119,12 +119,11 @@ class _ExtraState extends State<Extra> {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // القيمة (على الشمال)
           Flexible(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
               decoration: BoxDecoration(
-                color: const Color(0xffF3F3F3), // رمادي فاتح
+                color: const Color(0xffF3F3F3),
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text(
@@ -135,13 +134,13 @@ class _ExtraState extends State<Extra> {
             ),
           ),
           const SizedBox(width: 8),
-          // الليبل (على اليمين)
+
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(6),
-              border: Border.all(color: const Color(0xffE6DBA7)), // أصفر فاتح
+              border: Border.all(color: const Color(0xffE6DBA7)),
             ),
             child: Text(
               label,
