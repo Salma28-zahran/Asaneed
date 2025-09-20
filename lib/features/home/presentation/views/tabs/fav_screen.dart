@@ -13,6 +13,7 @@ class FavScreen extends StatelessWidget {
       length: 3,
       initialIndex: 2,
       child: Scaffold(
+        backgroundColor: Colors.transparent,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,

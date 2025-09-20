@@ -63,7 +63,8 @@ class _SahabaDetailsState extends State<SahabaDetails>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.white,
+      //backgroundColor: AppColor.white,
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.transparent,
@@ -116,7 +117,7 @@ class _SahabaDetailsState extends State<SahabaDetails>
               children: const [
                 Center(child: Text("محتوى الأحاديث")),
                 Center(child: Text("محتوى من روي عنه")),
-                const Extra(),
+                Extra(),
               ],
             ),
           ),

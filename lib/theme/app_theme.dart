@@ -115,6 +115,10 @@ class AppColor {
   static TextStyle title =
   TextStyle(color: AppColor.black, fontWeight: FontWeight.w600,fontSize: 18,fontFamily: "Arial Nova");
 
+  static TextStyle title2 =
+  GoogleFonts.inter(color: Color(0xff3F3F46), fontWeight: FontWeight.w500,fontSize: 12,);
+
+
 
   static TextStyle titleSahaba =
   GoogleFonts.inter(color: AppColor.purple2, fontWeight: FontWeight.w500,fontSize: 14);

@@ -1,33 +1,61 @@
+import 'package:asaneed/core/route/routes.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-class BookScreen extends StatefulWidget {
-  const BookScreen({super.key});
+class RwahScreen extends StatefulWidget {
+  const RwahScreen({super.key});
 
   @override
-  State<BookScreen> createState() => _BookScreenState();
+  State<RwahScreen> createState() => _RwahScreenState();
 }
 
-class _BookScreenState extends State<BookScreen> {
+class _RwahScreenState extends State<RwahScreen> {
   int? selectedIndex;
-
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "الصحابه",
-            style: GoogleFonts.inter(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+          onPressed: () => Navigator.pop(context),
         ),
-        body: Column(
+        title: Text(
+          "الصحابه",
+          style: AppColor.title,
+        ),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(right: 10,top: 8),
+        child: Column(
           children: [
-            const SizedBox(height: 20),
+            Align(
+              alignment: Alignment.topRight,
+              child: Container(
+                height: 30,
+                width: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: AppColor.primary,
+                ),
+
+                child: Center(child: Text("التابعين الرواه",style: AppColor.title.copyWith(fontWeight: FontWeight.w300))),
+              ),
+            ),
+            SizedBox(height: 5,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "عن جابر بن عبد الله الانصاري",
+                  style: AppColor.title2.copyWith(fontSize: 25),
+                ),
+              ],
+            ),
             Expanded(
               child: GridView.builder(
                 itemCount: 8,
@@ -43,16 +71,18 @@ class _BookScreenState extends State<BookScreen> {
                     context: context,
                     index: index,
                     isSelected: selectedIndex == index,
-                    type: "صحابي",
-                    name: "جابر بن عبد الله الأنصاري",
+                    type: "تابعي",
+                    name: "عطاء بن ابي رباح اسلم",
                     date: "تاريخ الوفاة 78 هجريه",
                   );
                 },
               ),
             ),
+
           ],
         ),
       ),
+
     );
   }
 
@@ -70,8 +100,10 @@ class _BookScreenState extends State<BookScreen> {
           selectedIndex = index;
         });
 
+        Navigator.pushNamed(context, PageRouteName.details);
 
-        // Navigator.push(context, MaterialPageRoute(builder: (_) => YourPage()));
+
+
       },
       child: Card(
         elevation: 3,

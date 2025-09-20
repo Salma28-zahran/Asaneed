@@ -1,5 +1,5 @@
 import 'package:asaneed/core/resources/app_assets_manager.dart';
-import 'package:asaneed/features/home/presentation/views/tabs/book_screen.dart';
+import 'package:asaneed/features/home/presentation/views/tabs/book/book_screen.dart';
 import 'package:asaneed/features/home/presentation/views/tabs/fav_screen.dart';
 import 'package:asaneed/features/home/presentation/views/tabs/home_page.dart';
 import 'package:asaneed/features/home/presentation/views/tabs/search_screen.dart';
@@ -40,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: (_selectedIndex == 0 || _selectedIndex == 1 || _selectedIndex == 2)
           ? null
           : const CustomAppBar(),

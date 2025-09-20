@@ -8,7 +8,8 @@ class Tabeen1Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.white,
+     // backgroundColor: AppColor.white,
+      backgroundColor: Colors.transparent,
       body:_tabeen1Content(context),
     );
   }
