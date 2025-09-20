@@ -111,6 +111,11 @@ class AppColor {
 
 
   ///////////////الصحابه//////
+
+  static TextStyle title =
+  TextStyle(color: AppColor.black, fontWeight: FontWeight.w600,fontSize: 18,fontFamily: "Arial Nova");
+
+
   static TextStyle titleSahaba =
   GoogleFonts.inter(color: AppColor.purple2, fontWeight: FontWeight.w500,fontSize: 14);
 
