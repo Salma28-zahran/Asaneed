@@ -86,7 +86,8 @@ class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
           preferredSize: const Size.fromHeight(55),
           child: Align(
             alignment: Alignment.centerRight,
-            child: TabBar(
+            child:
+            TabBar(
               controller: _tabController,
               isScrollable: true,
               indicatorColor: Colors.transparent,

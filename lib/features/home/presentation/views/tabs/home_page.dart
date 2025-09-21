@@ -240,6 +240,8 @@ class _HomePageState extends State<HomePage> {
               setState(() {
                 isTreePressed = true;
               });
+              Navigator.pushNamed(context, PageRouteName.tree);
+
               print("تم الضغط على كارت شجرة الإسنادية");
             },
             child: Container(
