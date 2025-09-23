@@ -1,4 +1,6 @@
+import 'package:asaneed/features/details/presentation/views/tabs/ahades.dart';
 import 'package:asaneed/features/details/presentation/views/tabs/extra.dart';
+import 'package:asaneed/features/details/presentation/views/tabs/rawah2.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -82,7 +84,6 @@ class _SahabaDetailsState extends State<SahabaDetails>
       body: Column(
         children: [
           const SizedBox(height: 16),
-
           Padding(
             padding: const EdgeInsets.only(right: 15),
             child: Align(
@@ -115,9 +116,10 @@ class _SahabaDetailsState extends State<SahabaDetails>
             child: TabBarView(
               controller: _tabController,
               children: const [
-                Center(child: Text("محتوى الأحاديث")),
-                Center(child: Text("محتوى من روي عنه")),
-                Extra(),
+
+               Ahades(),
+              Rawah2(),
+              Extra(),
               ],
             ),
           ),

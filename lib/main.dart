@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(AssetsManager.background), // صورتك
+          image: AssetImage(AssetsManager.background),
           fit: BoxFit.cover,
         ),
       ),
@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RoutesGenerator.onGenerateRoutes,
         builder: (context, child) {
-          // نخلي خلفية الـ Scaffold شفاف عشان يبان الـ background
           return Scaffold(
             backgroundColor: Colors.transparent,
             body: child,
