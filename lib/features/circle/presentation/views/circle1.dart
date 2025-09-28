@@ -27,8 +27,6 @@ class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
     setState(() {
       _currentIndex = index;
     });
-
-
   }
 
   @override
@@ -38,13 +36,13 @@ class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
   }
 
   Widget buildTab(
-    String title,
-    int index,
-    Color activeBgColor,
-    Color activeTextColor,
-    TextStyle baseStyle,
-    double width,
-  ) {
+      String title,
+      int index,
+      Color activeBgColor,
+      Color activeTextColor,
+      TextStyle baseStyle,
+      double width,
+      ) {
     return AnimatedBuilder(
       animation: _tabController,
       builder: (context, _) {
@@ -86,13 +84,11 @@ class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
           preferredSize: const Size.fromHeight(55),
           child: Align(
             alignment: Alignment.centerRight,
-            child:
-            TabBar(
+            child: TabBar(
               controller: _tabController,
               isScrollable: true,
               indicatorColor: Colors.transparent,
               tabs: [
-                // تابعي التابعين
                 buildTab(
                   "تابعي التابعين",
                   0,
@@ -101,7 +97,6 @@ class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
                   AppColor.titletabeen2,
                   110,
                 ),
-                // التابعين
                 buildTab(
                   "التابعين",
                   1,
@@ -110,7 +105,6 @@ class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
                   AppColor.titletabeen,
                   90,
                 ),
-                // الصحابة
                 buildTab(
                   "الصحابه",
                   2,
@@ -124,17 +118,54 @@ class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
           ),
         ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          Tabeen2Screen(tabController: _tabController),
 
-          Tabeen1Screen(tabController: _tabController),
+      body:
+      AnimatedBuilder(
+      animation: _tabController,
+      builder: (context, _) {
+        Widget child;
+        switch (_tabController.index) {
+          case 0:
+            child = Tabeen2Screen(tabController: _tabController);
+            break;
+          case 1:
+            child = Tabeen1Screen(tabController: _tabController);
+            break;
+          case 2:
+            child = SahabaScreen(tabController: _tabController);
+            break;
+          default:
+            child = const SizedBox();
+        }
 
-          SahabaScreen(tabController: _tabController),
-        ],
-      ),
-      bottomNavigationBar: CustomBottomNavBar(
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 600),
+          transitionBuilder: (widget, animation) {
+            final slideAnimation = Tween<Offset>(
+              begin: const Offset(0, 0.2), // من تحت لفوق
+              end: Offset.zero,
+            ).animate(CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeOutCubic, // انسيابية لطيفة
+            ));
+
+            return SlideTransition(
+              position: slideAnimation,
+              child: FadeTransition(
+                opacity: animation,
+                child: widget,
+              ),
+            );
+          },
+          child: KeyedSubtree(
+            key: ValueKey<int>(_tabController.index),
+            child: child,
+          ),
+        );
+      },
+    ),
+
+    bottomNavigationBar: CustomBottomNavBar(
         currentIndex: _currentIndex,
         onTap: _onTabTapped,
       ),

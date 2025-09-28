@@ -110,9 +110,9 @@ class TreeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                buildFakeTab("تابعي التابعين",Colors.transparent,AppColor.grey ),
+                buildFakeTab("تابعي التابعين", Colors.transparent, AppColor.grey),
                 const SizedBox(width: 8),
-                buildFakeTab("التابعين", Colors.transparent,AppColor.grey ),
+                buildFakeTab("التابعين", Colors.transparent, AppColor.grey),
                 const SizedBox(width: 8),
                 buildFakeTab("الصحابه", AppColor.purple, AppColor.purple2),
               ],
@@ -129,11 +129,30 @@ class TreeScreen extends StatelessWidget {
                     title: "جابر بن عبد الله الأنصاري",
                     color: Colors.purple,
                     onTap: () {
-                      // ✅ يفتح صفحة TreeTabeen1
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const TreeTabeen1(),
+                      // ✅ يفتح صفحة TreeTabeen1 بأنيميشن
+                      Navigator.of(context).push(
+                        PageRouteBuilder(
+                          transitionDuration:
+                          const Duration(milliseconds: 600),
+                          pageBuilder: (context, animation, secondaryAnimation) =>
+                          const TreeTabeen1(),
+                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                            final offsetAnimation = Tween<Offset>(
+                              begin: const Offset(0.2, 0), // slide من اليمين
+                              end: Offset.zero,
+                            ).animate(CurvedAnimation(
+                              parent: animation,
+                              curve: Curves.easeOutCubic,
+                            ));
+
+                            return SlideTransition(
+                              position: offsetAnimation,
+                              child: FadeTransition(
+                                opacity: animation,
+                                child: child,
+                              ),
+                            );
+                          },
                         ),
                       );
                     },

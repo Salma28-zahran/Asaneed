@@ -115,7 +115,7 @@ class _SahabaDetailsState extends State<SahabaDetails>
           Expanded(
             child: TabBarView(
               controller: _tabController,
-              children: const [
+              children:  [
 
                Ahades(),
               Rawah2(),

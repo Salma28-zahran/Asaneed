@@ -9,6 +9,9 @@ abstract class AssetsManager {
   static const String sal2 = "assets/images/png/sal2.png";
   static const String search = "assets/images/png/search.png";
   static const String background = "assets/images/png/background.png";
+  static const String comment2 = "assets/images/png/comment2.png";
+
+
 
 
 

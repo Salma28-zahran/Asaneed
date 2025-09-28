@@ -1,5 +1,6 @@
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Extra extends StatefulWidget {
@@ -12,6 +13,7 @@ class Extra extends StatefulWidget {
 
 class _ExtraState extends State<Extra> {
   bool isBookmarked = false;
+  bool isCopy=false;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -22,7 +24,7 @@ class _ExtraState extends State<Extra> {
           width: 380,
           //height: 1028,
           child: Padding(
-            padding: const EdgeInsets.only(right: 15, top: 10),
+            padding: const EdgeInsets.only(right: 10, top: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -30,27 +32,55 @@ class _ExtraState extends State<Extra> {
                   "سفيان بن عيينة الهلالي",
                   style: AppColor.title,
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 10,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    IconButton(
-                      icon: Icon(
-                        isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-                        color: const Color(0xff7FCC82),
-                        size: 40,
-                      ),
-                      onPressed: () {
+                    GestureDetector(
+                      onTap: () {
                         setState(() {
                           isBookmarked = !isBookmarked;
                         });
-                      }),
-                    SizedBox(width: 105,),
-                    Text("تاريخ الوفاة 78 هجريه",style: AppColor.title.copyWith(fontSize: 12),),
-                    SizedBox(width: 8,),
+                      },
+                      child: Icon( isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                          color: AppColor.primary, size: 30),
+                    ),
+                    SizedBox(width: 5,),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isCopy= !isCopy;
+                        });
+                      },
+                      child: Icon( isCopy ?  FontAwesomeIcons.solidCopy: Icons.copy,
+                          color: AppColor.primary, size: 30),
+                    ),
+                    SizedBox(width: 5,),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Icon(Icons.share, color: AppColor.primary, size: 30),
+                    ),
+                    SizedBox(width: 5,),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Icon(Icons.comment, color: AppColor.primary, size: 30),
+                    ),
+                  ],
+                ),
+
+                Row(
+                  children: [
+                    Text(
+                      "تاريخ الوفاة 78 هجريه",
+                      style: AppColor.title.copyWith(fontSize: 12),
+                    ),
+                    SizedBox(width: 4),
                     Container(
-                      width: 95,
-                      height: 35,
+                      width: 90,
+                      height: 30,
                       decoration: BoxDecoration(
                         color: AppColor.orange,
                         borderRadius: BorderRadius.circular(7),
@@ -62,11 +92,16 @@ class _ExtraState extends State<Extra> {
                         ),
                       ),
                     ),
-        
-        
                   ],
                 ),
-                Text(
+              ],
+            ),
+
+
+            SizedBox(height: 10,),
+
+
+            Text(
                   "السيرة الذاتية",
                   style: AppColor.title,
                 ),
