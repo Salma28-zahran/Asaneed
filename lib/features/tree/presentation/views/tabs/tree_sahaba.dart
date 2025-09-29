@@ -73,13 +73,16 @@ class TreeSahaba extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         itemCount: 12,
         itemBuilder: (context, index) {
-          return NameBox(
+          return
+            NameBox(
             title: "جابر بن عبد الله الأنصاري", // نفس الاسم للكل
             color: Colors.purple,
-            onTap: () {
-              tabController.animateTo(1);
-              debugPrint("Tapped on جابر $index");
-            },
+              onTap: () {
+                // ✅ هنا التغيير مع أنيميشن
+                tabController.animateTo(1);
+
+                debugPrint("Tapped on جابر $index");
+              },
           );
         },
       ),

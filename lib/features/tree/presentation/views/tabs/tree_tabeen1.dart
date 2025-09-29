@@ -172,13 +172,33 @@ class TreeTabeen1 extends StatelessWidget {
                     title: "عمرو بن دينار المكي ",
                     color: Colors.purple,
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const TreeTabeen2(),
+                      Navigator.of(context).push(
+                        PageRouteBuilder(
+                          transitionDuration: const Duration(milliseconds: 600),
+                          pageBuilder: (context, animation, secondaryAnimation) =>
+                          const TreeTabeen2(),
+                          transitionsBuilder:
+                              (context, animation, secondaryAnimation, child) {
+                            final offsetAnimation = Tween<Offset>(
+                              begin: const Offset(0.2, 0),
+                              end: Offset.zero,
+                            ).animate(CurvedAnimation(
+                              parent: animation,
+                              curve: Curves.easeOutCubic,
+                            ));
+
+                            return SlideTransition(
+                              position: offsetAnimation,
+                              child: FadeTransition(
+                                opacity: animation,
+                                child: child,
+                              ),
+                            );
+                          },
                         ),
                       );
                     },
+
                   );
                 },
               ),

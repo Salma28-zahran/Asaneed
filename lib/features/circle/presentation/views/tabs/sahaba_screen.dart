@@ -8,7 +8,7 @@ class SahabaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     // backgroundColor: AppColor.white,
+      // backgroundColor: AppColor.white,
       backgroundColor: Colors.transparent,
       body: _sahabaContent(context),
     );
@@ -99,8 +99,11 @@ class SahabaScreen extends StatelessWidget {
   Widget _nameBox() {
     return GestureDetector(
       onTap: () {
-        // ينقل للتاب بتاع "التابعين" (index = 1)
-        tabController.animateTo(1);
+        tabController.animateTo(
+          1,
+          duration: const Duration(milliseconds: 1200), // اطول شوية عشان البونص يبان
+          curve: Curves.elasticOut, // حركة مرنة بتدي ارتداد قوي
+        );
       },
       child: Container(
         width: 82,
