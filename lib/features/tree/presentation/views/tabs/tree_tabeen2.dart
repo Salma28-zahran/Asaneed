@@ -100,26 +100,34 @@ class TreeTabeen2 extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: Colors.black,
+                    color: AppColor.primary,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const Text(
-                    'اقرأ المزيد...',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  child:  Row(
+                    children: [
+
+                      Text(
+                        '... اقرأ المزيد ',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Icon(Icons.error,color: AppColor.white,),
+                    ],
                   ),
                 ),
+                SizedBox(width: 10,),
 
                 Row(
                   children: [
+
                     Text(
                       'تاريخ الوفاة 78 هجرية',
                       style: TextStyle(
@@ -131,13 +139,13 @@ class TreeTabeen2 extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                       decoration: BoxDecoration(
-                        color: AppColor.pink,
+                        color: AppColor.purple,
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: const Text(
-                        'تابعي',
+                        'صحابي',
                         style: TextStyle(
-                          color: AppColor.pink2,
+                          color: AppColor.purple2,
                           fontSize: 12,
                           fontWeight: FontWeight.w700,
                         ),
@@ -154,10 +162,6 @@ class TreeTabeen2 extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 buildFakeTab("تابعي التابعي",AppColor.orange,AppColor.orange2 ),
-
-
-
-
               ],
             ),
             const SizedBox(height: 10),

@@ -1,6 +1,6 @@
 import 'package:asaneed/features/details/presentation/views/tabs/ahades.dart';
 import 'package:asaneed/features/details/presentation/views/tabs/extra.dart';
-import 'package:asaneed/features/details/presentation/views/tabs/rawah2.dart';
+import 'package:asaneed/features/details/presentation/views/tabs/rwah2/rawah2.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 

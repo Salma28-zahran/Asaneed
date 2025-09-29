@@ -1,8 +1,10 @@
 
 import 'package:asaneed/core/resources/app_assets_manager.dart';
+import 'package:asaneed/features/home/provider/favorites_provider.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class FavScreen extends StatelessWidget {
   const FavScreen({super.key});
@@ -109,28 +111,60 @@ class FavScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ImageIcon(
-                    AssetImage(AssetsManager.book2,),
-                    size: 150,
-
-                    color: AppColor.primary,
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    "لا توجد أحاديث مفضلة",
-                    style: GoogleFonts.inter(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: AppColor.grey,
+            Consumer<FavoritesProvider>(
+              builder: (context, favProvider, child) {
+                if (favProvider.favHadiths.isEmpty) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ImageIcon(
+                          AssetImage(AssetsManager.book2),
+                          size: 150,
+                          color: AppColor.primary,
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          "لا توجد أحاديث مفضلة",
+                          style: GoogleFonts.inter(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: AppColor.grey,
+                          ),
+                        ),
+                      ],
                     ),
+                  );
+                }
+
+                return SingleChildScrollView(
+                  child: Column(
+                    children: favProvider.favHadiths.map((hadithWidget) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Stack(
+                          children: [
+                            hadithWidget,
+                            Positioned(
+                              top: 22,
+                              right: 220,
+                              child: IconButton(
+                                icon: const Icon(Icons.delete, color: Colors.red,size: 32,),
+                                onPressed: () {
+                                  favProvider.removeFromFav(hadithWidget);
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
                   ),
-                ],
-              ),
+                );
+              },
             ),
+
+
           ],
         ),
       ),
