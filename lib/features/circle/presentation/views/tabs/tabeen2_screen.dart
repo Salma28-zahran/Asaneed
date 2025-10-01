@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 
 class Tabeen2Screen extends StatelessWidget {
   final TabController tabController;
-  const Tabeen2Screen({super.key, required this.tabController});
+  final int zoomLevel;
+
+  const Tabeen2Screen({super.key, required this.tabController, required this.zoomLevel});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,8 @@ class Tabeen2Screen extends StatelessWidget {
 
   Widget _tabeen2Content(BuildContext context) {
     return Center(
-      child: Column(
+      child:
+      Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // --- الصف الأول (2 صناديق) ---
@@ -24,26 +27,26 @@ class Tabeen2Screen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               _nameBox(context),
-              const SizedBox(width: 4),
+              SizedBox(width: zoomLevel == 2 ? 10 : 4),
               _nameBox(context),
             ],
           ),
-          const SizedBox(height: 4),
+
 
           // --- الصف الثاني (4 صناديق) ---
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               _nameBox(context),
-              const SizedBox(width: 4),
+              SizedBox(height: zoomLevel == 2 ? 24 : 4),
               _nameBox(context),
-              const SizedBox(width: 4),
+              SizedBox(height: zoomLevel == 2 ? 24 : 4),
               _nameBox(context),
-              const SizedBox(width: 4),
+              SizedBox(height: zoomLevel == 2 ? 24 : 4),
               _nameBox(context),
             ],
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: zoomLevel == 2 ? 28 : 4),
 
           // --- الصف الثالث (2 بالطول + الوسط + 2 بالطول) ---
           Row(
@@ -52,13 +55,20 @@ class Tabeen2Screen extends StatelessWidget {
               Column(
                 children: [
                   _nameBox(context),
+                  SizedBox(height: zoomLevel == 2 ? 7 : 4),
                   _nameBox(context),
                 ],
               ),
               _centerBox(),
+              SizedBox(width: zoomLevel == 2 ? 27 : 4),
+
+
               Column(
                 children: [
                   _nameBox(context),
+                  SizedBox(height: zoomLevel == 2 ? 7 : 4),
+
+
                   _nameBox(context),
                 ],
               ),
@@ -86,7 +96,7 @@ class Tabeen2Screen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               _nameBox(context),
-              const SizedBox(width: 4),
+              SizedBox(height: zoomLevel == 2 ? 24 : 4),
               _nameBox(context),
             ],
           ),

@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 
 class SahabaScreen extends StatelessWidget {
   final TabController tabController;
-  const SahabaScreen({super.key, required this.tabController});
+  final int zoomLevel; // 👈 استقبلنا الـ zoomLevel
+
+  const SahabaScreen({
+    super.key,
+    required this.tabController,
+    required this.zoomLevel, // 👈 ضروري
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: AppColor.white,
       backgroundColor: Colors.transparent,
       body: _sahabaContent(context),
     );
@@ -19,16 +24,17 @@ class SahabaScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // --- الصف الأول (2 صناديق) ---
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _nameBox(),
-              const SizedBox(width: 4),
-              _nameBox(),
-            ],
-          ),
-          const SizedBox(height: 4),
+          // --- الصف الأول (2 صناديق) --- 👈 نخفيه لو zoomLevel > 0
+          if (zoomLevel == 0)
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _nameBox(),
+                const SizedBox(width: 4),
+                _nameBox(),
+              ],
+            ),
+          if (zoomLevel == 0) const SizedBox(height: 4),
 
           // --- الصف الثاني (4 صناديق) ---
           Row(
@@ -81,15 +87,16 @@ class SahabaScreen extends StatelessWidget {
           ),
           const SizedBox(height: 4),
 
-          // --- الصف الخامس (2 صناديق) ---
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _nameBox(),
-              const SizedBox(width: 4),
-              _nameBox(),
-            ],
-          ),
+          // --- الصف الخامس (2 صناديق) --- 👈 نخفيه لو zoomLevel > 0
+          if (zoomLevel == 0)
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _nameBox(),
+                const SizedBox(width: 4),
+                _nameBox(),
+              ],
+            ),
         ],
       ),
     );
@@ -101,8 +108,8 @@ class SahabaScreen extends StatelessWidget {
       onTap: () {
         tabController.animateTo(
           1,
-          duration: const Duration(milliseconds: 1200), // اطول شوية عشان البونص يبان
-          curve: Curves.elasticOut, // حركة مرنة بتدي ارتداد قوي
+          duration: const Duration(milliseconds: 1200),
+          curve: Curves.elasticOut,
         );
       },
       child: Container(

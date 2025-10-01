@@ -4,6 +4,7 @@ import 'package:asaneed/features/circle/presentation/views/tabs/tabeen2_screen.d
 import 'package:asaneed/features/home/presentation/widgets/custom_bottom_navbar.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:asaneed/features/circle/presentation/views/tabs/zoomable_circle_screen.dart';
 
 class Circle1 extends StatefulWidget {
   const Circle1({super.key});
@@ -14,13 +15,14 @@ class Circle1 extends StatefulWidget {
 
 class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  int _currentIndex = 3;
+  int _currentIndex = 0; // ✅ مكنش ينفع تبقى 4
+  int zoomLevel = 0; //
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
-    _tabController.index = 2;
+    _tabController = TabController(length: 4, vsync: this);
+    _tabController.index = 2; // ✅ يبدأ من الصحابة
   }
 
   void _onTabTapped(int index) {
@@ -89,83 +91,75 @@ class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
               isScrollable: true,
               indicatorColor: Colors.transparent,
               tabs: [
-                buildTab(
-                  "تابعي التابعين",
-                  0,
-                  AppColor.orange,
-                  AppColor.orange2,
-                  AppColor.titletabeen2,
-                  110,
-                ),
-                buildTab(
-                  "التابعين",
-                  1,
-                  AppColor.pink,
-                  AppColor.pink2,
-                  AppColor.titletabeen,
-                  90,
-                ),
-                buildTab(
-                  "الصحابه",
-                  2,
-                  AppColor.purple,
-                  AppColor.purple2,
-                  AppColor.titleSahaba,
-                  90,
-                ),
+                buildTab("تابعي التابعين", 0, AppColor.orange, AppColor.orange2,
+                    AppColor.titletabeen2, 110),
+                buildTab("التابعين", 1, AppColor.pink, AppColor.pink2,
+                    AppColor.titletabeen, 90),
+                buildTab("الصحابه", 2, AppColor.purple, AppColor.purple2,
+                    AppColor.titleSahaba, 90),
+                buildTab("Zoom", 3, AppColor.purple, AppColor.purple2,
+                    AppColor.titleSahaba, 90),
               ],
             ),
           ),
         ),
       ),
+      body: MediaQuery.removePadding(
+        context: context,
+        removeTop: true,
+        child: AnimatedBuilder(
+          animation: _tabController,
+          builder: (context, _) {
+            Widget child;
+            switch (_tabController.index) {
+              case 0:
+                var zoomLevel;
+                child = Tabeen2Screen(tabController: _tabController, zoomLevel: zoomLevel);
+                break;
+              case 1:
+                var zoomLevel;
+                child = Tabeen1Screen(tabController: _tabController, zoomLevel: zoomLevel);
+                break;
+              case 2:
+                var zoomLevel;
+                child = SahabaScreen(tabController: _tabController, zoomLevel: zoomLevel);
+                break;
+              case 3:
+                child = ZoomableCircleScreen(tabController: _tabController);
+                break;
+              default:
+                child = const SizedBox();
+            }
 
-      body:
-      AnimatedBuilder(
-      animation: _tabController,
-      builder: (context, _) {
-        Widget child;
-        switch (_tabController.index) {
-          case 0:
-            child = Tabeen2Screen(tabController: _tabController);
-            break;
-          case 1:
-            child = Tabeen1Screen(tabController: _tabController);
-            break;
-          case 2:
-            child = SahabaScreen(tabController: _tabController);
-            break;
-          default:
-            child = const SizedBox();
-        }
 
-        return AnimatedSwitcher(
-          duration: const Duration(milliseconds: 600),
-          transitionBuilder: (widget, animation) {
-            final slideAnimation = Tween<Offset>(
-              begin: const Offset(0, 0.2), // من تحت لفوق
-              end: Offset.zero,
-            ).animate(CurvedAnimation(
-              parent: animation,
-              curve: Curves.easeOutCubic, // انسيابية لطيفة
-            ));
+            return AnimatedSwitcher(
+              duration: const Duration(milliseconds: 600),
+              transitionBuilder: (widget, animation) {
+                final slideAnimation = Tween<Offset>(
+                  begin: const Offset(0, 0.2),
+                  end: Offset.zero,
+                ).animate(CurvedAnimation(
+                  parent: animation,
+                  curve: Curves.easeOutCubic,
+                ));
 
-            return SlideTransition(
-              position: slideAnimation,
-              child: FadeTransition(
-                opacity: animation,
-                child: widget,
+                return SlideTransition(
+                  position: slideAnimation,
+                  child: FadeTransition(
+                    opacity: animation,
+                    child: widget,
+                  ),
+                );
+              },
+              child: KeyedSubtree(
+                key: ValueKey<int>(_tabController.index),
+                child: child,
               ),
             );
           },
-          child: KeyedSubtree(
-            key: ValueKey<int>(_tabController.index),
-            child: child,
-          ),
-        );
-      },
-    ),
-
-    bottomNavigationBar: CustomBottomNavBar(
+        ),
+      ),
+      bottomNavigationBar: CustomBottomNavBar(
         currentIndex: _currentIndex,
         onTap: _onTabTapped,
       ),
