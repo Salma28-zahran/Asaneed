@@ -1,23 +1,22 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
-class FavoritesProvider with ChangeNotifier {
-  final List<Widget> favoriteHadiths = [];
-  final List<Widget> favoriteRuwaa = [];
-  final List<Widget> favoriteSeries = [];
+class FavoritesProvider extends ChangeNotifier {
+  List<Widget> favHadiths = [];
 
-  void addToFavoritesRuwaa(Widget item) {
-    favoriteRuwaa.add(item);
+  void addHadith(Widget hadithCard) {
+    favHadiths.add(hadithCard);
     notifyListeners();
   }
 
-  void addToFavoritesHadiths(Widget item) {
-    favoriteHadiths.add(item);
+  void removeHadith(Widget hadithCard) {
+    favHadiths.removeWhere((element) =>
+    element.key == hadithCard.key);
+    notifyListeners();
+  }
+  void removeFromFav(Widget hadithCard) {
+    favHadiths.removeWhere((element) => element.key == hadithCard.key);
     notifyListeners();
   }
 
-  void addToFavoritesSeries(Widget item) {
-    favoriteSeries.add(item);
-    notifyListeners();
-  }
+
 }

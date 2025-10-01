@@ -100,23 +100,30 @@ class TreeTabeen1 extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: Colors.black,
+                    color: AppColor.primary,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const Text(
-                    'اقرأ المزيد...',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  child:  Row(
+                    children: [
+
+                      Text(
+                        '... اقرأ المزيد ',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Icon(Icons.error,color: AppColor.white,),
+                    ],
                   ),
                 ),
+                SizedBox(width: 10,),
 
                 Row(
                   children: [

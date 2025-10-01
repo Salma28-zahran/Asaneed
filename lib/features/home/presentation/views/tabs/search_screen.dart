@@ -30,13 +30,13 @@ class SearchScreen extends StatelessWidget {
           children: [
             buildSearchTab(
               context: context,
-              hint: "ابحث في نص الحديث....",
+              hint: "... ابحث عن الحديث",
               image: AssetsManager.search,
               message: "اكتب اسم الراوي للبحث",
             ),
             buildSearchTab(
               context: context,
-              hint: "ابحث عن الراوي....",
+              hint: "... ابحث عن الراوي ",
               image: AssetsManager.search,
               message: "اكتب اسم الراوي للبحث",
             ),
@@ -80,12 +80,17 @@ class SearchScreen extends StatelessWidget {
                 child: SizedBox(
                   height: 44,
                   child: TextField(
-                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.right,
+                   // textDirection: TextDirection.ltr,
                     decoration: InputDecoration(
                       hintText: hint,
                       hintStyle: const TextStyle(color: AppColor.grey),
-                      suffixIcon: const Icon(Icons.search, color: AppColor.grey),
-                      contentPadding: EdgeInsets.zero,
+                      prefixIcon: const Icon(Icons.search, color: AppColor.grey),
+
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12, // المسافة يمين ويسار
+                        vertical: 10,   // المسافة فوق وتحت
+                      ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: const BorderSide(color: AppColor.grey),
