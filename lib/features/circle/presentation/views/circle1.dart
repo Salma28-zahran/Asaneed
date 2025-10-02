@@ -15,14 +15,14 @@ class Circle1 extends StatefulWidget {
 
 class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  int _currentIndex = 0; // ✅ مكنش ينفع تبقى 4
-  int zoomLevel = 0; //
+  int _currentIndex = 0;
+  int zoomLevel = 0;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
-    _tabController.index = 2; // ✅ يبدأ من الصحابة
+    _tabController.index = 2;
   }
 
   void _onTabTapped(int index) {
@@ -97,8 +97,7 @@ class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
                     AppColor.titletabeen, 90),
                 buildTab("الصحابه", 2, AppColor.purple, AppColor.purple2,
                     AppColor.titleSahaba, 90),
-                buildTab("Zoom", 3, AppColor.purple, AppColor.purple2,
-                    AppColor.titleSahaba, 90),
+
               ],
             ),
           ),
@@ -113,23 +112,19 @@ class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
             Widget child;
             switch (_tabController.index) {
               case 0:
-                var zoomLevel;
                 child = Tabeen2Screen(tabController: _tabController, zoomLevel: zoomLevel);
                 break;
               case 1:
-                var zoomLevel;
                 child = Tabeen1Screen(tabController: _tabController, zoomLevel: zoomLevel);
                 break;
+
               case 2:
-                var zoomLevel;
-                child = SahabaScreen(tabController: _tabController, zoomLevel: zoomLevel);
-                break;
-              case 3:
                 child = ZoomableCircleScreen(tabController: _tabController);
                 break;
               default:
                 child = const SizedBox();
             }
+
 
 
             return AnimatedSwitcher(
