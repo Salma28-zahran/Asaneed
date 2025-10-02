@@ -3,13 +3,19 @@ import 'package:flutter/material.dart';
 
 class Tabeen1Screen extends StatelessWidget {
   final TabController tabController;
-  const Tabeen1Screen({super.key, required this.tabController});
+  final int zoomLevel; // 👈 استقبلنا الـ zoomLevel
+
+  const Tabeen1Screen({
+    super.key,
+    required this.tabController,
+    required this.zoomLevel,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body:_tabeen1Content(context),
+      body: _tabeen1Content(context),
     );
   }
 
@@ -19,15 +25,14 @@ class Tabeen1Screen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // --- الصف الأول (2 صناديق) ---
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _nameBox(),
-              const SizedBox(width: 4),
-              _nameBox(),
-            ],
-          ),
-          const SizedBox(height: 4),
+          if (zoomLevel == 0)
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [_nameBox(), const SizedBox(width: 4), _nameBox()],
+            ),
+
+          // const SizedBox(height: 4),
+          if (zoomLevel == 0) const SizedBox(height: 4),
 
           // --- الصف الثاني (4 صناديق) ---
           Row(
@@ -48,19 +53,9 @@ class Tabeen1Screen extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Column(
-                children: [
-                  _nameBox(),
-                  _nameBox(),
-                ],
-              ),
+              Column(children: [_nameBox(), _nameBox()]),
               _centerBox(),
-              Column(
-                children: [
-                  _nameBox(),
-                  _nameBox(),
-                ],
-              ),
+              Column(children: [_nameBox(), _nameBox()]),
             ],
           ),
           const SizedBox(height: 4),
@@ -81,14 +76,11 @@ class Tabeen1Screen extends StatelessWidget {
           const SizedBox(height: 4),
 
           // --- الصف الخامس (2 صناديق) ---
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _nameBox(),
-              const SizedBox(width: 4),
-              _nameBox(),
-            ],
-          ),
+          if (zoomLevel == 0)
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [_nameBox(), const SizedBox(width: 4), _nameBox()],
+            ),
         ],
       ),
     );
@@ -98,7 +90,6 @@ class Tabeen1Screen extends StatelessWidget {
   Widget _nameBox() {
     return GestureDetector(
       onTap: () {
-        // ينقل للتاب بتاع "التابعين" (index = 1)
         tabController.animateTo(0);
       },
       child: Container(
@@ -106,7 +97,7 @@ class Tabeen1Screen extends StatelessWidget {
         height: 82,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color:AppColor.pink,
+          color: AppColor.pink,
           borderRadius: BorderRadius.circular(8),
         ),
         child: const Center(
