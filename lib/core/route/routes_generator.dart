@@ -3,6 +3,7 @@ import 'package:asaneed/features/circle/presentation/views/circle1.dart';
 import 'package:asaneed/features/details/presentation/views/sahaba_details.dart';
 import 'package:asaneed/features/home/presentation/views/home_screen.dart';
 import 'package:asaneed/features/home/presentation/views/tabs/book/rwah_screen.dart';
+import 'package:asaneed/features/splash/presentation/views/splash_screen.dart';
 import 'package:asaneed/features/tree/presentation/views/tree_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:asaneed/core/widgets/background_screen.dart'; // استورد الـ BackgroundScreen
@@ -42,11 +43,18 @@ class RoutesGenerator {
           ),
           settings: settings,
         );
+      case PageRouteName.homeScreen:
+        return MaterialPageRoute(
+          builder: (context) => const BackgroundScreen(
+            child: HomeScreen(),
+          ),
+          settings: settings,
+        );
 
       default:
         return MaterialPageRoute(
           builder: (context) => const BackgroundScreen(
-            child: HomeScreen(),
+            child: AnimatedSplashScreen(),
           ),
           settings: settings,
         );

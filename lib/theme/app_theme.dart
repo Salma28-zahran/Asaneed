@@ -33,6 +33,7 @@ class AppColor {
   static const Color blue = Color(0xFF90CAF9);
   static const Color blue2 = Color(0xFF0059A1); //Color(0xFF42A5F5);
 
+  static const Color appBarcolor = Color(0xFFF5F3FF);
 
   static const Color purple = Color(0xFFF5F3FF);
   static const Color purple2 = Color(0xFF8B5CF6);
@@ -190,4 +191,35 @@ extension HexaColor on Color {
     }
     return Color(int.parse(hexColorString, radix: 16));
   }
+
 }
+ThemeData lightTheme = ThemeData(
+  brightness: Brightness.light,
+  scaffoldBackgroundColor: AppColor.backgroundcolor,
+  primaryColor: AppColor.primary,
+  textTheme: const TextTheme(
+    bodyMedium: TextStyle(color: Colors.black87),
+  ),
+);
+
+ThemeData darkTheme = ThemeData(
+  brightness: Brightness.dark,
+  scaffoldBackgroundColor: Colors.black,
+  primaryColor: AppColor.primary,
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Colors.black,
+    foregroundColor: Colors.white,
+    elevation: 0,
+  ),
+  textTheme: const TextTheme(
+    headlineLarge:
+    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+    bodyMedium: TextStyle(color: Colors.white70),
+  ),
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
+    backgroundColor: AppColor.primary,
+  ),
+  colorScheme: const ColorScheme.dark().copyWith(
+    secondary: AppColor.primary3,
+  ),
+);
