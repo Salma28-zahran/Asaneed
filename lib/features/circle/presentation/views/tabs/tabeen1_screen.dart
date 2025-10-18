@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class Tabeen1Screen extends StatelessWidget {
   final TabController tabController;
-  final int zoomLevel; // 👈 استقبلنا الـ zoomLevel
+  final int zoomLevel;
 
   const Tabeen1Screen({
     super.key,
