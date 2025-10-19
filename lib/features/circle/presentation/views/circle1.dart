@@ -76,11 +76,11 @@ class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
       backgroundColor: Colors.transparent,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: AppColor.getAppBarColor(context),
         surfaceTintColor: Colors.transparent,
         title: Text(
           "الدائرة الإسنادية",
-          style: AppColor.titleStyle2.copyWith(fontFamily: "Arial Nova"),
+          style: AppColor.titleStyle2.copyWith(fontFamily: "Arial Nova",color: AppColor.getBlack(context)),
         ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(55),

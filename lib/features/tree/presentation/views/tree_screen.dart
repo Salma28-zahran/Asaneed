@@ -76,11 +76,11 @@ class TreeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: AppColor.white,
+        backgroundColor: AppColor.getAppBarColor(context),
         title: Text(
           "شجرة الاسنادية",
           style: AppColor.title.copyWith(
-              fontSize: 20, fontWeight: FontWeight.bold),
+              fontSize: 20, fontWeight: FontWeight.bold,color: AppColor.getBlack(context)),
         ),
       ),
       body: Padding(
@@ -127,9 +127,11 @@ class TreeScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return NameBox(
                     title: "جابر بن عبد الله الأنصاري",
-                    color: Colors.purple,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? const Color(0xff444444)
+                        : Colors.purple,
+
                     onTap: () {
-                      // ✅ يفتح صفحة TreeTabeen1 بأنيميشن
                       Navigator.of(context).push(
                         PageRouteBuilder(
                           transitionDuration:
@@ -138,7 +140,7 @@ class TreeScreen extends StatelessWidget {
                           const TreeTabeen1(),
                           transitionsBuilder: (context, animation, secondaryAnimation, child) {
                             final offsetAnimation = Tween<Offset>(
-                              begin: const Offset(0.2, 0), // slide من اليمين
+                              begin: const Offset(0.2, 0),
                               end: Offset.zero,
                             ).animate(CurvedAnimation(
                               parent: animation,

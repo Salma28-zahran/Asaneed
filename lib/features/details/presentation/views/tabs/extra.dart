@@ -20,7 +20,7 @@ class _ExtraState extends State<Extra> {
       child: SingleChildScrollView(
         child: Container(
 
-          color: Colors.white70,
+          color: AppColor.getWhite(context),
           width: 380,
           //height: 1028,
           child: Padding(
@@ -30,7 +30,7 @@ class _ExtraState extends State<Extra> {
               children: [
                 Text(
                   "سفيان بن عيينة الهلالي",
-                  style: AppColor.title,
+                  style: AppColor.title.copyWith(color: AppColor.getBlack(context)),
                 ),
                 SizedBox(height: 10,),
             Row(
@@ -75,7 +75,7 @@ class _ExtraState extends State<Extra> {
                   children: [
                     Text(
                       "تاريخ الوفاة 78 هجريه",
-                      style: AppColor.title.copyWith(fontSize: 12),
+                      style: AppColor.title.copyWith(fontSize: 12,color: AppColor.getBlack(context)),
                     ),
                     SizedBox(width: 4),
                     Container(
@@ -103,7 +103,7 @@ class _ExtraState extends State<Extra> {
 
             Text(
                   "السيرة الذاتية",
-                  style: AppColor.title,
+                  style: AppColor.title.copyWith(color: AppColor.getBlack(context)),
                 ),
 
             buildBioRow("الكنية", "أبو عبد الله ، ويقال : أبو عبد الرحمن ، ويقال : أبو محمد"),
@@ -158,13 +158,18 @@ class _ExtraState extends State<Extra> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
               decoration: BoxDecoration(
-                color: const Color(0xffF3F3F3),
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? const Color(0xff212121)
+                    : Colors.white,
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text(
                 value,
                 textAlign: TextAlign.right,
-                style: GoogleFonts.inter(fontWeight: FontWeight.w500,fontSize: 12,color: Color(0xff3F3F46))
+                style: GoogleFonts.inter(fontWeight: FontWeight.w500,fontSize: 12,color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.white
+                    : const Color(0xff3F3F46),
+                )
               ),
             ),
           ),
@@ -173,13 +178,20 @@ class _ExtraState extends State<Extra> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? const Color(0xff212121)
+                  : Colors.white,
+
               borderRadius: BorderRadius.circular(6),
-              border: Border.all(color: const Color(0xffE6DBA7)),
+              border: Border.all(color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.black
+                  : const Color(0xffE6DBA7),
+              ),
             ),
             child: Text(
               label,
               style: AppColor.title2.copyWith(
+                color:AppColor.getBlack(context)
 
               ),
             ),

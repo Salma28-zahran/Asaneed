@@ -1,7 +1,9 @@
 import 'package:asaneed/core/route/routes.dart';
+import 'package:asaneed/theme/AppThemeManager.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class BookScreen extends StatefulWidget {
   const BookScreen({super.key});
@@ -15,44 +17,46 @@ class _BookScreenState extends State<BookScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "الصحابه",
-            style: GoogleFonts.inter(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
+    return Scaffold(
+      backgroundColor: context.watch<AppThemeManager>().isDarkMode
+          ? Colors.grey[900]
+          : Colors.white,
+      appBar: AppBar(
+        backgroundColor: AppColor.getAppBarColor(context),
+        title: Text(
+          "الصحابه",
+          style: GoogleFonts.inter(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
           ),
         ),
-        body: Column(
-          children: [
-            const SizedBox(height: 20),
-            Expanded(
-              child: GridView.builder(
-                itemCount: 8,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 12,
-                  crossAxisSpacing: 12,
-                  childAspectRatio: 110 / 100,
-                ),
-                padding: const EdgeInsets.all(16),
-                itemBuilder: (context, index) {
-                  return buildSahabiCard(
-                    context: context,
-                    index: index,
-                    isSelected: selectedIndex == index,
-                    type: "صحابي",
-                    name: "جابر بن عبد الله الأنصاري",
-                    date: "تاريخ الوفاة 78 هجريه",
-                  );
-                },
+      ),
+      body: Column(
+        children: [
+          const SizedBox(height: 20),
+          Expanded(
+            child: GridView.builder(
+              itemCount: 8,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+                childAspectRatio: 110 / 100,
               ),
+              padding: const EdgeInsets.all(16),
+              itemBuilder: (context, index) {
+                return buildSahabiCard(
+                  context: context,
+                  index: index,
+                  isSelected: selectedIndex == index,
+                  type: "صحابي",
+                  name: "جابر بن عبد الله الأنصاري",
+                  date: "تاريخ الوفاة 78 هجريه",
+                );
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -78,7 +82,7 @@ class _BookScreenState extends State<BookScreen> {
       },
       child: Card(
         elevation: 3,
-        color: isSelected ? AppColor.primary : Colors.white,
+        color: isSelected ? AppColor.primary : AppColor.getWhite(context),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -135,7 +139,7 @@ class _BookScreenState extends State<BookScreen> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: isSelected ? Colors.white : Colors.black,
+                        color: isSelected ? Colors.white : AppColor.getBlack(context),
                       ),
                     ),
                     const SizedBox(height: 6),

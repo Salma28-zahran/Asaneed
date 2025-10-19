@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class AppColor {
   static const Color floatButtonbackgroundColor = Color(0xff0F9585); // Pink
   static const Color backgroundIcon = Color(0xFFFFFFFF); // White
- // static const Color textColor = Color(0xFF333333); // Dark gray
+  // static const Color textColor = Color(0xFF333333); // Dark gray
   static const Color backgroundcolor = Color(0xFFF8F9FA); // Light gray
   static const Color textColorheadline1 = Color(0xFF000000); // Black
   static const Color textColorheadline2 = Color(0xFF424242); // Gray
@@ -12,6 +12,10 @@ class AppColor {
   static const Color textColorbodyText2 = Color(0xFF757575); // Medium gray
   static const Color primary = Color(0xff0F9585);
   static const Color primary2 = Color(0xffE8FFFC);
+  static Color getPrimary2(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ?  Colors.black : primary2;
+  }
   static const Color primary3 = Color(0xff61f18f);
 
 
@@ -29,11 +33,26 @@ class AppColor {
   static const Color grey2 = Color.fromARGB(255, 66, 66, 66);
   static const Color greylite200 = Color(0xFFEEEEEE);
   static const Color black = Color(0xff000000);
+  static Color getBlack(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ? Colors.white : black;
+  }
+
   static const Color white = Color(0xffF8F9FD);
+  static Color getWhite(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ?  Colors.black : const Color(0xFFF5F3FF)    ;
+  }
+
   static const Color blue = Color(0xFF90CAF9);
   static const Color blue2 = Color(0xFF0059A1); //Color(0xFF42A5F5);
 
   static const Color appBarcolor = Color(0xFFF5F3FF);
+  static Color getAppBarColor(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ?  Colors.black : const Color(0xFFF5F3FF);
+  }
+
 
   static const Color purple = Color(0xFFF5F3FF);
   static const Color purple2 = Color(0xFF8B5CF6);
@@ -192,19 +211,59 @@ extension HexaColor on Color {
     return Color(int.parse(hexColorString, radix: 16));
   }
 
+
 }
+
+// 🌞 Light Theme
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   scaffoldBackgroundColor: AppColor.backgroundcolor,
   primaryColor: AppColor.primary,
-  textTheme: const TextTheme(
-    bodyMedium: TextStyle(color: Colors.black87),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: AppColor.white,
+    foregroundColor: AppColor.textColorheadline1,
+    elevation: 0,
+  ),
+  textTheme: TextTheme(
+    headlineLarge: GoogleFonts.inter(
+      color: AppColor.textColorheadline1,
+      fontWeight: FontWeight.bold,
+      fontSize: 24,
+    ),
+    headlineMedium: GoogleFonts.inter(
+      color: AppColor.textColorheadline2,
+      fontSize: 20,
+    ),
+    bodyLarge: GoogleFonts.inter(
+      color: AppColor.textColorbodyText1,
+      fontSize: 16,
+    ),
+    bodyMedium: GoogleFonts.inter(
+      color: AppColor.textColorbodyText2,
+      fontSize: 14,
+    ),
+  ),
+  iconTheme: const IconThemeData(color: AppColor.textColorheadline1),
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
+    backgroundColor: AppColor.floatButtonbackgroundColor,
+  ),
+  cardColor: Colors.white,
+  colorScheme: const ColorScheme.light(
+    primary: AppColor.primary,
+    secondary: AppColor.primary3,
+    surface: Colors.white,
+    background: AppColor.backgroundcolor,
+    onPrimary: Colors.white,
+    onSecondary: Colors.black,
+    onBackground: AppColor.textColorheadline1,
+    onSurface: AppColor.textColorheadline2,
   ),
 );
 
+// 🌑 Dark Theme
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
-  scaffoldBackgroundColor: Colors.black,
+  scaffoldBackgroundColor: Color(0xff888888),
   primaryColor: AppColor.primary,
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.black,
@@ -212,14 +271,26 @@ ThemeData darkTheme = ThemeData(
     elevation: 0,
   ),
   textTheme: const TextTheme(
-    headlineLarge:
-    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+    headlineLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+    headlineMedium: TextStyle(color: Colors.white),
+    headlineSmall: TextStyle(color: Colors.white70),
+    bodyLarge: TextStyle(color: Colors.white),
     bodyMedium: TextStyle(color: Colors.white70),
+    bodySmall: TextStyle(color: Colors.white60),
   ),
+  iconTheme: const IconThemeData(color: Colors.white70),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
     backgroundColor: AppColor.primary,
   ),
-  colorScheme: const ColorScheme.dark().copyWith(
+  cardColor: const Color(0xFF1E1E1E),
+  colorScheme: const ColorScheme.dark(
+    primary: AppColor.primary,
     secondary: AppColor.primary3,
+    surface: Color(0xFF1E1E1E),
+    background: Color(0xFF121212),
+    onPrimary: Colors.white,
+    onSecondary: Colors.black,
+    onBackground: Colors.white70,
+    onSurface: Colors.white,
   ),
 );

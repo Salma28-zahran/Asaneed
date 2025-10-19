@@ -13,7 +13,7 @@ class BackgroundScreen extends StatelessWidget {
     return Container(
       decoration: isDark
           ? const BoxDecoration(
-        color: Colors.black, // في الوضع الداكن، خلفية سادة
+        color: Color(0xff212121), // في الوضع الداكن، خلفية سادة
       )
           : BoxDecoration(
         image: DecorationImage(
