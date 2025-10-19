@@ -1,6 +1,8 @@
 import 'package:asaneed/core/resources/app_assets_manager.dart';
+import 'package:asaneed/theme/AppThemeManager.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -8,30 +10,36 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColor.white,
+      backgroundColor: AppColor.getAppBarColor(context),
       centerTitle: true,
-      title: Image.asset(
-        color: AppColor.black,
-        AssetsManager.homeLogo,
-        height: 60,
-        width: 144,
+      title: Padding(
+        padding: const EdgeInsets.only(bottom: 10),
+        child: Image.asset(
+          color: AppColor.getBlack(context),
+          AssetsManager.homeLogo,
+          height: 60,
+          width: 144,
+        ),
       ),
       elevation: 0,
       actions: [
-        /*
         GestureDetector(
           onTap: () {
-            context.read<MyProvider>().changeTheme();
+            context.read<AppThemeManager>().toggleTheme();
           },
+
           child: Icon(
-            isDark ? Icons.wb_sunny : Icons.dark_mode,
+            context.watch<AppThemeManager>().isDarkMode
+                ? Icons.wb_sunny
+                : Icons.dark_mode,
             size: 25,
-            color:
-            isDark ? Colors.amber : Theme.of(context).primaryColor,
+            color: context.watch<AppThemeManager>().isDarkMode
+                ? Colors.amber
+                : Theme.of(context).primaryColor,
           ),
         ),
 
-         */
+
       ],
     );
   }

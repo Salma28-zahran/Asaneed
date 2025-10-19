@@ -18,7 +18,7 @@ class FavScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
+          backgroundColor: AppColor.getAppBarColor(context),
           elevation: 0,
           bottom:
           TabBar(
@@ -28,7 +28,7 @@ class FavScreen extends StatelessWidget {
             ),
             indicatorSize: TabBarIndicatorSize.tab,
             labelColor: Colors.white,
-            unselectedLabelColor: Colors.black,
+            unselectedLabelColor: AppColor.getBlack(context),
             labelStyle: GoogleFonts.inter(
               fontSize: 18,
               fontWeight: FontWeight.w600,

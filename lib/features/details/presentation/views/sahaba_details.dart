@@ -68,16 +68,17 @@ class _SahabaDetailsState extends State<SahabaDetails>
       //backgroundColor: AppColor.white,
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColor.getAppBarColor(context),
         surfaceTintColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+          icon:  Icon(Icons.arrow_back_ios, color: AppColor.getBlack(context)),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           "الصحابه",
-          style: AppColor.title,
+          style: AppColor.title.copyWith(color: 
+          AppColor.getBlack(context)),
         ),
         centerTitle: true,
       ),
@@ -88,12 +89,12 @@ class _SahabaDetailsState extends State<SahabaDetails>
             padding: const EdgeInsets.only(right: 15),
             child: Align(
               alignment: Alignment.topRight,
-              child: const Text(
+              child:  Text(
                 "سفيان بن عيينة الهلالي",
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
-                  color: Colors.black,
+                  color: AppColor.getBlack(context),
                 ),
               ),
             ),

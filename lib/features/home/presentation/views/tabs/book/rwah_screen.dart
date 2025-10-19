@@ -16,16 +16,16 @@ class _RwahScreenState extends State<RwahScreen> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColor.getAppBarColor(context),
         surfaceTintColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+          icon:  Icon(Icons.arrow_back_ios, color: AppColor.getBlack(context)),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           "الصحابه",
-          style: AppColor.title,
+          style: AppColor.title.copyWith(color: AppColor.getBlack(context)),
         ),
         centerTitle: true,
       ),
@@ -107,7 +107,7 @@ class _RwahScreenState extends State<RwahScreen> {
       },
       child: Card(
         elevation: 3,
-        color: isSelected ? AppColor.primary : Colors.white,
+        color: isSelected ? AppColor.primary : AppColor.getWhite(context),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -164,7 +164,7 @@ class _RwahScreenState extends State<RwahScreen> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: isSelected ? Colors.white : Colors.black,
+                        color: isSelected ? Colors.white : AppColor.getBlack(context),
                       ),
                     ),
                     const SizedBox(height: 6),

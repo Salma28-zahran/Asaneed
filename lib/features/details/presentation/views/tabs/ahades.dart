@@ -1,5 +1,7 @@
+import 'package:asaneed/theme/AppThemeManager.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PersonCard {
   final String name;
@@ -55,6 +57,9 @@ class Ahades extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.watch<AppThemeManager>().isDarkMode
+          ? Colors.grey[900]
+          : Colors.white,
       body: ListView.separated(
         padding: const EdgeInsets.all(12),
         itemCount: cards.length,
@@ -64,7 +69,9 @@ class Ahades extends StatelessWidget {
           return Container(
             height: 95,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ?  Colors.black
+                  : Colors.white,
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(

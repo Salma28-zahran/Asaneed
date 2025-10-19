@@ -13,10 +13,10 @@ class SearchScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: AppColor.white,
+          backgroundColor: AppColor.getAppBarColor(context),
           elevation: 0,
-          bottom: const TabBar(
-            labelColor: AppColor.black,
+          bottom:  TabBar(
+            labelColor: AppColor.getBlack(context),
             unselectedLabelColor: AppColor.grey,
             indicatorColor: AppColor.primary,
             indicatorWeight: 3,
