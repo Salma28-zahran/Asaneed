@@ -7,15 +7,22 @@ class BackgroundScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // نجيب الثيم الحالي (فاتح أو داكن)
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
-      decoration: BoxDecoration(
+      decoration: isDark
+          ? const BoxDecoration(
+        color: Colors.black, // في الوضع الداكن، خلفية سادة
+      )
+          : BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(AssetsManager.background), // صورتك
+          image: AssetImage(AssetsManager.background),
           fit: BoxFit.cover,
         ),
       ),
       child: Scaffold(
-        backgroundColor: Colors.transparent, // علشان الخلفية تبان
+        backgroundColor: Colors.transparent,
         body: child,
       ),
     );
