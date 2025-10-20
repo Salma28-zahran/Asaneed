@@ -2,7 +2,7 @@ import 'package:asaneed/features/tree/presentation/views/tabs/tree_tabeen1.dart'
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
-class NameBox extends StatefulWidget {
+class NameBox extends StatelessWidget {
   final String title;
   final Color color;
   final VoidCallback? onTap;
@@ -15,48 +15,52 @@ class NameBox extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<NameBox> createState() => _NameBoxState();
-}
-
-class _NameBoxState extends State<NameBox> {
-  @override
   Widget build(BuildContext context) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+
+    // ✅ الخلفية تتغير حسب المود
+    final Color backgroundColor =
+    isDark ? const Color(0xff444444) : Colors.white;
+
     return GestureDetector(
-      onTap: widget.onTap,
+      onTap: onTap,
       child: Container(
         height: 47,
         margin: const EdgeInsets.symmetric(vertical: 4),
         decoration: BoxDecoration(
-          color: widget.color.withOpacity(0.1),
+          color: backgroundColor, // الخلفية تتغير حسب المود
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
           children: [
+            // ✅ الجزء البنفسجي اللي فيه السهم دايمًا بنفس اللون البنفسجي
             Container(
               width: 35,
               height: 45,
-              decoration: BoxDecoration(
-                color: widget.color,
-                borderRadius: const BorderRadius.only(
+              decoration: const BoxDecoration(
+                color: Colors.purple, // ثابت في اللايت والدارك
+                borderRadius: BorderRadius.only(
                   topRight: Radius.circular(8),
                   bottomRight: Radius.circular(8),
                 ),
               ),
-              child: const Icon(
-                Icons.arrow_back_ios_new,
-                color: Colors.white,
-                size: 18,
+              child: const Center(
+                child: Icon(
+                  Icons.arrow_back_ios_new,
+                  color: Colors.white, // السهم أبيض دايمًا
+                  size: 18,
+                ),
               ),
             ),
             const SizedBox(width: 8),
             Expanded(
               child: Center(
                 child: Text(
-                  widget.title,
-                  style: const TextStyle(
+                  title,
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: Colors.black,
+                    color: isDark ? Colors.white : Colors.black,
                   ),
                 ),
               ),
@@ -80,7 +84,10 @@ class TreeScreen extends StatelessWidget {
         title: Text(
           "شجرة الاسنادية",
           style: AppColor.title.copyWith(
-              fontSize: 20, fontWeight: FontWeight.bold,color: AppColor.getBlack(context)),
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: AppColor.getBlack(context),
+          ),
         ),
       ),
       body: Padding(
@@ -88,7 +95,6 @@ class TreeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            // البوكس بتاع الرسول ﷺ
             Container(
               width: 280,
               height: 55,
@@ -105,8 +111,6 @@ class TreeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-
-            // شكل التابات بس كـ ديزاين
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -118,27 +122,24 @@ class TreeScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-
-            // ليست فيها الأسماء
             Expanded(
               child: ListView.builder(
                 padding: const EdgeInsets.all(8),
                 itemCount: 12,
                 itemBuilder: (context, index) {
+                  final bool isDark = Theme.of(context).brightness == Brightness.dark;
+
                   return NameBox(
                     title: "جابر بن عبد الله الأنصاري",
-                    color: Theme.of(context).brightness == Brightness.dark
-                        ? const Color(0xff444444)
-                        : Colors.purple,
-
+                    color: isDark ? const Color(0xff444444) : Colors.purple,
                     onTap: () {
                       Navigator.of(context).push(
                         PageRouteBuilder(
-                          transitionDuration:
-                          const Duration(milliseconds: 600),
+                          transitionDuration: const Duration(milliseconds: 600),
                           pageBuilder: (context, animation, secondaryAnimation) =>
                           const TreeTabeen1(),
-                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                          transitionsBuilder:
+                              (context, animation, secondaryAnimation, child) {
                             final offsetAnimation = Tween<Offset>(
                               begin: const Offset(0.2, 0),
                               end: Offset.zero,

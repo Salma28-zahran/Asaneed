@@ -5,6 +5,8 @@ class PageRouteName{
   static const String rwah = '/ rwah';
   static const String tree = '/ tree';
   static const String splash = '/splash';
+  static const String terms = '/terms';
+  static const String info = '/info';
 
 
 

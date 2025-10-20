@@ -51,15 +51,17 @@ class CustomBottomNavBar extends StatelessWidget {
                   unselectedItemColor: Colors.grey,
                   showSelectedLabels: false,
                   showUnselectedLabels: false,
-                  iconSize: 24,
+                  iconSize: 28,
                   items: [
+                    _buildNavItem(const Icon(Icons.settings_outlined), 0),
                     _buildNavItem(
                       const ImageIcon(AssetImage(AssetsManager.book1)),
-                      0,
+                      1,
                     ),
-                    _buildNavItem(const Icon(Icons.search), 1),
-                    _buildNavItem(const Icon(Icons.bookmark_border), 2),
-                    _buildNavItem(const Icon(Icons.home), 3),
+                    _buildNavItem(const Icon(Icons.search), 2),
+                    _buildNavItem(const Icon(Icons.bookmark_border), 3),
+                    _buildNavItem(const Icon(Icons.home), 4),
+
                   ],
                 ),
               ),

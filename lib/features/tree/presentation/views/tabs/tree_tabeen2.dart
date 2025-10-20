@@ -1,7 +1,9 @@
 import 'package:asaneed/features/tree/presentation/views/tabs/tree_tabeen1.dart';
 import 'package:asaneed/features/tree/presentation/views/tabs/tree_tabeen2.dart' show TreeTabeen2;
+import 'package:asaneed/theme/AppThemeManager.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class NameBox3 extends StatefulWidget {
   final String title;
@@ -75,13 +77,18 @@ class TreeTabeen2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: context.watch<AppThemeManager>().isDarkMode
+          ? Colors.grey[900]
+          : Colors.transparent,
       appBar: AppBar(
-        backgroundColor: AppColor.white,
+        backgroundColor: AppColor.getWhite(context),
         title: Text(
           "الصحابه",
           style: AppColor.title.copyWith(
-              fontSize: 20, fontWeight: FontWeight.bold),
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: AppColor.getBlack(context),
+          ),
         ),
       ),
       body: Padding(
