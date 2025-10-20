@@ -22,25 +22,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       elevation: 0,
-      actions: [
-        GestureDetector(
-          onTap: () {
-            context.read<AppThemeManager>().toggleTheme();
-          },
 
-          child: Icon(
-            context.watch<AppThemeManager>().isDarkMode
-                ? Icons.wb_sunny
-                : Icons.dark_mode,
-            size: 25,
-            color: context.watch<AppThemeManager>().isDarkMode
-                ? Colors.amber
-                : Theme.of(context).primaryColor,
-          ),
-        ),
-
-
-      ],
     );
   }
 
