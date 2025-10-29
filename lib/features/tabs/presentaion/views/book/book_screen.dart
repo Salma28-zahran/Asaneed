@@ -20,7 +20,7 @@ class _BookScreenState extends State<BookScreen> {
     return Scaffold(
       backgroundColor: context.watch<AppThemeManager>().isDarkMode
           ? Colors.grey[900]
-          : Colors.white,
+          : Colors.transparent,
       appBar: AppBar(
         backgroundColor: AppColor.getAppBarColor(context),
         title: Text(

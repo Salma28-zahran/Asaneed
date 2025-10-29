@@ -1,7 +1,9 @@
 import 'package:asaneed/features/tree/presentation/views/tabs/tree_tabeen1.dart';
 import 'package:asaneed/features/tree/presentation/views/tabs/tree_tabeen2.dart' show TreeTabeen2;
+import 'package:asaneed/theme/AppThemeManager.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class NameBox2 extends StatefulWidget {
   final String title;
@@ -22,13 +24,15 @@ class NameBox2 extends StatefulWidget {
 class _NameBoxState extends State<NameBox2> {
   @override
   Widget build(BuildContext context) {
+    final isDark = context.watch<AppThemeManager>().isDarkMode;
+
     return GestureDetector(
       onTap: widget.onTap,
       child: Container(
         height: 47,
         margin: const EdgeInsets.symmetric(vertical: 4),
         decoration: BoxDecoration(
-          color: AppColor.pink,
+          color: isDark ? const Color(0xff444444) : AppColor.pink,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
@@ -37,7 +41,7 @@ class _NameBoxState extends State<NameBox2> {
               width: 35,
               height: 38,
               decoration: BoxDecoration(
-                color:AppColor.pink2,
+                color: AppColor.pink2, // يفضل فوشيا في كل الحالات
                 borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(8),
                   bottomRight: Radius.circular(8),
@@ -75,13 +79,18 @@ class TreeTabeen1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: context.watch<AppThemeManager>().isDarkMode
+          ? Colors.grey[900]
+          : Colors.transparent,
       appBar: AppBar(
-        backgroundColor: AppColor.white,
+        backgroundColor: AppColor.getWhite(context),
         title: Text(
           "الصحابه",
           style: AppColor.title.copyWith(
-              fontSize: 20, fontWeight: FontWeight.bold),
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: AppColor.getBlack(context),
+          ),
         ),
       ),
       body: Padding(
@@ -89,13 +98,14 @@ class TreeTabeen1 extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 "جابر بن عبد الله الأنصاري",
                 style: AppColor.title.copyWith(
-                    fontSize: 24, fontWeight: FontWeight.w400),
+                  fontSize: 24,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
             const SizedBox(height: 12),
@@ -108,10 +118,9 @@ class TreeTabeen1 extends StatelessWidget {
                     color: AppColor.primary,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child:  Row(
+                  child: Row(
                     children: [
-
-                      Text(
+                      const Text(
                         '... اقرأ المزيد ',
                         style: TextStyle(
                           color: Colors.white,
@@ -119,15 +128,13 @@ class TreeTabeen1 extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Icon(Icons.error,color: AppColor.white,),
+                      const Icon(Icons.error, color: AppColor.white),
                     ],
                   ),
                 ),
-                SizedBox(width: 10,),
-
+                const SizedBox(width: 10),
                 Row(
                   children: [
-
                     Text(
                       'تاريخ الوفاة 78 هجرية',
                       style: TextStyle(
@@ -137,7 +144,8 @@ class TreeTabeen1 extends StatelessWidget {
                     ),
                     const SizedBox(width: 6),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 14, vertical: 8),
                       decoration: BoxDecoration(
                         color: AppColor.purple,
                         borderRadius: BorderRadius.circular(16),
@@ -156,20 +164,15 @@ class TreeTabeen1 extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 12),
-
-
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                buildFakeTab("تابعي التابعين",Colors.transparent,AppColor.grey ),
+                buildFakeTab("تابعي التابعين", Colors.transparent, AppColor.grey),
                 const SizedBox(width: 8),
-                buildFakeTab("التابعي", AppColor.pink,AppColor.pink2 ),
-
-
+                buildFakeTab("التابعي", AppColor.pink, AppColor.pink2),
               ],
             ),
             const SizedBox(height: 10),
-
             Expanded(
               child: ListView.builder(
                 padding: const EdgeInsets.all(8),
@@ -182,10 +185,11 @@ class TreeTabeen1 extends StatelessWidget {
                       Navigator.of(context).push(
                         PageRouteBuilder(
                           transitionDuration: const Duration(milliseconds: 600),
-                          pageBuilder: (context, animation, secondaryAnimation) =>
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) =>
                           const TreeTabeen2(),
-                          transitionsBuilder:
-                              (context, animation, secondaryAnimation, child) {
+                          transitionsBuilder: (context, animation,
+                              secondaryAnimation, child) {
                             final offsetAnimation = Tween<Offset>(
                               begin: const Offset(0.2, 0),
                               end: Offset.zero,
@@ -205,7 +209,6 @@ class TreeTabeen1 extends StatelessWidget {
                         ),
                       );
                     },
-
                   );
                 },
               ),
