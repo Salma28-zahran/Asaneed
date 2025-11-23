@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       ),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: themeManager.currentTheme, // ✅ هنا بيطبق الثيم الفعلي
+        theme: themeManager.currentTheme,
         onGenerateRoute: RoutesGenerator.onGenerateRoutes,
         builder: (context, child) {
           return Scaffold(
