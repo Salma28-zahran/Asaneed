@@ -5,6 +5,7 @@ import 'package:asaneed/features/home/presentation/widgets/custom_bottom_navbar.
 import 'package:asaneed/features/tabs/presentaion/views/book/book_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/fav_screen.dart' show FavScreen;
 import 'package:asaneed/features/tabs/presentaion/views/home_page.dart';
+import 'package:asaneed/features/tabs/presentaion/views/home_page2.dart';
 import 'package:asaneed/features/tabs/presentaion/views/search_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/settings/setting_screen.dart';
 import 'package:asaneed/theme/app_theme.dart';
@@ -30,10 +31,10 @@ class _HomeScreenState extends State<HomeScreen> {
       const BookScreen(),
       const SearchScreen(),
       const FavScreen(),
-      HomePage(
-        onCardTap: () {
+      HomePage2(
+        onTabChange: (index) {
           setState(() {
-            _selectedIndex = 0; // BookScreen
+            _selectedIndex = index;
           });
         },
       ),

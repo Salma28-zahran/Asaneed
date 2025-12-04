@@ -88,8 +88,8 @@ class SearchScreen extends StatelessWidget {
                       prefixIcon: const Icon(Icons.search, color: AppColor.grey),
 
                       contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 12, // المسافة يمين ويسار
-                        vertical: 10,   // المسافة فوق وتحت
+                        horizontal: 12,
+                        vertical: 10,
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
