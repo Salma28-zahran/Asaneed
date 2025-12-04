@@ -10,7 +10,7 @@ class AppColor {
   static const Color textColorheadline2 = Color(0xFF424242); // Gray
   static const Color textColorbodyText1 = Color(0xFF666666); // Light gray
   static const Color textColorbodyText2 = Color(0xFF757575); // Medium gray
-  static const Color primary = Color(0xff0F9585);
+  static const Color primary = Color(0xff2F5D4B);
   static const Color primary2 = Color(0xffE8FFFC);
   static Color getPrimary2(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -44,10 +44,8 @@ class AppColor {
     return isDark ?  Colors.black : const Color(0xFFF5F3FF)    ;
   }
 
-  static const Color blue = Color(0xFF90CAF9);
-  static const Color blue2 = Color(0xFF0059A1); //Color(0xFF42A5F5);
 
-  static const Color appBarcolor = Color(0xFFF5F3FF);
+  static const Color appBarcolor = Color(0xffFFFFFF);
   static Color getAppBarColor(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return isDark ?  Colors.black : const Color(0xFFF5F3FF);
@@ -58,8 +56,24 @@ class AppColor {
   static const Color purple2 = Color(0xFF8B5CF6);
   static const Color pink = Color(0xffFDF2F8);
   static const Color pink2 = Color(0xffEC4899);
-  static const Color orange = Color(0xffFFF1E6);
-  static const Color orange2 = Color(0xffFF9B4D);
+
+
+  static const Color green = Color(0xFF166534);
+  static const Color green2 = Color(0xFFE8F5E9);
+  static const Color blue = Color(0xFF1976D2);
+  static const Color blue2 = Color(0xFFE3F2FD);
+  static const Color orange = Color(0xffFFF3E0);
+  static const Color orange2 = Color(0xffE65100);
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -97,7 +111,7 @@ class AppColor {
   static const Color kDarkGreyColor = Color(0xFF555555);
   static const Color kBackgroundColor = Colors.white;
 ///////////////////mine
-  static const Color backgroundbox = AppColor.blue2;
+ // static const Color backgroundbox = AppColor.blue2;
   static const Color backgroundbox2 = AppColor.blue;
   static const Color backgroundboxlite = AppColor.white;
   static const Color listviewbackground = AppColor.white;
@@ -106,12 +120,12 @@ class AppColor {
 
   static const Color titleColor = AppColor.white;
 
-  static const Color textColorAppbar = AppColor.blue2;
+ // static const Color textColorAppbar = AppColor.blue2;
   static const Color textColorDisabled = AppColor.grey;
 
   static const Color appBarBackground = AppColor.white;
 
-  static const Color buttonBackground = AppColor.blue2;
+//  static const Color buttonBackground = AppColor.blue2;
 
   static const Color buttonBackgroundDisable = AppColor.grey;
   static const Color buttontitle = AppColor.primaryColor;
@@ -148,6 +162,33 @@ class AppColor {
 
   static TextStyle titletabeen2 =
   GoogleFonts.inter(color: AppColor.orange2, fontWeight: FontWeight.w500,fontSize: 14);
+
+  static TextStyle textblack =
+  GoogleFonts.ibmPlexSansArabic(
+    color: AppColor.black,
+    fontWeight: FontWeight.w500,
+    fontSize: 20,
+  );
+  static TextStyle textprimary =
+  GoogleFonts.ibmPlexSansArabic(
+    color: AppColor.primary,
+    fontWeight: FontWeight.w500,
+    fontSize: 20,
+  );
+  static TextStyle textgrey =
+  GoogleFonts.ibmPlexSansArabic(
+    color: Color(0xff6B7280),
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
+  );
+
+  static TextStyle ahades =
+  TextStyle(
+    color:AppColor.black,
+    fontWeight: FontWeight.w700,
+    fontSize: 17,
+    fontFamily: "Times New Roman"
+  );
 
 
 

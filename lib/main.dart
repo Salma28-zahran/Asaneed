@@ -27,24 +27,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeManager = Provider.of<AppThemeManager>(context);
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(AssetsManager.background),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: themeManager.currentTheme,
-        onGenerateRoute: RoutesGenerator.onGenerateRoutes,
-        builder: (context, child) {
-          return Scaffold(
-            backgroundColor: Colors.transparent,
-            body: child,
-          );
-        },
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: themeManager.currentTheme,
+      onGenerateRoute: RoutesGenerator.onGenerateRoutes,
+      builder: (context, child) {
+        return Scaffold(
+          backgroundColor: Colors.transparent,
+          body: child,
+        );
+      },
     );
   }
 }
