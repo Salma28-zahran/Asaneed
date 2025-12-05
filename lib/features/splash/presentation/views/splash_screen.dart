@@ -1,4 +1,5 @@
 import 'package:asaneed/core/route/routes.dart';
+import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedSplashScreen extends StatefulWidget {
@@ -43,17 +44,37 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: ScaleTransition(
-          scale: _animation,
-          child: Image.asset(
-            'assets/images/png/logo_1.png',
-            width: 200,
-            height: 200,
+      backgroundColor: AppColor.primary,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Center(
+              child: ScaleTransition(
+                scale: _animation,
+                child: Image.asset(
+                  'assets/images/png/splashScreen.jpg',
+                  width: 200,
+                  height: 200,
+                ),
+              ),
+            ),
           ),
-        ),
+
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20.0),
+            child: ScaleTransition(
+              scale: _animation,
+              child: Image.asset(
+                'assets/images/png/loadingIcon.png',
+                width: 120,
+                height: 120,
+              ),
+            ),
+          ),
+        ],
       ),
+
     );
   }
 }

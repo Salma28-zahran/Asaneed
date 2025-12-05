@@ -10,7 +10,7 @@ class AppColor {
   static const Color textColorheadline2 = Color(0xFF424242); // Gray
   static const Color textColorbodyText1 = Color(0xFF666666); // Light gray
   static const Color textColorbodyText2 = Color(0xFF757575); // Medium gray
-  static const Color primary = Color(0xff0F9585);
+  static const Color primary = Color(0xff4A8B71);
   static const Color primary2 = Color(0xffE8FFFC);
   static Color getPrimary2(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
