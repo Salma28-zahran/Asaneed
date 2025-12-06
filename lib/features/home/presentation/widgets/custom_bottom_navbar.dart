@@ -20,6 +20,7 @@ class CustomBottomNavBar extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 2),
         child: Container(
           height: 74,
+
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(

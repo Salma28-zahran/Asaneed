@@ -43,6 +43,12 @@ class AppColor {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return isDark ?  Colors.black : const Color(0xFFF5F3FF)    ;
   }
+  static Color getborder(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ?  Color(0xff9CA3AF) : const Color(0xffE5E5DC)    ;
+  }
+
+
 
 
   static const Color appBarcolor = Color(0xffFFFFFF);
@@ -163,12 +169,16 @@ class AppColor {
   static TextStyle titletabeen2 =
   GoogleFonts.inter(color: AppColor.orange2, fontWeight: FontWeight.w500,fontSize: 14);
 
-  static TextStyle textblack =
-  GoogleFonts.ibmPlexSansArabic(
-    color: AppColor.black,
-    fontWeight: FontWeight.w500,
-    fontSize: 20,
-  );
+  static TextStyle textBlack(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return GoogleFonts.ibmPlexSansArabic(
+      color: isDark ? Colors.white : AppColor.black,
+      fontWeight: FontWeight.w500,
+      fontSize: 20,
+    );
+  }
+
   static TextStyle textprimary =
   GoogleFonts.ibmPlexSansArabic(
     color: AppColor.primary,
@@ -182,13 +192,23 @@ class AppColor {
     fontSize: 14,
   );
 
-  static TextStyle ahades =
-  TextStyle(
-    color:AppColor.black,
-    fontWeight: FontWeight.w700,
-    fontSize: 17,
-    fontFamily: "Times New Roman"
-  );
+  static TextStyle ahades(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return const TextStyle(
+      fontWeight: FontWeight.w700,
+      fontSize: 17,
+      fontFamily: "Times New Roman",
+    ).copyWith(
+      color: isDark ? Colors.white : AppColor.black,
+    );
+  }
+
+  static Color getContainerColor(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ? const Color(0xFF1A221E) : Colors.white;
+  }
+
 
 
 
