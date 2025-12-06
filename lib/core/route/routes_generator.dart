@@ -2,6 +2,7 @@ import 'package:asaneed/core/route/routes.dart';
 import 'package:asaneed/features/circle/presentation/views/circle1.dart';
 import 'package:asaneed/features/details/presentation/views/sahaba_details.dart';
 import 'package:asaneed/features/home/presentation/views/home_screen.dart';
+import 'package:asaneed/features/onboarding/onboarding.dart';
 import 'package:asaneed/features/splash/presentation/views/splash_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/book/rwah_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/settings/info_screen.dart';
@@ -65,6 +66,11 @@ class RoutesGenerator {
           builder: (context) => const BackgroundScreen(
             child: InfoScreen(),
           ),
+          settings: settings,
+        );
+      case PageRouteName.onboarding:
+        return MaterialPageRoute(
+          builder: (context) => const OnBoarding(),
           settings: settings,
         );
 

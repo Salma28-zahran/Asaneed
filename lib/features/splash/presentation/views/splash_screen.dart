@@ -30,7 +30,7 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen>
     _controller.forward();
 
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, PageRouteName.homeScreen);
+      Navigator.pushReplacementNamed(context, PageRouteName.onboarding);
     });
   }
 
