@@ -6,9 +6,9 @@ import 'package:provider/provider.dart';
 
 import 'theme/AppThemeManager.dart';
 
-
-
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();     // ★★ أهم حاجة لمنع الشاشة البيضا ★★
+
   runApp(
     MultiProvider(
       providers: [
@@ -40,4 +40,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

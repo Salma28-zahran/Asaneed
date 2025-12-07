@@ -1,4 +1,6 @@
+import 'package:asaneed/theme/AppThemeManager.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../core/resources/app_assets_manager.dart';
 import '../../core/route/routes.dart';
 import '../../theme/app_theme.dart';
@@ -16,6 +18,9 @@ class _OnBoardingState extends State<OnBoarding> {
 
   @override
   Widget build(BuildContext context) {
+    final themeManager = context.watch<AppThemeManager>();
+    final isDark = themeManager.isDarkMode;
+
     final size = MediaQuery.of(context).size;
     final width = size.width;
     final height = size.height;
@@ -41,11 +46,21 @@ class _OnBoardingState extends State<OnBoarding> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Icon(
-                          Icons.dark_mode_outlined,
-                          size: 20,
-                          color: AppColor.grey,
+                        GestureDetector(
+                          onTap: () {
+                            themeManager.toggleTheme();
+                          },
+                          child: Icon(
+                            isDark
+                                ? Icons.nightlight_round
+                                : Icons.wb_sunny_rounded,
+                            size: 24,
+                            color: isDark
+                                ? Colors.grey[700]
+                                : AppColor.primary,
+                          ),
                         ),
+
                         TextButton(
                           onPressed: () => _controller.jumpToPage(2),
                           child: Text(
@@ -218,7 +233,7 @@ class _OnBoardingState extends State<OnBoarding> {
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
-                color: AppColor.darkGreen
+                color: AppColor.primary
               ),
             ),
 
