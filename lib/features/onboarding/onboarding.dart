@@ -28,8 +28,7 @@ class _OnBoardingState extends State<OnBoarding> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(
+        backgroundColor: isDark ?  Color(0xFF1A221E) : AppColor.white,        body: SafeArea(
           child: Stack(
             children: [
               Column(
@@ -86,21 +85,21 @@ class _OnBoardingState extends State<OnBoarding> {
                         _buildPage(
 
                           context: context,
-                          image: AssetsManager.onboard1,
+                          image: isDark? AssetsManager.onboard1dark:AssetsManager.onboard1,
                           title: "موسوعة الحديث النبوي",
                           description:
                           "تصفح آلاف الأحاديث النبوية من المصادر \nالمعتمدة مع الترجمة الإيضاحية.",
                         ),
                         _buildPage(
                           context: context,
-                          image: AssetsManager.onboard2,
+                          image:isDark? AssetsManager.onboard2dark:AssetsManager.onboard2 ,
                           title: "تتبع الأسانيد",
                           description:
                           "اكتشف سلسلة الرواة عبر الزمن باستخدام \nالرسوم البيانية والتفسيرات التفاعلية.",
                         ),
                         _buildPage(
                           context: context,
-                          image: AssetsManager.onboard3,
+                          image: isDark? AssetsManager.onboard3dark:AssetsManager.onboard3  ,
                           title: "تحقق من الصحة",
                           description:
                           "اعرف درجة صحة الحديث وحالة كل راوٍ من حيث \n الثقة والضبط.",
@@ -213,7 +212,8 @@ class _OnBoardingState extends State<OnBoarding> {
   }) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-
+    final themeManager = context.watch<AppThemeManager>();
+    final isDark = themeManager.isDarkMode;
     return Center(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: width * 0.08 , vertical: height * 0.1),
@@ -230,12 +230,13 @@ class _OnBoardingState extends State<OnBoarding> {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: AppColor.textBlack(context).copyWith(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
-                color: AppColor.primary
               ),
             ),
+
+
 
             SizedBox(height: height * 0.010),
 
@@ -244,7 +245,7 @@ class _OnBoardingState extends State<OnBoarding> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 18,
-                color: AppColor.grey,
+                color:  AppColor.grey,
               ),
             ),
           ],
