@@ -41,15 +41,15 @@ class _NameBoxState extends State<NameBox2> {
               width: 35,
               height: 38,
               decoration: BoxDecoration(
-                color: AppColor.pink2, // يفضل فوشيا في كل الحالات
+                //color: AppColor.pink2, // يفضل فوشيا في كل الحالات
                 borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(8),
                   bottomRight: Radius.circular(8),
                 ),
               ),
-              child: const Icon(
+              child:  Icon(
                 Icons.arrow_back_ios_new,
-                color: Colors.white,
+                color: AppColor.getBlack(context),
                 size: 16,
               ),
             ),

@@ -99,15 +99,12 @@ class _RwahScreenState extends State<RwahScreen> {
         setState(() {
           selectedIndex = index;
         });
-
         Navigator.pushNamed(context, PageRouteName.details);
-
-
 
       },
       child: Card(
         elevation: 3,
-        color: isSelected ? AppColor.primary : AppColor.getWhite(context),
+        color: isSelected ? AppColor.primary : Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -145,13 +142,13 @@ class _RwahScreenState extends State<RwahScreen> {
                       decoration: BoxDecoration(
                         color: isSelected
                             ? Colors.white24
-                            : AppColor.purple,
+                            : AppColor.blue2,
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
                         type,
                         style: TextStyle(
-                          color: isSelected ? AppColor.white : AppColor.purple2,
+                          color: isSelected ? AppColor.white : AppColor.blue,
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),

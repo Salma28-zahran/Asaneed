@@ -1,5 +1,6 @@
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PersonCard extends StatelessWidget {
   final String name;
@@ -56,7 +57,7 @@ class PersonCard extends StatelessWidget {
               ),
               child: Text(
                 badgeText,
-                style: TextStyle(
+                style: GoogleFonts.scheherazadeNew(
                   color: badgeColor,
                   fontSize: width * 0.035,
                   fontWeight: FontWeight.w600,
@@ -70,7 +71,7 @@ class PersonCard extends StatelessWidget {
             Text(
               name,
               textAlign: TextAlign.right,
-              style: TextStyle(
+              style: GoogleFonts.scheherazadeNew(
                 color: isDark ? Colors.white : const Color(0xff1A1A1A),
                 fontSize: width * 0.045,
                 fontWeight: FontWeight.w600,
