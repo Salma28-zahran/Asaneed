@@ -3,7 +3,9 @@ import 'package:asaneed/features/tabs/presentaion/widgets/ItemRow.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../theme/AppThemeManager.dart';
 import '../widgets/PersonCard.dart';
 
 class HomePage2 extends StatefulWidget {
@@ -16,12 +18,26 @@ class HomePage2 extends StatefulWidget {
 }
 
 class _HomePage2State extends State<HomePage2> {
+  String hadithWithTashkeel =
+      "مَنْ أَحَقُّ النَّاسِ بِحُسْنِ صَحَابَتِي؟ قَالَ: أُمُّكَ...";
+
+  String hadithWithoutTashkeel =
+      "من احق الناس بحسن صحابتي؟ قال: امك...";
+
+  String currentText = "";   // النص اللي هيظهر
+
+  @override
+  void initState() {
+    super.initState();
+    currentText = hadithWithTashkeel;   // بداية يظهر بالتشكيل
+  }
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
     final width = mq.size.width;
     final height = mq.size.height;
-
+    final themeManager = context.watch<AppThemeManager>();
+    final isDark = themeManager.isDarkMode;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: width * 0.04),
       child: SingleChildScrollView(
@@ -55,7 +71,9 @@ class _HomePage2State extends State<HomePage2> {
                       fontSize: width * 0.04,
                     ),
                     contentPadding: EdgeInsets.only(
-                        right: width * 0.015, left: width * 0.03),
+                      right: width * 0.015,
+                      left: width * 0.03,
+                    ),
                     suffixIcon: Padding(
                       padding: EdgeInsets.only(right: width * 0.025),
                       child: Icon(
@@ -64,8 +82,9 @@ class _HomePage2State extends State<HomePage2> {
                         size: width * 0.055,
                       ),
                     ),
-                    suffixIconConstraints:
-                    BoxConstraints(minWidth: width * 0.08),
+                    suffixIconConstraints: BoxConstraints(
+                      minWidth: width * 0.08,
+                    ),
                   ),
                 ),
               ),
@@ -83,8 +102,11 @@ class _HomePage2State extends State<HomePage2> {
                   },
                   child: Row(
                     children: [
-                      Icon(Icons.arrow_back,
-                          color: AppColor.primary, size: width * 0.04),
+                      Icon(
+                        Icons.arrow_back,
+                        color: AppColor.primary,
+                        size: width * 0.04,
+                      ),
                       SizedBox(width: width * 0.012),
                       Text(
                         "المزيد ",
@@ -103,10 +125,7 @@ class _HomePage2State extends State<HomePage2> {
 
             Align(
               alignment: Alignment.topRight,
-              child: Text(
-                "عرض الاسانيد",
-                style: AppColor.textBlack(context),
-              ),
+              child: Text("عرض الاسانيد", style: AppColor.textBlack(context)),
             ),
 
             SizedBox(height: height * 0.018),
@@ -128,7 +147,6 @@ class _HomePage2State extends State<HomePage2> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-
                   ItemRow(
                     icon: Icons.circle,
                     title: 'الدائرة الإسنادية',
@@ -162,29 +180,25 @@ class _HomePage2State extends State<HomePage2> {
                       widget.onTabChange?.call(1);
                     },
                   ),
-
                 ],
               ),
             ),
-
-
-
-
-
 
             SizedBox(height: height * 0.018),
 
             /// حديث اليوم
             Align(
               alignment: Alignment.topRight,
-              child: Text(
-                "حديث اليوم",
-                style: AppColor.textBlack(context),
-              ),
+              child: Text("حديث اليوم", style: AppColor.textBlack(context)),
             ),
             SizedBox(height: height * 0.018),
 
-            Container(
+          InkWell(
+            borderRadius: BorderRadius.circular(width * 0.04),
+            onTap: () {
+              Navigator.pushNamed(context, PageRouteName.hadethScreen); // حط الروت بتاعك هنا
+            },
+            child: Container(
               width: width * 0.97,
               height: height * 0.17,
               padding: EdgeInsets.all(width * 0.035),
@@ -195,46 +209,100 @@ class _HomePage2State extends State<HomePage2> {
                   BoxShadow(
                     color: Colors.black.withOpacity(0.05),
                     blurRadius: 8,
-                    offset: const Offset(0, 2),
+                    offset: Offset(0, 2),
                   ),
                 ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            vertical: height * 0.005,
-                            horizontal: width * 0.03),
-                        decoration: BoxDecoration(
-                          color: AppColor.green2,
-                          border: Border.all(
-                            color: AppColor.green,
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.circular(width * 0.1),
-                        ),
-                        child: Text(
-                          "صحيح",
-                          style: TextStyle(
-                            color: AppColor.green,
-                            fontSize: width * 0.035,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
+
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            "صحيح مسلم",
-                            style: AppColor.textgrey,
+
+                      Row(
+                      children: [
+                      Icon(
+                      Icons.share_outlined,
+                        color: isDark ? Colors.white : AppColor.black,
+                        size: width * 0.055,
+                      ),
+                      SizedBox(width: width * 0.045),
+
+                      Icon(
+                        Icons.copy,
+                        color: isDark ? Colors.white : AppColor.black,
+                        size: width * 0.055,
+                      ),
+                      SizedBox(width: width * 0.045),
+
+                      Icon(
+                        Icons.favorite_border,
+                        color: isDark ? Colors.white : AppColor.black,
+                        size: width * 0.055,
+                      ),
+                      SizedBox(width: width * 0.045),
+
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              currentText = (currentText == hadithWithTashkeel)
+                                  ? hadithWithoutTashkeel
+                                  : hadithWithTashkeel;
+                            });
+                          },
+                          child: SizedBox(
+                            width: width * 0.055,        // نفس size بتاع Icon
+                            height: width * 0.055,       // مهم جداً
+                            child: Image.asset(
+                              "assets/images/png/textIcon.png",
+                              color: isDark ? AppColor.white : AppColor.black,
+                              fit: BoxFit.contain,       // عشان ما تتمددش وتبوظ
+                            ),
                           ),
+                        ),
+                    ],
+              ),
+
+
+              Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: height * 0.005,
+                              horizontal: width * 0.03,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppColor.green2,
+                              border: Border.all(
+                                color: AppColor.green,
+                                width: 1.5,
+                              ),
+                              borderRadius: BorderRadius.circular(width * 0.1),
+                            ),
+                            child: Text(
+                              "صحيح",
+                              style: TextStyle(
+                                color: AppColor.green,
+                                fontSize: width * 0.035,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: height * 0.006),
+
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text("صحيح مسلم", style: AppColor.textgrey),
                           SizedBox(width: width * 0.015),
-                          Icon(Icons.menu_book_outlined,
-                              color: AppColor.primary, size: width * 0.045),
+                          Icon(Icons.menu_book_outlined, color: AppColor.primary, size: width * 0.045),
                         ],
                       ),
                     ],
@@ -243,23 +311,27 @@ class _HomePage2State extends State<HomePage2> {
                   SizedBox(height: height * 0.015),
 
                   Text(
-                    "مَنْ أَحَقُّ النَّاسِ بِحُسْنِ صَحَابَتِي؟ قَالَ: أُمُّكَ...",
+                    currentText,
                     textDirection: TextDirection.rtl,
-                    style: AppColor.ahades(context),
-                  ),
+                    style: TextStyle(fontSize: 20 ),
+
+                  )
                 ],
               ),
             ),
+          ),
 
-            SizedBox(height: height * 0.012),
+
+          SizedBox(height: height * 0.012),
 
             /// رواة شوهدوا مؤخراً
             Align(
               alignment: Alignment.topRight,
               child: Text(
                 "رواة شوهدوا مؤخراً",
-                style: AppColor.textBlack(context)
-                    .copyWith(fontSize: width * 0.045),
+                style: AppColor.textBlack(
+                  context,
+                ).copyWith(fontSize: width * 0.045),
               ),
             ),
 
@@ -307,11 +379,4 @@ class _HomePage2State extends State<HomePage2> {
       ),
     );
   }
-
-
-
-
-
-
-
 }
