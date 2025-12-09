@@ -34,22 +34,11 @@ class NameBox extends StatelessWidget {
         child: Row(
           children: [
             // ✅ الجزء البنفسجي اللي فيه السهم دايمًا بنفس اللون البنفسجي
-            Container(
-              width: 35,
-              height: 45,
-              decoration: const BoxDecoration(
-                color: Colors.purple, // ثابت في اللايت والدارك
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(8),
-                  bottomRight: Radius.circular(8),
-                ),
-              ),
-              child: const Center(
-                child: Icon(
-                  Icons.arrow_back_ios_new,
-                  color: Colors.white, // السهم أبيض دايمًا
-                  size: 18,
-                ),
+             Center(
+              child: Icon(
+                Icons.arrow_back_ios_new,
+                color: AppColor.getBlack(context), // السهم أبيض دايمًا
+                size: 18,
               ),
             ),
             const SizedBox(width: 8),
@@ -99,7 +88,7 @@ class TreeScreen extends StatelessWidget {
               width: 280,
               height: 55,
               decoration: BoxDecoration(
-                color: AppColor.primary2,
+                color: AppColor.primary4,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Center(

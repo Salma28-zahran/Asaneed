@@ -54,10 +54,9 @@ class _HadithCardState extends State<HadithCard> {
                     });
 
                     if (isBookmarked) {
-                      // أضيف الكارد نفسه للمفضلة
                       Provider.of<FavoritesProvider>(context, listen: false).addHadith(
                         HadithCard(
-                          key: widget.key, // مهم لو حابة تميزيه
+                          key: widget.key,
                           mainText: widget.mainText,
                           highlights: widget.highlights,
                         ),
@@ -131,7 +130,6 @@ class _HadithCardState extends State<HadithCard> {
             ),
           ),
           const SizedBox(height: 8),
-          // مصدر الحديث
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -158,7 +156,7 @@ class _HadithCardState extends State<HadithCard> {
                 height: 30,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: const Color(0xff34a89a),
+                  color: AppColor.primary4,
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(

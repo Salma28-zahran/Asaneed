@@ -22,14 +22,14 @@ final List<PersonCard> cards = [
   PersonCard(
     name: "جابر بن عبد الله الأنصاري",
     label: "صحابي",
-    labelColor: AppColor.purple,
-    textColor: AppColor.purple2
+    labelColor: AppColor.green2,
+    textColor: AppColor.green
   ),
   PersonCard(
     name: "جابر بن عبد الله الأنصاري",
     label: "تابعي",
-    labelColor: AppColor.pink,
-      textColor: AppColor.pink2
+    labelColor: AppColor.blue2,
+      textColor: AppColor.blue
   ),
   PersonCard(
     name: "جابر بن عبد الله الأنصاري",
@@ -58,8 +58,8 @@ class Ahades extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.watch<AppThemeManager>().isDarkMode
-          ? Colors.grey[900]
-          : Colors.white,
+          ? Color(0xFF111814)
+          : Color(0xffF9F7F2),
       body: ListView.separated(
         padding: const EdgeInsets.all(12),
         itemCount: cards.length,
@@ -87,7 +87,7 @@ class Ahades extends StatelessWidget {
                 Container(
                   width: 24,
                   decoration: const BoxDecoration(
-                    color: Colors.teal,
+                    color: AppColor.primary,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(12),
                       bottomLeft: Radius.circular(12),

@@ -23,12 +23,17 @@ class _BookScreenState extends State<BookScreen> {
           : Colors.transparent,
       appBar: AppBar(
         backgroundColor: AppColor.getAppBarColor(context),
-        title: Text(
-          "الصحابه",
-          style: GoogleFonts.inter(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              "الصحابه",
+              style: GoogleFonts.tajawal(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
         ),
       ),
       body: Column(
@@ -82,7 +87,7 @@ class _BookScreenState extends State<BookScreen> {
       },
       child: Card(
         elevation: 3,
-        color: isSelected ? AppColor.primary : AppColor.getWhite(context),
+        color: isSelected ? AppColor.primary : AppColor.getContainerColor(context),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -120,13 +125,13 @@ class _BookScreenState extends State<BookScreen> {
                       decoration: BoxDecoration(
                         color: isSelected
                             ? Colors.white24
-                            : AppColor.purple,
+                            : AppColor.green2,
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
                         type,
                         style: TextStyle(
-                          color: isSelected ? AppColor.white : AppColor.purple2,
+                          color: isSelected ? AppColor.white : AppColor.green,
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),

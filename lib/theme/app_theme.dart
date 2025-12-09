@@ -21,6 +21,11 @@ class AppColor {
   ///////primary 3//////
   static const Color primary3 = Color(0xff61f18f);
 
+
+  ///////primary 4//////
+  static const Color primary4 = Color(0xffA9C8BA);
+
+
 ////////main colors////////////
 
 ////////grey////////
@@ -46,7 +51,7 @@ class AppColor {
   static const Color appBarcolor = Color(0xffFFFFFF);
   static Color getAppBarColor(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ?  Colors.black : const Color(0xFFF5F3FF);
+    return isDark ?  Colors.black : Colors.white;
   }
 
 ///////container color///////
@@ -108,7 +113,7 @@ class AppColor {
 ////////black text///////
   static TextStyle textBlack(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    return GoogleFonts.ibmPlexSansArabic(
+    return GoogleFonts.amiriQuran(
       color: isDark ? Colors.white : AppColor.black,
       fontWeight: FontWeight.w500,
       fontSize: 20,
