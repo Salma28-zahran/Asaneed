@@ -4,6 +4,7 @@ import 'package:asaneed/features/details/presentation/views/sahaba_details.dart'
 import 'package:asaneed/features/home/presentation/views/home_screen.dart';
 import 'package:asaneed/features/onboarding/onboarding.dart';
 import 'package:asaneed/features/tabs/presentaion/views/book/rwah_screen.dart';
+import 'package:asaneed/features/tabs/presentaion/views/hadethscreen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/settings/info_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/settings/terms_screen.dart';
 import 'package:asaneed/features/tree/presentation/views/tree_screen.dart';
@@ -72,7 +73,11 @@ class RoutesGenerator {
           builder: (context) => const OnBoarding(),
           settings: settings,
         );
-
+      case PageRouteName.hadethScreen:
+        return MaterialPageRoute(
+          builder: (context) => const Hadethscreen(),
+          settings: settings,
+        );
 
       default:
         return MaterialPageRoute(
