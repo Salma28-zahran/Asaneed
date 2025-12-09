@@ -21,7 +21,7 @@ class _SettingScreenState extends State<SettingScreen> {
     return Scaffold(
       backgroundColor: isDark ? Colors.grey[900] : Colors.transparent,
       appBar: AppBar(
-        backgroundColor: AppColor.getAppBarColor(context),
+        backgroundColor: AppColor.getWhite(context),
         title: Text(
           "الاعدادات",
           style: GoogleFonts.inter(
@@ -33,10 +33,14 @@ class _SettingScreenState extends State<SettingScreen> {
       body: Padding(
         padding: const EdgeInsets.only(top: 15,right: 15,left: 15),
         child: Container(
+
           width: double.infinity,
           height: 180,
           decoration: BoxDecoration(
-            color: AppColor.getWhite(context),
+            color: Theme.of(context).brightness == Brightness.dark
+                ? const Color(0xFF2C3630)   // Dark mode
+                : const Color(0xFFF9F7F2),  // Light mode
+
             borderRadius: BorderRadius.circular(12),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
@@ -76,7 +80,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               width: 24,
                               height: 24,
                               decoration: const BoxDecoration(
-                                color: Colors.white,
+                                color: Color(0xffF9F7F2),
                                 shape: BoxShape.circle,
                               ),
                               child: Icon(

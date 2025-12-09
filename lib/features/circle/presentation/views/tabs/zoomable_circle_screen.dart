@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'sahaba_screen.dart';
 import 'tabeen1_screen.dart';
@@ -85,15 +86,20 @@ class _ZoomableCircleScreenState extends State<ZoomableCircleScreen> {
           FloatingActionButton(
             heroTag: "zoomIn",
             onPressed: _zoomIn,
+            backgroundColor: AppColor.primary,
             child: const Icon(Icons.zoom_in),
           ),
           const SizedBox(height: 8),
           FloatingActionButton(
             heroTag: "zoomOut",
             onPressed: _zoomOut,
+            backgroundColor: AppColor.primary,
             child: const Icon(Icons.zoom_out),
           ),
-        ],
+
+
+
+      ],
       ),
     );
   }

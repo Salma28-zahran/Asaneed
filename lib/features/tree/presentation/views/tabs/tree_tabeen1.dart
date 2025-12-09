@@ -80,8 +80,9 @@ class TreeTabeen1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.watch<AppThemeManager>().isDarkMode
-          ? Colors.grey[900]
-          : Colors.transparent,
+          ? const Color(0xFF212121)
+          : const Color(0xFFF8F9FA),
+
       appBar: AppBar(
         backgroundColor: AppColor.getWhite(context),
         title: Text(

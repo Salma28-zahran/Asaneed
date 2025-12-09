@@ -1,4 +1,5 @@
 import 'package:asaneed/core/route/routes.dart';
+import 'package:asaneed/features/tabs/presentaion/widgets/ItemRow.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,6 +28,7 @@ class _HomePage2State extends State<HomePage2> {
         child: Column(
           children: [
             SizedBox(height: height * 0.025),
+
             Center(
               child: Container(
                 height: height * 0.06,
@@ -39,7 +41,7 @@ class _HomePage2State extends State<HomePage2> {
                       color: Colors.black.withOpacity(0.05),
                       blurRadius: 8,
                       spreadRadius: 1,
-                      offset: Offset(0, 2),
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),
@@ -49,7 +51,7 @@ class _HomePage2State extends State<HomePage2> {
                     border: InputBorder.none,
                     hintText: " ...ابحث في الأحاديث أو الرواة",
                     hintStyle: GoogleFonts.inter(
-                      color: Color(0xFF6B7280),
+                      color: const Color(0xFF6B7280),
                       fontSize: width * 0.04,
                     ),
                     contentPadding: EdgeInsets.only(
@@ -58,7 +60,7 @@ class _HomePage2State extends State<HomePage2> {
                       padding: EdgeInsets.only(right: width * 0.025),
                       child: Icon(
                         Icons.search,
-                        color: Color(0xFF6A6A80),
+                        color: const Color(0xFF6A6A80),
                         size: width * 0.055,
                       ),
                     ),
@@ -68,15 +70,16 @@ class _HomePage2State extends State<HomePage2> {
                 ),
               ),
             ),
+
             SizedBox(height: height * 0.012),
+
+            /// المزيد
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 InkWell(
                   onTap: () {
-                    if (widget.onTabChange != null) {
-                      widget.onTabChange!(2);
-                    }
+                    widget.onTabChange?.call(2);
                   },
                   child: Row(
                     children: [
@@ -93,13 +96,94 @@ class _HomePage2State extends State<HomePage2> {
                     ],
                   ),
                 ),
-                Text(
-                  "حديث اليوم",
-                  style: AppColor.textBlack(context),
-                ),
               ],
             ),
+
+            SizedBox(height: height * 0.013),
+
+            Align(
+              alignment: Alignment.topRight,
+              child: Text(
+                "عرض الاسانيد",
+                style: AppColor.textBlack(context),
+              ),
+            ),
+
             SizedBox(height: height * 0.018),
+
+            Container(
+              width: width * 0.97,
+              padding: EdgeInsets.all(width * 0.02),
+              decoration: BoxDecoration(
+                color: AppColor.getContainerColor(context),
+                borderRadius: BorderRadius.circular(width * 0.04),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+
+                  ItemRow(
+                    icon: Icons.circle,
+                    title: 'الدائرة الإسنادية',
+                    description: 'استعرض الأسانيد في دائرة واحدة.',
+                    iconBackground: const Color(0xFFE3F2E3),
+                    onTap: () {
+                      Navigator.pushNamed(context, PageRouteName.circle1);
+                    },
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  ItemRow(
+                    icon: Icons.account_tree_outlined,
+                    title: 'شجرة الإسنادية',
+                    description: 'اطلع على تسلسل الإسناد من الصحابي للراوي.',
+                    iconBackground: const Color(0xFFFFF4E5),
+                    onTap: () {
+                      Navigator.pushNamed(context, PageRouteName.tree);
+                    },
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  ItemRow(
+                    icon: Icons.credit_card_rounded,
+                    title: 'البطاقات الإسنادية',
+                    description: 'عرض معلومات كل راوٍ بطريقة مختصرة.',
+                    iconBackground: const Color(0xFFE7E9FF),
+                    onTap: () {
+                      widget.onTabChange?.call(1);
+                    },
+                  ),
+
+                ],
+              ),
+            ),
+
+
+
+
+
+
+            SizedBox(height: height * 0.018),
+
+            /// حديث اليوم
+            Align(
+              alignment: Alignment.topRight,
+              child: Text(
+                "حديث اليوم",
+                style: AppColor.textBlack(context),
+              ),
+            ),
+            SizedBox(height: height * 0.018),
+
             Container(
               width: width * 0.97,
               height: height * 0.17,
@@ -111,7 +195,7 @@ class _HomePage2State extends State<HomePage2> {
                   BoxShadow(
                     color: Colors.black.withOpacity(0.05),
                     blurRadius: 8,
-                    offset: Offset(0, 2),
+                    offset: const Offset(0, 2),
                   ),
                 ],
               ),
@@ -123,7 +207,8 @@ class _HomePage2State extends State<HomePage2> {
                     children: [
                       Container(
                         padding: EdgeInsets.symmetric(
-                            vertical: height * 0.005, horizontal: width * 0.03),
+                            vertical: height * 0.005,
+                            horizontal: width * 0.03),
                         decoration: BoxDecoration(
                           color: AppColor.green2,
                           border: Border.all(
@@ -154,7 +239,9 @@ class _HomePage2State extends State<HomePage2> {
                       ),
                     ],
                   ),
+
                   SizedBox(height: height * 0.015),
+
                   Text(
                     "مَنْ أَحَقُّ النَّاسِ بِحُسْنِ صَحَابَتِي؟ قَالَ: أُمُّكَ...",
                     textDirection: TextDirection.rtl,
@@ -163,7 +250,10 @@ class _HomePage2State extends State<HomePage2> {
                 ],
               ),
             ),
+
             SizedBox(height: height * 0.012),
+
+            /// رواة شوهدوا مؤخراً
             Align(
               alignment: Alignment.topRight,
               child: Text(
@@ -172,6 +262,7 @@ class _HomePage2State extends State<HomePage2> {
                     .copyWith(fontSize: width * 0.045),
               ),
             ),
+
             PersonCard(
               name: "علي بن أبي طالب",
               badgeText: "صحابي",
@@ -181,6 +272,7 @@ class _HomePage2State extends State<HomePage2> {
                 Navigator.pushNamed(context, PageRouteName.details);
               },
             ),
+
             PersonCard(
               name: "مجاهد بن جبر",
               badgeText: "تابعي",
@@ -190,6 +282,7 @@ class _HomePage2State extends State<HomePage2> {
                 Navigator.pushNamed(context, PageRouteName.details);
               },
             ),
+
             PersonCard(
               name: "عكرمة",
               badgeText: "تابعي",
@@ -199,6 +292,7 @@ class _HomePage2State extends State<HomePage2> {
                 Navigator.pushNamed(context, PageRouteName.details);
               },
             ),
+
             PersonCard(
               name: "أبو داود",
               badgeText: "تابع التابعين",
@@ -213,4 +307,11 @@ class _HomePage2State extends State<HomePage2> {
       ),
     );
   }
+
+
+
+
+
+
+
 }
