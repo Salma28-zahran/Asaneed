@@ -65,10 +65,10 @@ class _SahabaDetailsState extends State<SahabaDetails>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: AppColor.white,
-      backgroundColor: Colors.transparent,
+      backgroundColor:  Color(0xffF9F7F2),
+      //backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: AppColor.getAppBarColor(context),
+        backgroundColor: AppColor.white,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
@@ -105,9 +105,9 @@ class _SahabaDetailsState extends State<SahabaDetails>
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              buildTab("الأحاديث", 0, Colors.teal, Colors.white, AppColor.title),
-              buildTab("من روي عنه", 1, Colors.teal, Colors.white, AppColor.title),
-              buildTab("المزيد عنه", 2, Colors.teal, Colors.white, AppColor.title),
+              buildTab("الأحاديث", 0, AppColor.primary, Colors.white, AppColor.title),
+              buildTab("من روي عنه", 1, AppColor.primary, Colors.white, AppColor.title),
+              buildTab("المزيد عنه", 2, AppColor.primary, Colors.white, AppColor.title),
             ],
           ),
 

@@ -20,7 +20,7 @@ class _ExtraState extends State<Extra> {
       child: SingleChildScrollView(
         child: Container(
 
-          color: AppColor.getWhite(context),
+          color: Color(0xffF9F7F2),
           width: 380,
           //height: 1028,
           child: Padding(
