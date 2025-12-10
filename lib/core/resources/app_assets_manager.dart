@@ -11,12 +11,12 @@ abstract class AssetsManager {
   static const String background = "assets/images/png/background.png";
   static const String comment2 = "assets/images/png/comment2.png";
   static const String logo1 = "assets/images/png/logo_1.png";
-  static const String onboard1 = "assets/images/png/onboard1 (2).png";
-  static const String onboard2 = "assets/images/png/onboard2Dark.png";
+  static const String onboard1 = "assets/images/png/onboard1.png";
+  static const String onboard2 = "assets/images/png/onboard2.png";
   static const String onboard3 = "assets/images/png/onboard3.png";
-  static const String onboard1dark = "assets/images/png/onboard1dark (4).png";
-  static const String onboard2dark = "assets/images/png/onboard2Dark.png";
-  static const String onboard3dark = "assets/images/png/onboard3dark (3).png";
+  static const String onboard1dark = "assets/images/png/onboard1dark.png";
+  static const String onboard2dark = "assets/images/png/onboard2dark.png";
+  static const String onboard3dark = "assets/images/png/onboard3dark.png";
 
 
 
