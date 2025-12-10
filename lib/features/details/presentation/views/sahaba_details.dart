@@ -105,8 +105,8 @@ class _SahabaDetailsState extends State<SahabaDetails>
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              buildTab("الأحاديث", 0, AppColor.primary, Colors.white, AppColor.title),
-              buildTab("من روي عنه", 1, AppColor.primary, Colors.white, AppColor.title),
+              buildTab("من روي عنه", 0, AppColor.primary, Colors.white, AppColor.title),
+              buildTab("الأحاديث", 1, AppColor.primary, Colors.white, AppColor.title),
               buildTab("المزيد عنه", 2, AppColor.primary, Colors.white, AppColor.title),
             ],
           ),

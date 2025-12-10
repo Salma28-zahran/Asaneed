@@ -21,13 +21,18 @@ class _SettingScreenState extends State<SettingScreen> {
     return Scaffold(
       backgroundColor: isDark ? Colors.grey[900] : Colors.transparent,
       appBar: AppBar(
-        backgroundColor: AppColor.getWhite(context),
-        title: Text(
-          "الاعدادات",
-          style: GoogleFonts.inter(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
+        backgroundColor: AppColor.getAppBarColor(context),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              "الاعدادات",
+              style: GoogleFonts.tajawal(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
         ),
       ),
       body: Padding(
@@ -39,7 +44,7 @@ class _SettingScreenState extends State<SettingScreen> {
           decoration: BoxDecoration(
             color: Theme.of(context).brightness == Brightness.dark
                 ? const Color(0xFF2C3630)   // Dark mode
-                : const Color(0xFFF9F7F2),  // Light mode
+                :  Colors.white,  // Light mode
 
             borderRadius: BorderRadius.circular(12),
           ),

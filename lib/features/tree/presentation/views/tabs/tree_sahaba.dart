@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 
 class NameBox extends StatelessWidget {
   final String title;
-  final Color color;
   final VoidCallback? onTap;
 
   const NameBox({
     Key? key,
     required this.title,
-    required this.color,
     this.onTap,
   }) : super(key: key);
 
@@ -17,7 +15,6 @@ class NameBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
 
-    // ✅ الخلفية تتغير حسب المود
     final Color backgroundColor =
     isDark ? const Color(0xff444444) : Colors.white;
 
@@ -32,12 +29,12 @@ class NameBox extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // ✅ الجزء البنفسجي اللي فيه السهم دايمًا بنفس اللون
+            // ✨ السهم فقط بدون خلفية
             Container(
               width: 35,
               height: 45,
               decoration: const BoxDecoration(
-                color: Colors.purple, // بنفسجي ثابت في اللايت والدارك
+                color: Colors.transparent, // شلنا اللون الفوشيا
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(8),
                   bottomRight: Radius.circular(8),
@@ -46,12 +43,14 @@ class NameBox extends StatelessWidget {
               child: const Center(
                 child: Icon(
                   Icons.arrow_back_ios_new,
-                  color: Colors.white, // السهم أبيض ثابت
+                  color: Colors.black, // السهم أسود زي ما انتي عايزة
                   size: 18,
                 ),
               ),
             ),
+
             const SizedBox(width: 8),
+
             Expanded(
               child: Center(
                 child: Text(
@@ -85,9 +84,7 @@ class TreeSahaba extends StatelessWidget {
         itemBuilder: (context, index) {
           return NameBox(
             title: "جابر بن عبد الله الأنصاري",
-            color: Colors.purple,
             onTap: () {
-              // ✅ أنيميشن للانتقال بين التابات
               tabController.animateTo(1);
               debugPrint("Tapped on جابر $index");
             },
