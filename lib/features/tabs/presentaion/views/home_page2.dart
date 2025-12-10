@@ -322,7 +322,7 @@ class _HomePage2State extends State<HomePage2> {
           ),
 
 
-          SizedBox(height: height * 0.012),
+          SizedBox(height: height * 0.018),
 
             /// رواة شوهدوا مؤخراً
             Align(
@@ -334,6 +334,7 @@ class _HomePage2State extends State<HomePage2> {
                 ).copyWith(fontSize: width * 0.045),
               ),
             ),
+            SizedBox(height: height * 0.012),
 
             PersonCard(
               name: "علي بن أبي طالب",

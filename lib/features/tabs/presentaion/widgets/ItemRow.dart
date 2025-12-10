@@ -64,7 +64,7 @@ class _ItemRowState extends State<ItemRow> {
                       color: widget.iconBackground,
                       borderRadius: BorderRadius.circular(16),
                     ),
-                    child: Icon(widget.icon, size: 24),
+                    child: Icon(widget.icon, size: 24,color: AppColor.black,),
                   ),
 
                   const SizedBox(width: 10),

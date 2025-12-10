@@ -19,7 +19,7 @@ class _SettingScreenState extends State<SettingScreen> {
     final isDark = themeManager.isDarkMode;
 
     return Scaffold(
-      backgroundColor: isDark ? Colors.grey[900] : Colors.transparent,
+      backgroundColor: isDark ? Color(0xFF111814) : Colors.transparent,
       appBar: AppBar(
         backgroundColor: AppColor.getAppBarColor(context),
         title: Row(

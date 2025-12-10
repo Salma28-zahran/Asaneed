@@ -3,6 +3,9 @@ import 'package:asaneed/features/details/presentation/views/tabs/extra.dart';
 import 'package:asaneed/features/details/presentation/views/tabs/rwah2/rawah2.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../theme/AppThemeManager.dart';
 
 class SahabaDetails extends StatefulWidget {
   const SahabaDetails({super.key});
@@ -64,11 +67,14 @@ class _SahabaDetailsState extends State<SahabaDetails>
 
   @override
   Widget build(BuildContext context) {
+    final themeManager = context.watch<AppThemeManager>();
+    final isDark = themeManager.isDarkMode;
     return Scaffold(
-      backgroundColor:  Color(0xffF9F7F2),
-      //backgroundColor: Colors.transparent,
+      backgroundColor:isDark?
+      Color(0xFF111814)
+          :AppColor.white,      //backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: AppColor.white,
+        backgroundColor: isDark? AppColor.black:AppColor.white,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
@@ -83,6 +89,7 @@ class _SahabaDetailsState extends State<SahabaDetails>
         centerTitle: true,
       ),
       body: Column(
+
         children: [
           const SizedBox(height: 16),
           Padding(
