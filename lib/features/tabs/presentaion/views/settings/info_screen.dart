@@ -11,17 +11,15 @@ class InfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.watch<AppThemeManager>().isDarkMode
-          ? Colors.grey[900]
-          : Colors.transparent,
+      backgroundColor:
+          context.watch<AppThemeManager>().isDarkMode
+              ? Color(0xFF111814)
+              : Colors.transparent,
       appBar: AppBar(
         backgroundColor: AppColor.getAppBarColor(context),
         title: Text(
           "المزيد عن أسانيد",
-          style: GoogleFonts.inter(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
+          style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.w600),
         ),
       ),
       body: Directionality(
@@ -45,8 +43,8 @@ class InfoScreen extends StatelessWidget {
               const SizedBox(height: 15),
               Text(
                 "أسانيد هو التطبيق الذي يساعد المستخدمين على استكشاف الأحاديث النبوية الشريفة، والتعرف على الصحابة والرواة الذين نقلوا هذه الأحاديث عن رسول الله ﷺ، بأسلوب منظم وسهل الفهم.\n"
-                    "في عالم تتسارع فيه التكنولوجيا، حان الوقت للاستفادة منها في خدمة العلم الشرعي. \"أسانيد\" يستخدم أحدث التقنيات لتقديم تجربة تعليمية سلسة، تركز على الفهم والتأمل بدلًا من التعقيد والتكرار.\n"
-                    "ما يميزنا هو أننا نريد تحويل رحلة التعلم إلى تجربة ممتعة ومثيرة.",
+                "في عالم تتسارع فيه التكنولوجيا، حان الوقت للاستفادة منها في خدمة العلم الشرعي. \"أسانيد\" يستخدم أحدث التقنيات لتقديم تجربة تعليمية سلسة، تركز على الفهم والتأمل بدلًا من التعقيد والتكرار.\n"
+                "ما يميزنا هو أننا نريد تحويل رحلة التعلم إلى تجربة ممتعة ومثيرة.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: AppColor.getBlack(context),
@@ -69,8 +67,6 @@ class InfoScreen extends StatelessWidget {
           ),
         ),
       ),
-
-
     );
   }
 }

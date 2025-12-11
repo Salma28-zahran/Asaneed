@@ -28,13 +28,13 @@ class _OnBoardingState extends State<OnBoarding> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        backgroundColor: isDark ?  Color(0xFF1A221E) : AppColor.white,        body: SafeArea(
+        backgroundColor: isDark ? Color(0xFF1A221E) : AppColor.white,
+        body: SafeArea(
           child: Stack(
             children: [
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-
                   // ===== TOP ROW (MODE ICON + SKIP) =====
                   Padding(
                     padding: EdgeInsets.only(
@@ -54,9 +54,7 @@ class _OnBoardingState extends State<OnBoarding> {
                                 ? Icons.nightlight_round
                                 : Icons.wb_sunny_rounded,
                             size: 24,
-                            color: isDark
-                                ? Colors.grey[700]
-                                : AppColor.primary,
+                            color: isDark ? Colors.grey[700] : AppColor.primary,
                           ),
                         ),
 
@@ -70,8 +68,6 @@ class _OnBoardingState extends State<OnBoarding> {
                             ),
                           ),
                         ),
-
-
                       ],
                     ),
                   ),
@@ -83,26 +79,34 @@ class _OnBoardingState extends State<OnBoarding> {
                       onPageChanged: (i) => setState(() => _currentPage = i),
                       children: [
                         _buildPage(
-
                           context: context,
-                          image: isDark? AssetsManager.onboard1dark:AssetsManager.onboard1,
+                          image:
+                              isDark
+                                  ? AssetsManager.onboard1dark
+                                  : AssetsManager.onboard1,
                           title: "موسوعة الحديث النبوي",
                           description:
-                          "تصفح آلاف الأحاديث النبوية من المصادر \nالمعتمدة مع الترجمة الإيضاحية.",
+                              "تصفح آلاف الأحاديث النبوية من المصادر \nالمعتمدة مع الترجمة الإيضاحية.",
                         ),
                         _buildPage(
                           context: context,
-                          image:isDark? AssetsManager.onboard2dark:AssetsManager.onboard2 ,
+                          image:
+                              isDark
+                                  ? AssetsManager.onboard2dark
+                                  : AssetsManager.onboard2,
                           title: "تتبع الأسانيد",
                           description:
-                          "اكتشف سلسلة الرواة عبر الزمن باستخدام \nالرسوم البيانية والتفسيرات التفاعلية.",
+                              "اكتشف سلسلة الرواة عبر الزمن باستخدام \nالرسوم البيانية والتفسيرات التفاعلية.",
                         ),
                         _buildPage(
                           context: context,
-                          image: isDark? AssetsManager.onboard3dark:AssetsManager.onboard3  ,
+                          image:
+                              isDark
+                                  ? AssetsManager.onboard3dark
+                                  : AssetsManager.onboard3,
                           title: "تحقق من الصحة",
                           description:
-                          "اعرف درجة صحة الحديث وحالة كل راوٍ من حيث \n الثقة والضبط.",
+                              "اعرف درجة صحة الحديث وحالة كل راوٍ من حيث \n الثقة والضبط.",
                         ),
                       ],
                     ),
@@ -119,7 +123,10 @@ class _OnBoardingState extends State<OnBoarding> {
                         height: 8,
                         width: isActive ? 26 : 8,
                         decoration: BoxDecoration(
-                          color: isActive ? AppColor.primary : Colors.grey.shade300,
+                          color:
+                              isActive
+                                  ? AppColor.primary
+                                  : isDark ? Color(0xFF2C3630):Colors.grey.shade300,
                           borderRadius: BorderRadius.circular(10),
                         ),
                       );
@@ -157,7 +164,9 @@ class _OnBoardingState extends State<OnBoarding> {
                               );
                             } else {
                               Navigator.pushReplacementNamed(
-                                  context, PageRouteName.homeScreen);
+                                context,
+                                PageRouteName.homeScreen,
+                              );
                             }
                           },
                           style: ElevatedButton.styleFrom(
@@ -192,8 +201,6 @@ class _OnBoardingState extends State<OnBoarding> {
                       ),
                     ),
                   ),
-
-
                 ],
               ),
             ],
@@ -216,7 +223,10 @@ class _OnBoardingState extends State<OnBoarding> {
     final isDark = themeManager.isDarkMode;
     return Center(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: width * 0.08 , vertical: height * 0.1),
+        padding: EdgeInsets.symmetric(
+          horizontal: width * 0.08,
+          vertical: height * 0.1,
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -230,23 +240,17 @@ class _OnBoardingState extends State<OnBoarding> {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: AppColor.textBlack(context).copyWith(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
+              style: AppColor.textBlack(
+                context,
+              ).copyWith(fontSize: 30, fontWeight: FontWeight.bold),
             ),
-
-
 
             SizedBox(height: height * 0.010),
 
             Text(
               description,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 18,
-                color:  AppColor.grey,
-              ),
+              style: TextStyle(fontSize: 18, color: AppColor.grey),
             ),
           ],
         ),

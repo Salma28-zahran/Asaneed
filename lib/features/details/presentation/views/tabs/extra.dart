@@ -2,6 +2,9 @@ import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../../theme/AppThemeManager.dart';
 
 class Extra extends StatefulWidget {
 
@@ -16,12 +19,15 @@ class _ExtraState extends State<Extra> {
   bool isCopy=false;
   @override
   Widget build(BuildContext context) {
+    final themeManager = context.watch<AppThemeManager>();
+    final isDark = themeManager.isDarkMode;
     return Center(
       child: SingleChildScrollView(
         child: Container(
 
-          color: Color(0xffF9F7F2),
-          width: 380,
+          color:isDark?
+          Color(0xFF111814)
+              :AppColor.white,          width: 380,
           //height: 1028,
           child: Padding(
             padding: const EdgeInsets.only(right: 10, top: 10),

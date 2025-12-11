@@ -12,7 +12,7 @@ class TermsScreen extends StatelessWidget {
     final isDark = context.watch<AppThemeManager>().isDarkMode;
 
     return Scaffold(
-      backgroundColor: isDark ? Colors.grey[900] : Colors.transparent,
+      backgroundColor: isDark ? Color(0xFF111814) : Colors.transparent,
       appBar: AppBar(
         backgroundColor: AppColor.getAppBarColor(context),
         elevation: 0,
