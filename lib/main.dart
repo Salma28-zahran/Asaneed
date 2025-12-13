@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'theme/AppThemeManager.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();     // ★★ أهم حاجة لمنع الشاشة البيضا ★★
+  WidgetsFlutterBinding.ensureInitialized();
 
   runApp(
     MultiProvider(

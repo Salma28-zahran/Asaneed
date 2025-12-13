@@ -1,4 +1,5 @@
 import 'package:asaneed/core/route/routes.dart';
+import 'package:asaneed/features/tabs/presentaion/widgets/FilterWidget.dart';
 import 'package:asaneed/theme/AppThemeManager.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +14,26 @@ class BookScreen extends StatefulWidget {
 }
 
 class _BookScreenState extends State<BookScreen> {
-  int? selectedIndex;
+
+  String? selectedType;
+
+  final List<Map<String, String>> persons = [
+    {"type": "صحابي", "name": "جابر بن عبد الله الأنصاري", "date": "توفي 78 هـ"},
+    {"type": "صحابي", "name": "علي بن أبي طالب", "date": "توفي 40 هـ"},
+    {"type": "تابعي", "name": "مجاهد بن جبر", "date": "توفي 104 هـ"},
+    {"type": "تابعي", "name": "عكرمة", "date": "توفي 105 هـ"},
+    {"type": "تابعي", "name": "الحسن البصري", "date": "توفي 110 هـ"},
+    {"type": "تابع التابعين", "name": "أبو داود", "date": "توفي 275 هـ"},
+    {"type": "تابع التابعين", "name": "النسائي", "date": "توفي 303 هـ"},
+    {"type": "تابع التابعين", "name": "الترمذي", "date": "توفي 279 هـ"},
+  ];
 
   @override
   Widget build(BuildContext context) {
+    final filteredPersons = selectedType == null
+        ? persons
+        : persons.where((p) => p['type'] == selectedType).toList();
+
     return Scaffold(
       backgroundColor: context.watch<AppThemeManager>().isDarkMode
           ? Colors.grey[900]
@@ -38,25 +55,31 @@ class _BookScreenState extends State<BookScreen> {
       ),
       body: Column(
         children: [
+          const SizedBox(height: 10),
+          FilterWidget(
+            selectedType: selectedType ?? "",
+            onTypeSelected: (type) {
+              setState(() {
+                if (selectedType == type) {
+                  selectedType = null;
+                } else {
+                  selectedType = type;
+                }
+              });
+            },
+          ),
           const SizedBox(height: 20),
           Expanded(
-            child: GridView.builder(
-              itemCount: 8,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 12,
-                childAspectRatio: 110 / 100,
-              ),
-              padding: const EdgeInsets.all(16),
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              itemCount: filteredPersons.length,
               itemBuilder: (context, index) {
-                return buildSahabiCard(
+                final item = filteredPersons[index];
+                return buildPersonCard(
                   context: context,
-                  index: index,
-                  isSelected: selectedIndex == index,
-                  type: "صحابي",
-                  name: "جابر بن عبد الله الأنصاري",
-                  date: "تاريخ الوفاة 78 هجريه",
+                  type: item["type"]!,
+                  name: item["name"]!,
+                  date: item["date"]!,
                 );
               },
             ),
@@ -66,102 +89,99 @@ class _BookScreenState extends State<BookScreen> {
     );
   }
 
-  Widget buildSahabiCard({
+  Widget buildPersonCard({
     required BuildContext context,
-    required int index,
-    required bool isSelected,
     required String type,
     required String name,
     required String date,
   }) {
     return InkWell(
       onTap: () {
-        setState(() {
-          selectedIndex = index;
-        });
-
         Navigator.pushNamed(context, PageRouteName.rwah);
-
-
-
       },
-      child: Card(
-        elevation: 3,
-        color: isSelected ? AppColor.primary : AppColor.getContainerColor(context),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        margin: const EdgeInsets.only(bottom: 12),
+        decoration: BoxDecoration(
+          color: AppColor.getContainerColor(context),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: Colors.white10,
+            width: 1,
+          ),
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-
-            Container(
-              width: 24,
-              decoration: BoxDecoration(
-                color: isSelected ? Colors.white : AppColor.primary,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(12),
-                  bottomLeft: Radius.circular(12),
-                ),
-              ),
-              child: Center(
-                child: Icon(
-                  Icons.chevron_left,
-                  color: isSelected ? AppColor.primary : AppColor.white,
-                  size: 20,
-                ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: _getTypeBgColor(type),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      type,
+                      style: TextStyle(
+                        color: _getTypeTextColor(type),
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    name,
+                    textAlign: TextAlign.right,
+                    style: GoogleFonts.scheherazadeNew(
+                      color: AppColor.getBlack(context),
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    date,
+                    style:  GoogleFonts.scheherazadeNew(
+                      color: Colors.grey,
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
               ),
             ),
-
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: isSelected
-                            ? Colors.white24
-                            : AppColor.green2,
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Text(
-                        type,
-                        style: TextStyle(
-                          color: isSelected ? AppColor.white : AppColor.green,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      name,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: isSelected ? Colors.white : AppColor.getBlack(context),
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      date,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: isSelected ? Colors.white70 : Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            )
           ],
         ),
       ),
     );
+  }
+
+  Color _getTypeBgColor(String type) {
+    switch (type) {
+      case "صحابي":
+        return AppColor.green2;
+      case "تابعي":
+        return AppColor.blue2;
+      case "تابع التابعين":
+        return AppColor.orange;
+      default:
+        return Colors.grey.shade200;
+    }
+  }
+
+  Color _getTypeTextColor(String type) {
+    switch (type) {
+      case "صحابي":
+        return AppColor.green;
+      case "تابعي":
+        return AppColor.blue;
+      case "تابع التابعين":
+        return AppColor.orange2;
+      default:
+        return Colors.grey;
+    }
   }
 }

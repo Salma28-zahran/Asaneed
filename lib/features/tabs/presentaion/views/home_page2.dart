@@ -24,12 +24,12 @@ class _HomePage2State extends State<HomePage2> {
   String hadithWithoutTashkeel =
       "من احق الناس بحسن صحابتي؟ قال: امك...";
 
-  String currentText = "";   // النص اللي هيظهر
+  String currentText = "";
 
   @override
   void initState() {
     super.initState();
-    currentText = hadithWithTashkeel;   // بداية يظهر بالتشكيل
+    currentText = hadithWithTashkeel;
   }
   @override
   Widget build(BuildContext context) {
