@@ -14,6 +14,7 @@ class AppColor {
   static const Color primary = Color(0xff2F5D4B);
   /////primary2///////
   static const Color primary2 = Color(0xff4A8B71);
+
   static Color getPrimary2(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return isDark ?  Colors.black : primary2;
@@ -24,6 +25,9 @@ class AppColor {
 
   ///////primary 4//////
   static const Color primary4 = Color(0xffA9C8BA);
+  ///////primary 5//////
+
+  static const Color primary5 = Color(0xff2C3630);
 
 
 ////////main colors////////////
@@ -31,6 +35,8 @@ class AppColor {
 ////////grey////////
   static const Color grey = Color(0xff8e8e8e);
   static const Color grey2 = Color.fromARGB(255, 66, 66, 66);
+  static const Color grey3= Color(0xFF9CA3AF);
+
   static const Color greylite200 = Color(0xFFEEEEEE);
 
   ///////black/////////
