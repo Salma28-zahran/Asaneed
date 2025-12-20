@@ -21,7 +21,7 @@ class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
     _tabController.index = 2;
   }
 

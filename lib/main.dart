@@ -3,7 +3,6 @@ import 'package:asaneed/features/home/provider/favorites_provider.dart';
 import 'package:flutter/material.dart';
 import 'core/route/routes_generator.dart';
 import 'package:provider/provider.dart';
-
 import 'theme/AppThemeManager.dart';
 
 void main() {

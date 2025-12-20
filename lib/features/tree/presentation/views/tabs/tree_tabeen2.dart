@@ -30,7 +30,7 @@ class _NameBoxState extends State<NameBox2> {
         height: 47,
         margin: const EdgeInsets.symmetric(vertical: 4),
         decoration: BoxDecoration(
-          color: AppColor.pink,
+          color: AppColor.orange2,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
@@ -39,7 +39,7 @@ class _NameBoxState extends State<NameBox2> {
               width: 35,
               height: 38,
               decoration: BoxDecoration(
-                color:AppColor.pink2,
+                color:AppColor.orange2,
                 borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(8),
                   bottomRight: Radius.circular(8),
@@ -181,7 +181,7 @@ class TreeTabeen2 extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return NameBox2(
                     title: "سفيان بن عيينه الهلالي ",
-                    color: Colors.purple,
+                    color: AppColor.orange2,
                     onTap: () {}
                   );
                 },
