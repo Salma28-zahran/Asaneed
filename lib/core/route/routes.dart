@@ -9,6 +9,8 @@ class PageRouteName{
   static const String info = '/info';
   static const String onboarding = '/onboarding';
   static const String hadethScreen = '/hadethScreen';
+  static const String profile = '/profile';
+
 
 
 

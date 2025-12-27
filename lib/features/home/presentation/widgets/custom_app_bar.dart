@@ -12,7 +12,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final themeManager = context.watch<AppThemeManager>();
     final isDark = themeManager.isDarkMode;
-    return AppBar(
+    return
+      AppBar(
       backgroundColor: AppColor.getAppBarColor(context),
       elevation: 0,
       centerTitle: false,
