@@ -97,7 +97,7 @@ class _BookScreenState extends State<BookScreen> {
   }) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, PageRouteName.rwah);
+        Navigator.pushNamed(context, PageRouteName.profile);
       },
       child: Container(
         padding: const EdgeInsets.all(16),
