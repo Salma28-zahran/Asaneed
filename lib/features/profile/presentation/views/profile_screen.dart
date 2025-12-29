@@ -1,3 +1,9 @@
+import 'package:asaneed/core/route/routes.dart';
+import 'package:asaneed/features/profile/presentation/views/tabs/info_screen2.dart';
+import 'package:asaneed/features/profile/presentation/views/tabs/morwayat_screen.dart' show MorwayatScreen;
+import 'package:asaneed/features/profile/presentation/views/tabs/person_screen.dart';
+import 'package:asaneed/features/profile/presentation/views/tabs/students_screen.dart';
+import 'package:asaneed/features/profile/presentation/views/tabs/tree_screen.dart';
 import 'package:asaneed/features/profile/presentation/widgets/buildTabIcon.dart';
 import 'package:asaneed/features/profile/presentation/widgets/iconTagWithText.dart';
 import 'package:asaneed/features/profile/presentation/widgets/infoCard.dart';
@@ -7,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../../../theme/AppThemeManager.dart';
+import '../../../tabs/presentaion/views/settings/info_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -19,7 +26,6 @@ class _ProfileScreenState extends State<ProfileScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
-  // أسماء التابات
   final List<String> tabNames = [
     "شجرة",
     "مرويات",
@@ -74,11 +80,17 @@ class _ProfileScreenState extends State<ProfileScreen>
                 ],
               ),
               const SizedBox(width: 8),
-              Icon(
-                Icons.arrow_forward,
-                color: AppColor.getBlack(context),
-                size: 20,
+              IconButton(
+                icon: Icon(
+                  Icons.arrow_forward,
+                  color: AppColor.getBlack(context),
+                  size: 20,
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, PageRouteName.homeScreen);
+                },
               ),
+
             ],
           ),
         ),
@@ -295,14 +307,22 @@ class _ProfileScreenState extends State<ProfileScreen>
             const SizedBox(height: 16),
 
             /// -------- Text Showing Tab Name --------
-            Text(
-              _getTabName(_tabController.index),
-              style: GoogleFonts.tajawal(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: AppColor.primary,
+            ///
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.6,
+              child: IndexedStack(
+                index: _tabController.index,
+                children: const [
+                  TreeScreen(),     // index 0
+                  MorwayatScreen(), // index 1
+                  PersonScreen(), // index 2
+                  StudentsScreen(), // index 3
+                  InfoScreen2(),     // index 4
+                ],
               ),
             ),
+
+
             const SizedBox(height: 20),
           ],
         ),

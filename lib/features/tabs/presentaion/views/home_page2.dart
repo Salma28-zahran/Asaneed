@@ -196,7 +196,7 @@ class _HomePage2State extends State<HomePage2> {
           InkWell(
             borderRadius: BorderRadius.circular(width * 0.04),
             onTap: () {
-              Navigator.pushNamed(context, PageRouteName.hadethScreen); // حط الروت بتاعك هنا
+              Navigator.pushNamed(context, PageRouteName.hadethScreen);
             },
             child: Container(
               width: width * 0.97,
@@ -257,12 +257,12 @@ class _HomePage2State extends State<HomePage2> {
                             });
                           },
                           child: SizedBox(
-                            width: width * 0.055,        // نفس size بتاع Icon
-                            height: width * 0.055,       // مهم جداً
+                            width: width * 0.055,
+                            height: width * 0.055,
                             child: Image.asset(
                               "assets/images/png/textIcon.png",
                               color: isDark ? AppColor.white : AppColor.black,
-                              fit: BoxFit.contain,       // عشان ما تتمددش وتبوظ
+                              fit: BoxFit.contain,
                             ),
                           ),
                         ),
