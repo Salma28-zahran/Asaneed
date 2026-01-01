@@ -1,5 +1,6 @@
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class InfoCard extends StatelessWidget {
   final String number;
@@ -32,18 +33,18 @@ class InfoCard extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               number,
-              style: const TextStyle(
+              style:  GoogleFonts.roboto(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: AppColor.getBlack(context),
               ),
             ),
             const SizedBox(height: 4),
             Text(
               title,
-              style: const TextStyle(
-                fontSize: 12,
-                color: Colors.white60,
+              style:  GoogleFonts.roboto(
+                fontSize: 16,
+                color: AppColor.getBlack(context),
               ),
             ),
           ],

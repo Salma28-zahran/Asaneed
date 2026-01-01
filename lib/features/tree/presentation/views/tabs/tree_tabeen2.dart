@@ -82,7 +82,7 @@ class TreeTabeen2 extends StatelessWidget {
           : const Color(0xFFF8F9FA),
 
       appBar: AppBar(
-        backgroundColor: AppColor.getWhite(context),
+        backgroundColor: AppColor.getAppBarColor(context),
         title: Text(
           "الصحابه",
           style: AppColor.title.copyWith(
@@ -103,7 +103,8 @@ class TreeTabeen2 extends StatelessWidget {
               child: Text(
                 "عمرو بن دينار المكي",
                 style: AppColor.title.copyWith(
-                    fontSize: 24, fontWeight: FontWeight.w400),
+                    fontSize: 24, fontWeight: FontWeight.w400,color: AppColor.getBlack(context)),
+
               ),
             ),
             const SizedBox(height: 12),

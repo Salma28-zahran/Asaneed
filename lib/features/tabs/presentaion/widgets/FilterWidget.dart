@@ -97,16 +97,16 @@ class FilterWidget extends StatelessWidget {
     } else {
       switch (title) {
         case "صحابي":
-          bgColor = AppColor.green;
-          textColor = Colors.white;
+          bgColor = AppColor.green2;
+          textColor = AppColor.green;
           break;
         case "تابعي":
-          bgColor = AppColor.blue;
-          textColor = Colors.white;
+          bgColor = AppColor.blue2;
+          textColor = AppColor.blue;
           break;
         case "تابع التابعين":
-          bgColor = AppColor.orange2;
-          textColor = Colors.white;
+          bgColor = AppColor.orange;
+          textColor = AppColor.orange2;
           break;
         default:
           bgColor = Colors.grey.shade200;

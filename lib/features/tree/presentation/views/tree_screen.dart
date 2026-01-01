@@ -18,7 +18,6 @@ class NameBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
 
-    // ✅ الخلفية تتغير حسب المود
     final Color backgroundColor =
     isDark ? const Color(0xff444444) : Colors.white;
 
@@ -28,16 +27,15 @@ class NameBox extends StatelessWidget {
         height: 47,
         margin: const EdgeInsets.symmetric(vertical: 4),
         decoration: BoxDecoration(
-          color: backgroundColor, // الخلفية تتغير حسب المود
+          color: backgroundColor,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
           children: [
-            // ✅ الجزء البنفسجي اللي فيه السهم دايمًا بنفس اللون البنفسجي
              Center(
               child: Icon(
                 Icons.arrow_back_ios_new,
-                color: AppColor.getBlack(context), // السهم أبيض دايمًا
+                color: AppColor.getBlack(context),
                 size: 18,
               ),
             ),

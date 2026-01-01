@@ -169,9 +169,12 @@ class InfoScreen2 extends StatelessWidget {
                             height: 70,
                             width: 309,
                             decoration: BoxDecoration(
-                              color: Color(0xFF202925
+                              color: isDark
+                                  ? const Color(0xFF202925)
+                                  : const Color(0xFFE2E0D8),
 
-                              ),
+
+
                               borderRadius: BorderRadius.circular(16),
                               boxShadow: [
                                 BoxShadow(
