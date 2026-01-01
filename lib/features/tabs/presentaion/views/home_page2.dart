@@ -342,7 +342,7 @@ class _HomePage2State extends State<HomePage2> {
               badgeColor: AppColor.green,
               deathYear: 40,
               onTap: () {
-                Navigator.pushNamed(context, PageRouteName.details);
+                Navigator.pushNamed(context, PageRouteName.profile);
               },
             ),
 
@@ -352,7 +352,7 @@ class _HomePage2State extends State<HomePage2> {
               badgeColor: AppColor.blue,
               deathYear: 104,
               onTap: () {
-                Navigator.pushNamed(context, PageRouteName.details);
+                Navigator.pushNamed(context, PageRouteName.profile);
               },
             ),
 
@@ -362,7 +362,7 @@ class _HomePage2State extends State<HomePage2> {
               badgeColor: AppColor.blue,
               deathYear: 105,
               onTap: () {
-                Navigator.pushNamed(context, PageRouteName.details);
+                Navigator.pushNamed(context, PageRouteName.profile);
               },
             ),
 
@@ -372,7 +372,7 @@ class _HomePage2State extends State<HomePage2> {
               badgeColor: AppColor.orange2,
               deathYear: 275,
               onTap: () {
-                Navigator.pushNamed(context, PageRouteName.details);
+                Navigator.pushNamed(context, PageRouteName.profile);
               },
             ),
           ],

@@ -41,7 +41,7 @@ class _NameBoxState extends State<NameBox2> {
               width: 35,
               height: 38,
               decoration: BoxDecoration(
-                //color: AppColor.pink2, // يفضل فوشيا في كل الحالات
+                //color: AppColor.pink2,
                 borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(8),
                   bottomRight: Radius.circular(8),
@@ -84,7 +84,7 @@ class TreeTabeen1 extends StatelessWidget {
           : const Color(0xFFF8F9FA),
 
       appBar: AppBar(
-        backgroundColor: AppColor.getWhite(context),
+        backgroundColor: AppColor.getAppBarColor(context),
         title: Text(
           "الصحابه",
           style: AppColor.title.copyWith(
@@ -106,6 +106,7 @@ class TreeTabeen1 extends StatelessWidget {
                 style: AppColor.title.copyWith(
                   fontSize: 24,
                   fontWeight: FontWeight.w400,
+                  color: AppColor.getBlack(context)
                 ),
               ),
             ),
