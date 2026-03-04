@@ -6,10 +6,12 @@ import 'package:asaneed/features/tabs/presentaion/views/book/book_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/fav_screen.dart' show FavScreen;
 import 'package:asaneed/features/tabs/presentaion/views/home_page.dart';
 import 'package:asaneed/features/tabs/presentaion/views/home_page2.dart';
+import 'package:asaneed/features/tabs/presentaion/views/profile/profile_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/search_screen.dart';
-import 'package:asaneed/features/tabs/presentaion/views/settings/setting_screen.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+
+import '../../../profile/presentation/views/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,7 +21,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 4;
+  int _selectedIndex = 5;
 
   late final List<Widget> _pages;
 
@@ -27,10 +29,11 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _pages = [
-      const SettingScreen(),
+      const MyAccount(),
       const BookScreen(),
       const SearchScreen(),
       const FavScreen(),
+      const MyAccount(),
       HomePage2(
         onTabChange: (index) {
           setState(() {
@@ -45,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: _selectedIndex == 4 ? const CustomAppBar() : null,
+      appBar: _selectedIndex == 5 ? const CustomAppBar() : null,
       body: _pages[_selectedIndex],
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: _selectedIndex,
