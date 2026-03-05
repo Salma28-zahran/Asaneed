@@ -165,7 +165,7 @@ class _OnBoardingState extends State<OnBoarding> {
                             } else {
                               Navigator.pushReplacementNamed(
                                 context,
-                                PageRouteName.homeScreen,
+                                PageRouteName.login,
                               );
                             }
                           },
