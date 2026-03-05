@@ -1,4 +1,9 @@
 import 'package:asaneed/core/route/routes.dart';
+import 'package:asaneed/features/auth/presentation/views/forget_pass/forget_email.dart';
+import 'package:asaneed/features/auth/presentation/views/forget_pass/new_pass.dart';
+import 'package:asaneed/features/auth/presentation/views/login_screen.dart';
+import 'package:asaneed/features/auth/presentation/views/register_screen.dart';
+import 'package:asaneed/features/auth/presentation/views/verify_otp.dart';
 import 'package:asaneed/features/circle/presentation/views/circle1.dart';
 import 'package:asaneed/features/details/presentation/views/sahaba_details.dart';
 import 'package:asaneed/features/home/presentation/views/home_screen.dart';
@@ -31,7 +36,6 @@ class RoutesGenerator {
           settings: settings,
         );
 
-
       case PageRouteName.rwah:
         return MaterialPageRoute(
           builder: (context) => const BackgroundScreen(
@@ -39,8 +43,6 @@ class RoutesGenerator {
           ),
           settings: settings,
         );
-
-
       case PageRouteName.tree:
         return MaterialPageRoute(
           builder: (context) => const BackgroundScreen(
@@ -86,6 +88,42 @@ class RoutesGenerator {
           ),
           settings: settings,
         );
+      case PageRouteName.login:
+        return MaterialPageRoute(
+          builder: (context) => const BackgroundScreen(
+            child: LoginScreen(),
+          ),
+          settings: settings,
+        );
+      case PageRouteName.register:
+        return MaterialPageRoute(
+          builder: (context) => const BackgroundScreen(
+            child: RegisterScreen(),
+          ),
+          settings: settings,
+        );
+      case PageRouteName.verify_otp:
+        return MaterialPageRoute(
+          builder: (context) => const BackgroundScreen(
+            child: VerifyOtp(),
+          ),
+          settings: settings,
+        );
+      case PageRouteName.forget_email:
+        return MaterialPageRoute(
+          builder: (context) => const BackgroundScreen(
+            child: ForgetEmail(),
+          ),
+          settings: settings,
+        );
+      case PageRouteName.new_pass:
+        return MaterialPageRoute(
+          builder: (context) => const BackgroundScreen(
+            child: NewPass(),
+          ),
+          settings: settings,
+        );
+
 
       default:
         return MaterialPageRoute(
