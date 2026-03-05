@@ -36,6 +36,8 @@ class AppColor {
   static const Color grey = Color(0xff8e8e8e);
   static const Color grey2 = Color.fromARGB(255, 66, 66, 66);
   static const Color grey3= Color(0xFF9CA3AF);
+  static const Color border= Color(0xFFe2e0d8);
+
 
 
   static const Color greylite200 = Color(0xFFEEEEEE);

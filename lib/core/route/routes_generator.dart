@@ -11,11 +11,13 @@ import 'package:asaneed/features/onboarding/onboarding.dart';
 import 'package:asaneed/features/profile/presentation/views/profile_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/book/rwah_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/hadethscreen.dart';
-import 'package:asaneed/features/tabs/presentaion/views/settings/info_screen.dart';
-import 'package:asaneed/features/tabs/presentaion/views/settings/terms_screen.dart';
+import 'package:asaneed/features/tabs/presentaion/views/profile/contact_us.dart';
 import 'package:asaneed/features/tree/presentation/views/tree_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:asaneed/core/widgets/background_screen.dart';
+
+import '../../features/tabs/presentaion/views/profile/privacy_policy.dart';
+import '../../features/tabs/presentaion/views/profile/terms_screen.dart';
 
 class RoutesGenerator {
   static Route<dynamic> onGenerateRoutes(RouteSettings settings) {
@@ -64,10 +66,10 @@ class RoutesGenerator {
           ),
           settings: settings,
         );
-      case PageRouteName.info:
+      case PageRouteName.privacy:
         return MaterialPageRoute(
           builder: (context) => const BackgroundScreen(
-            child: InfoScreen(),
+            child: PrivacyScreen(),
           ),
           settings: settings,
         );
@@ -85,6 +87,13 @@ class RoutesGenerator {
         return MaterialPageRoute(
           builder: (context) => const BackgroundScreen(
             child: ProfileScreen(),
+          ),
+          settings: settings,
+        );
+      case PageRouteName.contact:
+        return MaterialPageRoute(
+          builder: (context) => const BackgroundScreen(
+            child: ContactScreen(),
           ),
           settings: settings,
         );

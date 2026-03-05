@@ -57,7 +57,8 @@ class CustomBottomNavBar extends StatelessWidget {
                     _buildNavItem(const Icon(Icons.group), 1),
                     _buildNavItem(const Icon(Icons.search), 2),
                     _buildNavItem(const Icon(Icons.bookmark_border), 3),
-                    _buildNavItem(const Icon(Icons.home), 4),
+                    _buildNavItem(const Icon(Icons.person), 4),
+                    _buildNavItem(const Icon(Icons.home), 5),
 
                   ],
                 ),
