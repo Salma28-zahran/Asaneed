@@ -370,7 +370,7 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  ///search widget///
+  ///search widgets///
   Widget searchTypes(int index, String text) {
     final bool isSelected = selectedTab == index;
     final themeManager = context.watch<AppThemeManager>();

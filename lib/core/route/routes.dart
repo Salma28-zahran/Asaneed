@@ -11,6 +11,15 @@ class PageRouteName{
   static const String hadethScreen = '/hadethScreen';
   static const String profile = '/profile';
   static const String contact = '/contact';
+  static const String login = '/login';
+  static const String register = '/register';
+  static const String verify_otp = '/verifyotp';
+  static const String forget_email = '/forget_email';
+  static const String new_pass = '/new_pass';
+
+
+
+
 
 
 
