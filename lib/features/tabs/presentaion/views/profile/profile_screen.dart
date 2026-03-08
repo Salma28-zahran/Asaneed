@@ -285,21 +285,26 @@ class MyAccount extends StatelessWidget {
                           bottom: 16,
                           right: 16,
                         ),
-                        child: Row(
-                          textDirection: TextDirection.rtl,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, PageRouteName.login);
+                          },
+                          child: Row(
+                            textDirection: TextDirection.rtl,
 
-                          children: [
-                            Icon(Icons.logout, size: 23, color: Colors.red),
-                            SizedBox(width: 10),
-                            Text(
-                              "تسجيل الخروج",
-                              style: GoogleFonts.ibmPlexSans(
-                                color: Colors.red,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
+                            children: [
+                              Icon(Icons.logout, size: 23, color: Colors.red),
+                              SizedBox(width: 10),
+                              Text(
+                                "تسجيل الخروج",
+                                style: GoogleFonts.ibmPlexSans(
+                                  color: Colors.red,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ],
