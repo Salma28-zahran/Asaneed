@@ -19,7 +19,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       centerTitle: false,
 
-      /// اللوغو والعنوان على اليمين
       title: Padding(
         padding: const EdgeInsets.only(bottom: 6),
         child: Row(

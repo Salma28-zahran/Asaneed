@@ -20,7 +20,6 @@ class CustomBottomNavBar extends StatelessWidget {
         clipBehavior: Clip.none,
         alignment: Alignment.center,
         children: [
-          /// NAV BAR
           Positioned(
             bottom: 0,
             left: 0,
@@ -77,7 +76,6 @@ class CustomBottomNavBar extends StatelessWidget {
             ),
           ),
 
-          /// الزر الدائري في المنتصف
           Positioned(
             bottom: 40,
             child: GestureDetector(
