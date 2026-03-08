@@ -1,4 +1,5 @@
 import 'package:asaneed/core/resources/app_assets_manager.dart';
+import 'package:asaneed/core/route/routes.dart';
 import 'package:asaneed/theme/AppThemeManager.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -12,11 +13,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final themeManager = context.watch<AppThemeManager>();
     final isDark = themeManager.isDarkMode;
-    return
-      AppBar(
+
+    return AppBar(
       backgroundColor: AppColor.getAppBarColor(context),
       elevation: 0,
       centerTitle: false,
+
+      /// اللوغو والعنوان على اليمين
       title: Padding(
         padding: const EdgeInsets.only(bottom: 6),
         child: Row(
@@ -27,7 +30,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               children: [
                 Text(
                   "أسانيـد",
-                  style:  GoogleFonts.tajawal(
+                  style: GoogleFonts.tajawal(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: AppColor.getBlack(context),
@@ -42,7 +45,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ],
             ),
-            const SizedBox(width: 1),
+            const SizedBox(width: 6),
             Image.asset(
               AssetsManager.brand,
               color: AppColor.primary,
@@ -51,28 +54,40 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ],
         ),
       ),
-      leading: Column(
+
+      leadingWidth: 120,
+      leading: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
+
           GestureDetector(
             onTap: () {
               themeManager.toggleTheme();
             },
             child: Container(
-              padding: const EdgeInsets.all(12),
+              margin: const EdgeInsets.symmetric(horizontal: 4),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.white.withOpacity(0.07),
               ),
               child: Icon(
                 isDark ? Icons.wb_sunny_rounded : Icons.nightlight_round,
-                size: 24,
+                size: 22,
                 color: isDark ? Colors.grey[400] : AppColor.primary,
               ),
             ),
-          )
-
-
-
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, PageRouteName.search);
+            },
+            icon: Icon(
+              Icons.search,
+              color: AppColor.primary,
+              size: 22,
+            ),
+          ),
         ],
       ),
     );

@@ -16,6 +16,12 @@ class PageRouteName{
   static const String verify_otp = '/verifyotp';
   static const String forget_email = '/forget_email';
   static const String new_pass = '/new_pass';
+  static const String asaneed = '/asaneed';
+  static const String search = '/search';
+
+
+
+
 
 
 

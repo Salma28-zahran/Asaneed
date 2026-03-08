@@ -9,9 +9,11 @@ import 'package:asaneed/features/details/presentation/views/sahaba_details.dart'
 import 'package:asaneed/features/home/presentation/views/home_screen.dart';
 import 'package:asaneed/features/onboarding/onboarding.dart';
 import 'package:asaneed/features/profile/presentation/views/profile_screen.dart';
+import 'package:asaneed/features/tabs/presentaion/views/asaneed/presentation/views/asaneed_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/book/rwah_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/hadethscreen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/profile/contact_us.dart';
+import 'package:asaneed/features/tabs/presentaion/views/search_screen.dart';
 import 'package:asaneed/features/tree/presentation/views/tree_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:asaneed/core/widgets/background_screen.dart';
@@ -129,6 +131,20 @@ class RoutesGenerator {
         return MaterialPageRoute(
           builder: (context) => const BackgroundScreen(
             child: NewPass(),
+          ),
+          settings: settings,
+        );
+      case PageRouteName.asaneed:
+        return MaterialPageRoute(
+          builder: (context) => const BackgroundScreen(
+            child: AsaneedScreen(),
+          ),
+          settings: settings,
+        );
+      case PageRouteName.search:
+        return MaterialPageRoute(
+          builder: (context) => const BackgroundScreen(
+            child: SearchScreen(),
           ),
           settings: settings,
         );
