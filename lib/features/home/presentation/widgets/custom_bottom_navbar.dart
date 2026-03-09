@@ -49,9 +49,9 @@ class CustomBottomNavBar extends StatelessWidget {
                       onTap: onTap,
                       type: BottomNavigationBarType.fixed,
                       backgroundColor:
-                          Theme.of(context).brightness == Brightness.dark
-                              ? const Color(0xff2c2b2b)
-                              : Colors.white,
+                      Theme.of(context).brightness == Brightness.dark
+                          ? const Color(0xff2c2b2b)
+                          : Colors.white,
                       selectedItemColor: AppColor.primary,
                       unselectedItemColor: Colors.grey,
                       showSelectedLabels: false,
@@ -94,36 +94,6 @@ class CustomBottomNavBar extends StatelessWidget {
                       blurRadius: 10,
                       offset: const Offset(0, 5),
                     ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(30),
-            child: SizedBox(
-              height: 74,
-              child: Theme(
-                data: Theme.of(context).copyWith(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                ),
-                child:
-                BottomNavigationBar(
-                  currentIndex: currentIndex,
-                  onTap: onTap,
-                  type: BottomNavigationBarType.fixed,
-                  backgroundColor:  Theme.of(context).brightness == Brightness.dark
-                    ? const Color(0xff2c2b2b)
-                    : Colors.white,
-                  selectedItemColor: AppColor.primary,
-                  unselectedItemColor: Colors.grey,
-                  showSelectedLabels: false,
-                  showUnselectedLabels: false,
-                  iconSize: 28,
-                  items: [
-                    _buildNavItem(const Icon(Icons.settings_outlined), 0),
-                    _buildNavItem(const Icon(Icons.group), 1),
-                    _buildNavItem(const Icon(Icons.search), 2),
-                    _buildNavItem(const Icon(Icons.bookmark_border), 3),
-                    _buildNavItem(const Icon(Icons.person), 4),
-                    _buildNavItem(const Icon(Icons.home), 5),
-                    _buildNavItem(const Icon(Icons.menu_book_rounded), 6),
                   ],
                 ),
                 child: const Icon(
