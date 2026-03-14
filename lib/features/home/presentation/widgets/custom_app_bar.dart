@@ -58,25 +58,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-
-          GestureDetector(
-            onTap: () {
-              themeManager.toggleTheme();
+          IconButton(
+            icon: const Icon(Icons.more_vert),
+            onPressed: () {
+              showOptionsSheet(context);
             },
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 4),
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white.withOpacity(0.07),
-              ),
-              child: Icon(
-                isDark ? Icons.wb_sunny_rounded : Icons.nightlight_round,
-                size: 22,
-                color: isDark ? Colors.grey[400] : AppColor.primary,
-              ),
-            ),
           ),
+
+
           IconButton(
             onPressed: () {
               Navigator.pushNamed(context, PageRouteName.search);
@@ -94,4 +83,122 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight + 10);
+}
+void showOptionsSheet(BuildContext context) {
+  final themeManager = context.read<AppThemeManager>();
+  final isDark = themeManager.isDarkMode;
+
+  showModalBottomSheet(
+    context: context,
+    backgroundColor: Colors.transparent,
+    builder: (context) {
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        decoration:  BoxDecoration(
+          color: AppColor.getContainerColor(context),
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(30),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+
+            const SizedBox(height: 10),
+
+            /// handle
+            Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: Colors.grey[400],
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            /// header
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.close, color: Colors.grey),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                const Text(
+                  "خيارات",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+
+            const Divider(),
+
+            /// Dark Mode
+            ListTile(
+              trailing: Icon(
+                isDark ? Icons.wb_sunny_outlined : Icons.nightlight_outlined,
+                color: Colors.grey,
+              ),
+              title: Text(
+                isDark ? "الوضع الصباحي" : "الوضع الليلي",
+                style: const TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                themeManager.toggleTheme();
+                Navigator.pop(context);
+              },
+            ),
+
+            const Divider(),
+
+            /// Account
+            ListTile(
+              trailing: const Icon(
+                Icons.person_outline,
+                color: Colors.grey,
+              ),
+              title: const Text(
+                "الحساب",
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+
+                Navigator.pushNamed(context, PageRouteName.profile2);
+              },
+            ),
+
+            const Divider(),
+
+            /// Logout
+            ListTile(
+              trailing: const Icon(
+                Icons.logout,
+                color: Colors.red,
+              ),
+              title: const Text(
+                "تسجيل الخروج",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.red,
+                ),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, PageRouteName.login);
+              },
+            ),
+
+            const SizedBox(height: 20),
+          ],
+        ),
+      );
+    },
+  );
 }

@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class BookScreen extends StatefulWidget {
-  const BookScreen({super.key});
+class RawahScreen extends StatefulWidget {
+  const RawahScreen({super.key});
 
   @override
-  State<BookScreen> createState() => _BookScreenState();
+  State<RawahScreen> createState() => _RawahScreenState();
 }
 
-class _BookScreenState extends State<BookScreen> {
+class _RawahScreenState extends State<RawahScreen> {
 
   String? selectedType;
 
@@ -44,7 +44,7 @@ class _BookScreenState extends State<BookScreen> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Text(
-              "الصحابه",
+              "الرواه",
               style: GoogleFonts.tajawal(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,

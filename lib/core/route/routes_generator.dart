@@ -10,9 +10,11 @@ import 'package:asaneed/features/home/presentation/views/home_screen.dart';
 import 'package:asaneed/features/onboarding/onboarding.dart';
 import 'package:asaneed/features/profile/presentation/views/profile_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/asaneed/presentation/views/asaneed_screen.dart';
-import 'package:asaneed/features/tabs/presentaion/views/book/rwah_screen.dart';
+import 'package:asaneed/features/tabs/presentaion/views/book_screen.dart';
+import 'package:asaneed/features/tabs/presentaion/views/rawah_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/hadethscreen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/profile/contact_us.dart';
+import 'package:asaneed/features/tabs/presentaion/views/profile/profile_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/search_screen.dart';
 import 'package:asaneed/features/tree/presentation/views/tree_screen.dart';
 import 'package:flutter/material.dart';
@@ -40,13 +42,7 @@ class RoutesGenerator {
           settings: settings,
         );
 
-      case PageRouteName.rwah:
-        return MaterialPageRoute(
-          builder: (context) => const BackgroundScreen(
-            child: RwahScreen(),
-          ),
-          settings: settings,
-        );
+
       case PageRouteName.tree:
         return MaterialPageRoute(
           builder: (context) => const BackgroundScreen(
@@ -145,6 +141,27 @@ class RoutesGenerator {
         return MaterialPageRoute(
           builder: (context) => const BackgroundScreen(
             child: SearchScreen(),
+          ),
+          settings: settings,
+        );
+      case PageRouteName.rawah:
+        return MaterialPageRoute(
+          builder: (context) => const BackgroundScreen(
+            child: RawahScreen(),
+          ),
+          settings: settings,
+        );
+      case PageRouteName.profile2:
+        return MaterialPageRoute(
+          builder: (context) => const BackgroundScreen(
+            child: MyAccount(),
+          ),
+          settings: settings,
+        );
+      case PageRouteName.book:
+        return MaterialPageRoute(
+          builder: (context) => const BackgroundScreen(
+            child: BookScreen(),
           ),
           settings: settings,
         );

@@ -71,7 +71,6 @@ class _HadethscreenState extends State<Hadethscreen> {
             children: [
               SizedBox(height: height * 0.015),
 
-              // الكارد كامل
               Container(
                 width: width * 0.97,
                 height: height * 0.17,
@@ -131,12 +130,12 @@ class _HadethscreenState extends State<Hadethscreen> {
                                     });
                                   },
                                   child: SizedBox(
-                                    width: width * 0.055,        // نفس size بتاع Icon
-                                    height: width * 0.055,       // مهم جداً
+                                    width: width * 0.055,
+                                    height: width * 0.055,
                                     child: Image.asset(
                                       "assets/images/png/textIcon.png",
                                       color: isDark ? AppColor.white : AppColor.black,
-                                      fit: BoxFit.contain,       // عشان ما تتمددش وتبوظ
+                                      fit: BoxFit.contain,
                                     ),
                                   ),
                                 ),
@@ -216,17 +215,17 @@ class _HadethscreenState extends State<Hadethscreen> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
       decoration: BoxDecoration(
-        color: Colors.transparent, // خلفية شفافة
+        color: Colors.transparent,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: AppColor.grey.withOpacity(0.2), // بوردر خفيف (ممكن تلغيه)
+          color: AppColor.grey.withOpacity(0.2),
           width: 1,
         ),
       ),
       child: Text(
         text,
         style:  TextStyle(
-          color:isDark?AppColor.grey : AppColor.black, // لون النص أسود
+          color:isDark?AppColor.grey : AppColor.black,
           fontSize: 16,
           fontWeight: FontWeight.w600,
         ),
