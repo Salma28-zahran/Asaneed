@@ -1,6 +1,7 @@
 import 'package:asaneed/features/home/presentation/widgets/custom_app_bar.dart';
 import 'package:asaneed/features/home/presentation/widgets/custom_bottom_navbar.dart';
-import 'package:asaneed/features/tabs/presentaion/views/book/book_screen.dart';
+import 'package:asaneed/features/tabs/presentaion/views/book_screen.dart';
+import 'package:asaneed/features/tabs/presentaion/views/rawah_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/fav_screen.dart' show FavScreen;
 import 'package:asaneed/features/tabs/presentaion/views/home_page2.dart';
 import 'package:asaneed/features/tabs/presentaion/views/profile/profile_screen.dart';
@@ -23,12 +24,12 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     _pages = [
-      const BookScreen(),
+      const RawahScreen(),
       const FavScreen(),
 
       const SizedBox(),
 
-      const MyAccount(),
+       const BookScreen(),
 
       HomePage2(
         onTabChange: (index) {

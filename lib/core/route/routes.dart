@@ -2,7 +2,6 @@ class PageRouteName{
   static const String homeScreen = '/home';
   static const String circle1 = '/circle1';
   static const String details = '/ details';
-  static const String rwah = '/ rwah';
   static const String tree = '/ tree';
   static const String splash = '/splash';
   static const String terms = '/terms';
@@ -18,6 +17,14 @@ class PageRouteName{
   static const String new_pass = '/new_pass';
   static const String asaneed = '/asaneed';
   static const String search = '/search';
+  static const String rawah = '/rawah';
+  static const String profile2 = '/profile2';
+  static const String book = '/book';
+
+
+
+
+
 
 
 

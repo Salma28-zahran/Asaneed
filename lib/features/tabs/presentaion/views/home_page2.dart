@@ -1,10 +1,12 @@
 import 'package:asaneed/core/route/routes.dart';
 import 'package:asaneed/features/tabs/presentaion/widgets/ItemRow.dart';
+import 'package:asaneed/features/tabs/presentaion/widgets/home/StatsSection.dart';
+import 'package:asaneed/features/tabs/presentaion/widgets/home/WelcomeBanner.dart';
+import 'package:asaneed/features/tabs/presentaion/widgets/home/hadith_of_the_day_card.dart';
+
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../theme/AppThemeManager.dart';
 import '../widgets/PersonCard.dart';
 
@@ -18,19 +20,6 @@ class HomePage2 extends StatefulWidget {
 }
 
 class _HomePage2State extends State<HomePage2> {
-  String hadithWithTashkeel =
-      "مَنْ أَحَقُّ النَّاسِ بِحُسْنِ صَحَابَتِي؟ قَالَ: أُمُّكَ...";
-
-  String hadithWithoutTashkeel =
-      "من احق الناس بحسن صحابتي؟ قال: امك...";
-
-  String currentText = "";
-
-  @override
-  void initState() {
-    super.initState();
-    currentText = hadithWithTashkeel;
-  }
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
@@ -38,166 +27,77 @@ class _HomePage2State extends State<HomePage2> {
     final height = mq.size.height;
     final themeManager = context.watch<AppThemeManager>();
     final isDark = themeManager.isDarkMode;
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: width * 0.04),
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: height * 0.025),
+            SizedBox(height: height * 0.020),
 
+            /// Welcome Banner
+            const WelcomeBanner(),
 
+            SizedBox(height: height * 0.020),
 
+            /// Stats Section
+            const StatsSection(),
 
+            SizedBox(height: 24),
 
+            /// Hadith Of The Day
+            const HadithOfTheDayCard(),
 
-            /// حديث اليوم
-            Align(
-              alignment: Alignment.topRight,
-              child: Text("حديث اليوم", style: AppColor.textBlack(context)),
-            ),
             SizedBox(height: height * 0.018),
 
-          InkWell(
-            borderRadius: BorderRadius.circular(width * 0.04),
-            onTap: () {
-              Navigator.pushNamed(context, PageRouteName.hadethScreen);
-            },
-            child: Container(
-              width: width * 0.97,
-              height: height * 0.17,
-              padding: EdgeInsets.all(width * 0.035),
-              decoration: BoxDecoration(
-                color: AppColor.getContainerColor(context),
-                borderRadius: BorderRadius.circular(width * 0.04),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 8,
-                    offset: Offset(0, 2),
+            /// Quick Actions
+            Row(
+              children: [
+                Expanded(
+                  child: ActionButton(
+                    title: "بحث",
+                    icon: Icons.search,
+                    onTap: () {
+                      Navigator.pushNamed(context, PageRouteName.search);
+                    },
                   ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
+                ),
+                const SizedBox(width: 12),
 
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-
-                      Row(
-                      children: [
-                      Icon(
-                      Icons.share_outlined,
-                        color: isDark ? Colors.white : AppColor.black,
-                        size: width * 0.055,
-                      ),
-                      SizedBox(width: width * 0.045),
-
-                      Icon(
-                        Icons.copy,
-                        color: isDark ? Colors.white : AppColor.black,
-                        size: width * 0.055,
-                      ),
-                      SizedBox(width: width * 0.045),
-
-                      Icon(
-                        Icons.favorite_border,
-                        color: isDark ? Colors.white : AppColor.black,
-                        size: width * 0.055,
-                      ),
-                      SizedBox(width: width * 0.045),
-
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              currentText = (currentText == hadithWithTashkeel)
-                                  ? hadithWithoutTashkeel
-                                  : hadithWithTashkeel;
-                            });
-                          },
-                          child: SizedBox(
-                            width: width * 0.055,
-                            height: width * 0.055,
-                            child: Image.asset(
-                              "assets/images/png/textIcon.png",
-                              color: isDark ? AppColor.white : AppColor.black,
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                        ),
-                    ],
-              ),
-
-
-              Container(
-                            padding: EdgeInsets.symmetric(
-                              vertical: height * 0.005,
-                              horizontal: width * 0.03,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColor.green2,
-                              border: Border.all(
-                                color: AppColor.green,
-                                width: 1.5,
-                              ),
-                              borderRadius: BorderRadius.circular(width * 0.1),
-                            ),
-                            child: Text(
-                              "صحيح",
-                              style: TextStyle(
-                                color: AppColor.green,
-                                fontSize: width * 0.035,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      SizedBox(height: height * 0.006),
-
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text("صحيح مسلم", style: AppColor.textgrey),
-                          SizedBox(width: width * 0.015),
-                          Icon(Icons.menu_book_outlined, color: AppColor.primary, size: width * 0.045),
-                        ],
-                      ),
-                    ],
+                Expanded(
+                  child: ActionButton(
+                    title: "رواة",
+                    icon: Icons.people_outline,
+                    onTap: () {
+                      Navigator.pushNamed(context, PageRouteName.rawah);
+                    },
                   ),
+                ),
+                const SizedBox(width: 12),
 
-                  SizedBox(height: height * 0.015),
-
-                  Text(
-                    currentText,
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(fontSize: 20 ),
-
-                  )
-                ],
-              ),
+                Expanded(
+                  child: ActionButton(
+                    title: "أحاديث",
+                    icon: Icons.menu_book_outlined,
+                    onTap: () {
+                      Navigator.pushNamed(context, PageRouteName.hadethScreen);
+                    },
+                  ),
+                ),
+              ],
             ),
-          ),
 
+            SizedBox(height: 20),
 
-          SizedBox(height: height * 0.018),
-
-            /// رواة شوهدوا مؤخراً
             Align(
               alignment: Alignment.topRight,
               child: Text(
                 "رواة شوهدوا مؤخراً",
-                style: AppColor.textBlack(
-                  context,
-                ).copyWith(fontSize: width * 0.045),
+                style: AppColor.textBlack(context)
+                    .copyWith(fontSize: width * 0.045),
               ),
             ),
+
             SizedBox(height: height * 0.012),
 
             PersonCard(
@@ -209,36 +109,50 @@ class _HomePage2State extends State<HomePage2> {
                 Navigator.pushNamed(context, PageRouteName.profile);
               },
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
-            PersonCard(
-              name: "مجاهد بن جبر",
-              badgeText: "تابعي",
-              badgeColor: AppColor.blue,
-              deathYear: 104,
-              onTap: () {
-                Navigator.pushNamed(context, PageRouteName.profile);
-              },
-            ),
+class ActionButton extends StatelessWidget {
+  final String title;
+  final IconData icon;
+  final VoidCallback onTap;
 
-            PersonCard(
-              name: "عكرمة",
-              badgeText: "تابعي",
-              badgeColor: AppColor.blue,
-              deathYear: 105,
-              onTap: () {
-                Navigator.pushNamed(context, PageRouteName.profile);
-              },
-            ),
+  const ActionButton({
+    super.key,
+    required this.title,
+    required this.icon,
+    required this.onTap,
+  });
 
-            PersonCard(
-              name: "أبو داود",
-              badgeText: "تابع التابعين",
-              badgeColor: AppColor.orange2,
-              deathYear: 275,
-              onTap: () {
-                Navigator.pushNamed(context, PageRouteName.profile);
-              },
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 70,
+        decoration: BoxDecoration(
+          color: AppColor.getContainerColor(context),
+          borderRadius: BorderRadius.circular(40),
+          border: Border.all(color: AppColor.getborder(context), width: 2),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                fontFamily: "Cairo",
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Color(0xff2F5D50),
+              ),
             ),
+            const SizedBox(width: 8),
+            Icon(icon, color: const Color(0xff2F5D50), size: 20),
           ],
         ),
       ),

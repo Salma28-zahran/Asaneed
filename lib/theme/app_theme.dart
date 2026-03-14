@@ -29,6 +29,12 @@ class AppColor {
 
   static const Color primary5 = Color(0xff2C3630);
 
+  static Color getPrimary6(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ?  primary5 : Color(0xFFE5EBE7);
+  }
+
+
 
 ////////main colors////////////
 

@@ -1,3 +1,4 @@
+import 'package:asaneed/core/route/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -40,17 +41,10 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ),
         leading: IconButton(
-          icon: GestureDetector(
-            onTap: () {
-              themeManager.toggleTheme();
-            },
-            child: Icon(
-              isDark ? Icons.nightlight_round : Icons.wb_sunny_rounded,
-              size: 24,
-              color: isDark ? Colors.grey[700] : AppColor.primary,
-            ),
-          ),
-          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
 
