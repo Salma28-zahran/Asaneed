@@ -9,7 +9,7 @@ class PageRouteName{
   static const String privacy = '/info';
   static const String onboarding = '/onboarding';
   static const String hadethScreen = '/hadethScreen';
-  static const String profile = '/profile';
+  static const String profile = '/Account';
   static const String contact = '/contact';
   static const String login = '/login';
   static const String register = '/register';
@@ -18,6 +18,7 @@ class PageRouteName{
   static const String new_pass = '/new_pass';
   static const String asaneed = '/asaneed';
   static const String search = '/search';
+  static const String hadithDetails = '/hadithDetails';
 
 
 

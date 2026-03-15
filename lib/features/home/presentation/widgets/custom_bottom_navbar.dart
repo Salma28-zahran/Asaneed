@@ -19,6 +19,7 @@ class CustomBottomNavBar extends StatelessWidget {
       child: Stack(
         clipBehavior: Clip.none,
         alignment: Alignment.center,
+
         children: [
           Positioned(
             bottom: 0,
@@ -50,7 +51,7 @@ class CustomBottomNavBar extends StatelessWidget {
                       type: BottomNavigationBarType.fixed,
                       backgroundColor:
                       Theme.of(context).brightness == Brightness.dark
-                          ? const Color(0xff2c2b2b)
+                          ?  Color(0xff2c2b2b)
                           : Colors.white,
                       selectedItemColor: AppColor.primary,
                       unselectedItemColor: Colors.grey,
@@ -60,14 +61,15 @@ class CustomBottomNavBar extends StatelessWidget {
                       items: [
                         _buildNavItem(const Icon(Icons.group), 0),
                         _buildNavItem(const Icon(Icons.bookmark_border), 1),
+                        _buildNavItem(const Icon(Icons.receipt_long_outlined), 2),
 
                         const BottomNavigationBarItem(
                           icon: SizedBox(width: 50),
                           label: "",
                         ),
 
-                        _buildNavItem(const Icon(Icons.person_outline), 3),
-                        _buildNavItem(const Icon(Icons.home_outlined), 4),
+                        _buildNavItem(const Icon(Icons.person_outline), 4),
+                        _buildNavItem(const Icon(Icons.home_outlined), 5),
                       ],
                     ),
                   ),

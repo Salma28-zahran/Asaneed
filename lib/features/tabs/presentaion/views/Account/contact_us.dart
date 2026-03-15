@@ -1,4 +1,4 @@
-import 'package:asaneed/features/tabs/presentaion/views/profile/widgets/custom_app_bar_account.dart';
+import 'package:asaneed/features/tabs/presentaion/views/Account/widgets/custom_app_bar_account.dart';
 import 'package:asaneed/theme/AppThemeManager.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,6 @@ class ContactScreen extends StatelessWidget {
           child: Column(
             children: [
               Row(
-
                 children: [
                   Expanded(
                     child: _topCard(
@@ -43,11 +42,10 @@ class ContactScreen extends StatelessWidget {
                       subtitle: "اطلع على شروط الاستخدام.",
                     ),
                   ),
-
                 ],
               ),
 
-               SizedBox(height: 24),
+              SizedBox(height: 24),
 
               Row(
                 children: [
@@ -58,10 +56,10 @@ class ContactScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Text(
                       "أو أرسل لنا رسالة",
-                      style: GoogleFonts.ibmPlexSans(
+                      style: GoogleFonts.scheherazadeNew(
                         color: AppColor.grey,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16
+                        fontWeight: FontWeight.w400,
+                        fontSize: 15,
                       ),
                     ),
                   ),
@@ -73,44 +71,49 @@ class ContactScreen extends StatelessWidget {
 
               const SizedBox(height: 24),
 
-              /// ================= Form =================
-              _buildLabel(context, "الاسم الكامل", required: true,icon:Icons.person_2_outlined),
+              _buildLabel(
+                context,
+                "الاسم الكامل",
+                required: true,
+                icon: Icons.person_2_outlined,
+              ),
               const SizedBox(height: 6),
-              _buildTextField(
+              _buildTextField(context, hint: "محمد مصطفي"),
+
+              SizedBox(height: 16),
+
+              _buildLabel(
                 context,
-                hint: "محمد مصطفي",
-
+                "البريد الإلكتروني",
+                required: true,
+                icon: Icons.mail_outline,
               ),
+              SizedBox(height: 6),
+              _buildTextField(context, hint: "mohamed@gmail.com"),
 
-               SizedBox(height: 16),
+              SizedBox(height: 16),
 
-              _buildLabel(context, "البريد الإلكتروني", required: true,icon:Icons.mail_outline),
-               SizedBox(height: 6),
-              _buildTextField(
+              _buildLabel(context, "الموضوع", icon: Icons.message),
+              SizedBox(height: 6),
+              _buildTextField(context, hint: "سؤال عام"),
+
+              SizedBox(height: 16),
+
+              _buildLabel(
                 context,
-                hint: "mohamed@gmail.com",
-
+                "الرسالة",
+                required: true,
+                icon: Icons.message,
               ),
-
-               SizedBox(height: 16),
-
-              _buildLabel(context, "الموضوع",icon:Icons.message),
-               SizedBox(height: 6),
-              _buildTextField(context, hint: "سؤال عام", ),
-
-               SizedBox(height: 16),
-
-              _buildLabel(context, "الرسالة", required: true,icon:Icons.message),
-               SizedBox(height: 6),
+              SizedBox(height: 6),
               _buildTextField(
                 context,
                 hint: "اشرح سؤالك أو مشكلتك بالتفصيل...",
                 maxLines: 5,
               ),
 
-               SizedBox(height: 24),
+              SizedBox(height: 24),
 
-              /// ================= Button =================
               SizedBox(
                 width: double.infinity,
                 height: 55,
@@ -124,53 +127,51 @@ class ContactScreen extends StatelessWidget {
                   ),
                   label: Text(
                     "إرسال الرسالة",
-                    style: GoogleFonts.ibmPlexSans(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
+                    style: GoogleFonts.scheherazadeNew(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500,
                       color: Colors.white,
                     ),
                   ),
-                  icon:  Icon(Icons.send, color: Colors.white),
-
+                  icon: Icon(Icons.send, color: Colors.white),
                 ),
               ),
 
-               SizedBox(height: 16),
+              SizedBox(height: 16),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                 children: [
-                   Text(
-                     "تُستخدم معلوماتك فقط للرد على استفسارك. ",
-                     textAlign: TextAlign.center,
-                     style: GoogleFonts.ibmPlexSans(
-                       color: AppColor.grey,
-                       fontSize: 14,
-                       fontWeight: FontWeight.w500
-                     ),
-                   ),
-                   TextButton(
-                     onPressed: () {
-                       Navigator.pushNamed(context, PageRouteName.privacy);
-
-                     },
-                     style: TextButton.styleFrom(
-                       padding: EdgeInsets.zero,
-                       minimumSize: Size.zero,
-                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                     ),
-                     child: Text(
-                       "راجع سياسة الخصوصية",
-                       style: GoogleFonts.ibmPlexSans(
-                         fontSize: 12,
-                         color: Colors.blue,
-                         decoration: TextDecoration.underline,
-                         decorationThickness: 1.2,
-                         height: 1.6,
-                       ),
-                     ),
-                   )
-                 ],
+                children: [
+                  Text(
+                    "تُستخدم معلوماتك فقط للرد على استفسارك. ",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.scheherazadeNew(
+                      color: AppColor.grey,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, PageRouteName.privacy);
+                    },
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      minimumSize: Size.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    child: Text(
+                      "راجع سياسة الخصوصية",
+                      style: GoogleFonts.scheherazadeNew(
+                        fontSize: 12,
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                        decorationThickness: 1.2,
+                        height: 1.6,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -179,7 +180,6 @@ class ContactScreen extends StatelessWidget {
     );
   }
 
-  /// ================= Top Card =================
 
   Widget _topCard(
     BuildContext context, {
@@ -189,7 +189,7 @@ class ContactScreen extends StatelessWidget {
   }) {
     final isDark = context.watch<AppThemeManager>().isDarkMode;
 
-    return  Container(
+    return Container(
       padding: const EdgeInsets.all(16),
       height: 150,
       decoration: BoxDecoration(
@@ -200,24 +200,20 @@ class ContactScreen extends StatelessWidget {
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start, // 👉 كله على اليمين
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Align(
               alignment: Alignment.centerRight,
-              child: Icon(
-                icon,
-                color: AppColor.primary,
-                size: 28,
-              ),
+              child: Icon(icon, color: AppColor.primary, size: 28),
             ),
             const SizedBox(height: 10),
             Text(
               title,
               textAlign: TextAlign.right,
-              style: GoogleFonts.ibmPlexSans(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
+              style: GoogleFonts.scheherazadeNew(
+                fontSize: 17,
+                fontWeight: FontWeight.w500,
                 color: AppColor.getBlack(context),
               ),
             ),
@@ -225,7 +221,7 @@ class ContactScreen extends StatelessWidget {
             Text(
               subtitle,
               textAlign: TextAlign.right,
-              style: GoogleFonts.ibmPlexSans(
+              style: GoogleFonts.scheherazadeNew(
                 fontSize: 14,
                 color: AppColor.grey,
               ),
@@ -242,39 +238,33 @@ class ContactScreen extends StatelessWidget {
     BuildContext context,
     String text, {
     bool required = false,
-        required IconData icon,
-
-
-      }) {
-
+    required IconData icon,
+  }) {
     return Row(
       children: [
-        Icon(icon,color: AppColor.grey3,size: 28,),
+        Icon(icon, color: AppColor.grey3, size: 28),
         Text(
           text,
-          style: GoogleFonts.ibmPlexSans(
-            fontWeight: FontWeight.w600,
+          style: GoogleFonts.scheherazadeNew(
+            fontWeight: FontWeight.w500,
             color: AppColor.getBlack(context),
-            fontSize: 18
+            fontSize: 17,
           ),
         ),
         if (required)
-           Padding(
+          Padding(
             padding: EdgeInsets.only(right: 6),
             child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 12,
-                vertical: 3,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 3),
               decoration: BoxDecoration(
                 color: AppColor.primary.withOpacity(0.15),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
-                 "مطلوب",
-                style: GoogleFonts.ibmPlexSans(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
+                "مطلوب",
+                style: GoogleFonts.scheherazadeNew(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
                   color: AppColor.getBlack(context),
                 ),
               ),
@@ -294,17 +284,15 @@ class ContactScreen extends StatelessWidget {
     final isDark = context.watch<AppThemeManager>().isDarkMode;
 
     return TextField(
-
       maxLines: maxLines,
       style: TextStyle(color: AppColor.getBlack(context)),
       decoration: InputDecoration(
-
         hintText: hint,
         hintStyle: TextStyle(color: AppColor.grey),
         filled: true,
-        fillColor: isDark ? Color(0xFF2C3630) : Color(0xFFF3F4F6) ,
+        fillColor: isDark ? Color(0xFF2C3630) : Color(0xFFF3F4F6),
 
-        contentPadding:  EdgeInsets.symmetric(vertical: 14,horizontal: 14),
+        contentPadding: EdgeInsets.symmetric(vertical: 14, horizontal: 14),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
           borderSide: BorderSide(color: AppColor.border),

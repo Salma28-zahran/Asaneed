@@ -1,4 +1,4 @@
-import 'package:asaneed/features/tabs/presentaion/views/profile/widgets/custom_app_bar_account.dart';
+import 'package:asaneed/features/tabs/presentaion/views/Account/widgets/custom_app_bar_account.dart';
 import 'package:asaneed/theme/AppThemeManager.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -35,9 +35,9 @@ class TermsScreen extends StatelessWidget {
                 "أسانيد نموذج أولي غير إنتاجي لأغراض تعليمية وبحثية. يرجى قراءة هذه الشروط قبل استخدام التطبيق.\nآخر تحديث: فبراير ٢٠٢٦",
                 textDirection: TextDirection.rtl,
                 textAlign: TextAlign.right,
-                style: GoogleFonts.ibmPlexSans(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
+                style: GoogleFonts.scheherazadeNew(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w400,
                   color: AppColor.grey2,
                 ),
               ),
@@ -108,9 +108,9 @@ class TermsScreen extends StatelessWidget {
     return Text(
       title,
       textAlign: TextAlign.right,
-      style: GoogleFonts.ibmPlexSans(
-        fontSize: 20,
-        fontWeight: FontWeight.w700,
+      style: GoogleFonts.scheherazadeNew(
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
         color: AppColor.getBlack(context)
       ),
     );
@@ -122,8 +122,8 @@ class TermsScreen extends StatelessWidget {
       child: Text(
         body,
         textAlign: TextAlign.right,
-        style: GoogleFonts.ibmPlexSans(
-          fontSize: 18,
+        style: GoogleFonts.scheherazadeNew(
+          fontSize: 16,
           height: 1.6,
           color: AppColor.grey3,
         ),
