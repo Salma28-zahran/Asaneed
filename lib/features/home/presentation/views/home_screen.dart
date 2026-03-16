@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: _selectedIndex == 4 ? const CustomAppBar() : null,
+      appBar: (_selectedIndex == 4 || _selectedIndex == 3) ? const CustomAppBar() : null,
       body: _pages[_selectedIndex],
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: _selectedIndex,
