@@ -28,7 +28,7 @@ class HadithDetails extends StatelessWidget {
         .brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? Color(0xFF111814) : AppColor.white,
+      backgroundColor: Colors.transparent,
 
       appBar: CustomAppBarAccount(title: "تفاصيل الحديث"),
       body: Padding(

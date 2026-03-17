@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../../../../theme/AppThemeManager.dart';
 import '../../../../../../../theme/app_theme.dart';
 import '../../../../../../details/presentation/views/tabs/rwah2/widgets/hadith_card.dart';
+import '../widgets/hadith_filter_bottom_sheet.dart';
 
 class Hadethscreen extends StatefulWidget {
   const Hadethscreen({super.key});
@@ -25,18 +26,13 @@ class Hadith {
   });
 }
 class _HadethscreenState extends State<Hadethscreen> {
-  String hadithWithTashkeel =
-      "مَنْ أَحَقُّ النَّاسِ بِحُسْنِ صَحَابَتِي؟ قَالَ: أُمُّكَ...";
 
-  String hadithWithoutTashkeel = "من احق الناس بحسن صحابتي؟ قال: امك...";
-
-  String currentText = "";
   String selectedStatus = "كل الدرجات";
 
   @override
   void initState() {
     super.initState();
-    currentText = hadithWithTashkeel;
+
   }
 
   @override
@@ -72,14 +68,14 @@ class _HadethscreenState extends State<Hadethscreen> {
           allHadith.where((h) => h.status == selectedStatus).toList();
     }
     return Scaffold(
-      backgroundColor: isDark ? Color(0xFF111814) : AppColor.white,
+      backgroundColor: Colors.transparent,
 
       appBar: AppBar(
-        backgroundColor: isDark ? AppColor.black : Colors.white,
+        backgroundColor: AppColor.getAppBarColor(context),
         elevation: 0,
         centerTitle: false,
         title: Align(
-          alignment: Alignment.center,
+          alignment: Alignment.centerRight,
           child: Text(
             "الأحاديث",
             style: GoogleFonts.scheherazadeNew(
@@ -87,12 +83,11 @@ class _HadethscreenState extends State<Hadethscreen> {
               fontSize: 22,
               fontWeight: FontWeight.bold,
             ),
+
           ),
         ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: AppColor.grey3),
-          onPressed: () => Navigator.pop(context),
-        ),
+        automaticallyImplyLeading: false,
+
       ),
 
       body: Directionality(
@@ -110,7 +105,7 @@ class _HadethscreenState extends State<Hadethscreen> {
                       decoration: BoxDecoration(
                         color: AppColor.getContainerColor(context),
                         borderRadius: BorderRadius.circular(25),
-                        border: Border.all(color: Color(0xffbfb8ae)),
+                        border: Border.all(color: AppColor.border,width: 1.5),
                       ),
                       child: TextField(
                         textAlign: TextAlign.right,
@@ -135,33 +130,37 @@ class _HadethscreenState extends State<Hadethscreen> {
                   ),
                   SizedBox(width: 8),
                   //filter
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-                    decoration: BoxDecoration(
-                      color: AppColor.getContainerColor(context),
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(color: Color(0xffbfb8ae)),
-                    ),
-                    child: Icon(
-                      Icons.tune,
-                      size: 20,
-                      color: isDark ? AppColor.white : AppColor.black,
+                  InkWell(
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        backgroundColor: AppColor.getContainerColor(context),
+                        isScrollControlled: true,
+                        shape:  RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(25),
+                          ),
+                        ),
+                        builder: (context) {
+                          return  FilterBottomSheet();
+                        },
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+                      decoration: BoxDecoration(
+                        color: AppColor.getContainerColor(context),
+                        borderRadius: BorderRadius.circular(25),
+                        border: Border.all(color: AppColor.border,width: 1.5),
+                      ),
+                      child: Icon(
+                        Icons.tune,
+                        size: 20,
+                        color: isDark ? AppColor.white : AppColor.black,
+                      ),
                     ),
                   ),
-                  SizedBox(width: 8),
-                  //essnad
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-                    decoration: BoxDecoration(
-                      color: isDark ? AppColor.primary : Color(0xffe8f2ed),
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: Icon(
-                      Icons.account_tree_outlined,
-                      size: 20,
-                      color: Colors.green,
-                    ),
-                  ),
+
                 ],
               ),
 
@@ -252,7 +251,7 @@ class _HadethscreenState extends State<Hadethscreen> {
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: isSelected
-                ? (isDark ? Color(0xFF6ED4A7) : AppColor.black)
+                ? ( AppColor.primary)
                 : Colors.grey.shade300,
           ),
         ),

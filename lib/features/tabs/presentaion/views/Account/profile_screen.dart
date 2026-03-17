@@ -15,16 +15,18 @@ class MyAccount extends StatelessWidget {
     final isDark = context.watch<AppThemeManager>().isDarkMode;
 
     return Scaffold(
-      backgroundColor: isDark ? Color(0xFF111814) : Color(0xFFF6F5F0),
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
         backgroundColor:       AppColor.getAppBarColor(context),
 
-      centerTitle: true,
-        title: Text(
-          "حسابي",
-          style: GoogleFonts.scheherazadeNew(
-            fontSize: 21,
-            fontWeight: FontWeight.w500,
+        title: Align(
+          alignment: Alignment.centerRight,
+          child: Text(
+            "حسابي",
+            style: GoogleFonts.scheherazadeNew(
+              fontSize: 21,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
 
