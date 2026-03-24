@@ -20,6 +20,8 @@ class PageRouteName{
   static const String rawah = '/rawah';
   static const String profile2 = '/profile2';
   static const String book = '/book';
+  static const String book_details = '/book_details';
+
 
 
 

@@ -10,7 +10,8 @@ import 'package:asaneed/features/home/presentation/views/home_screen.dart';
 import 'package:asaneed/features/onboarding/onboarding.dart';
 import 'package:asaneed/features/profile/presentation/views/profile_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/asaneed/presentation/views/asaneed_screen.dart';
-import 'package:asaneed/features/tabs/presentaion/views/book_screen.dart';
+import 'package:asaneed/features/tabs/presentaion/views/book/book_details.dart';
+import 'package:asaneed/features/tabs/presentaion/views/book/book_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/rawah_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/hadethscreen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/profile/contact_us.dart';
@@ -162,6 +163,13 @@ class RoutesGenerator {
         return MaterialPageRoute(
           builder: (context) => const BackgroundScreen(
             child: BookScreen(),
+          ),
+          settings: settings,
+        );
+      case PageRouteName.book_details:
+        return MaterialPageRoute(
+          builder: (context) => const BackgroundScreen(
+            child: BookDetails(),
           ),
           settings: settings,
         );
