@@ -54,12 +54,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
 
-      leadingWidth: 120,
+      leadingWidth: 150,
       leading: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
-            icon: const Icon(Icons.more_vert),
+            icon: const Icon(Icons.more_vert,color: AppColor.primary,),
             onPressed: () {
               showOptionsSheet(context);
             },
@@ -72,6 +72,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             },
             icon: Icon(
               Icons.search,
+              color: AppColor.primary,
+              size: 22,
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, PageRouteName.profile2);
+            },
+            icon: Icon(
+              Icons.person,
               color: AppColor.primary,
               size: 22,
             ),
