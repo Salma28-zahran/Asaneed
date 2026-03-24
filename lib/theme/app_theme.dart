@@ -128,7 +128,7 @@ class AppColor {
 ////////black text///////
   static TextStyle textBlack(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    return GoogleFonts.amiriQuran(
+    return GoogleFonts.tajawal(
       color: isDark ? Colors.white : AppColor.black,
       fontWeight: FontWeight.w500,
       fontSize: 20,
