@@ -6,8 +6,8 @@ import 'package:asaneed/theme/AppThemeManager.dart';
 import '../../../../../../theme/app_theme.dart';
 
 class CustomAppBarAccount extends StatelessWidget implements PreferredSizeWidget {
-  final String title; // 👈 required
-  final Widget? popMenu; // 👈 buildPopMenu
+  final String title;
+  final Widget? popMenu;
 
   const CustomAppBarAccount({
     super.key,
@@ -20,10 +20,10 @@ class CustomAppBarAccount extends StatelessWidget implements PreferredSizeWidget
     final isDark = context.watch<AppThemeManager>().isDarkMode;
 
     return Directionality(
-      textDirection: TextDirection.rtl, // 👈 يخلي السهم يمين
+      textDirection: TextDirection.rtl,
       child: AppBar(
-        backgroundColor:
-        isDark ? const Color(0xFF111814) : Colors.white,
+        backgroundColor: AppColor.getAppBarColor(context),
+
         elevation: 0,
         centerTitle: true,
         automaticallyImplyLeading: false,
@@ -75,9 +75,9 @@ class CustomAppBarAccount extends StatelessWidget implements PreferredSizeWidget
                 ),
                 child: Text(
                   isDark ? "ليلي" : "نهاري",
-                  style: GoogleFonts.ibmPlexSans(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
+                  style: GoogleFonts.scheherazadeNew(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
@@ -85,9 +85,9 @@ class CustomAppBarAccount extends StatelessWidget implements PreferredSizeWidget
               Expanded(
                 child: Text(
                   isDark ? "الوضع النهاري" : "الوضع الليلي",
-                  style: GoogleFonts.ibmPlexSans(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
+                  style: GoogleFonts.scheherazadeNew(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
@@ -117,10 +117,10 @@ class CustomAppBarAccount extends StatelessWidget implements PreferredSizeWidget
               SizedBox(width: 15),
               Text(
                 "تسجيل الخروج",
-                style: GoogleFonts.ibmPlexSans(
+                style: GoogleFonts.scheherazadeNew(
                   color: Colors.red,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ],

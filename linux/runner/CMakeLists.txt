@@ -12,8 +12,8 @@ add_executable(${BINARY_NAME}
   "${FLUTTER_MANAGED_DIR}/generated_plugin_registrant.cc"
 )
 
-# Apply the standard set of build profile. This can be removed for applications
-# that need different build profile.
+# Apply the standard set of build Account. This can be removed for applications
+# that need different build Account.
 apply_standard_settings(${BINARY_NAME})
 
 # Add preprocessor definitions for the application ID.

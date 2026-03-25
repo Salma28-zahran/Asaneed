@@ -1,4 +1,4 @@
-import 'package:asaneed/features/tabs/presentaion/views/profile/widgets/custom_app_bar_account.dart';
+import 'package:asaneed/features/tabs/presentaion/views/Account/widgets/custom_app_bar_account.dart';
 import 'package:asaneed/theme/AppThemeManager.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -53,8 +53,8 @@ class PrivacyScreen extends StatelessWidget {
                           children: [
                             Text(
                               "نموذج تقديم الخصوصية أولاً",
-                              style: GoogleFonts.ibmPlexSans(
-                                fontSize: 18,
+                              style: GoogleFonts.scheherazadeNew(
+                                fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFF1F3B2E),
                               ),
@@ -62,8 +62,8 @@ class PrivacyScreen extends StatelessWidget {
                             SizedBox(height: 2),
                             Text(
                               "أسناد يخزن جميع البيانات محليًا على جهازك. لا تُرسل أي بيانات إلى خادم.",
-                              style: GoogleFonts.ibmPlexSans(
-                                fontSize: 16,
+                              style: GoogleFonts.scheherazadeNew(
+                                fontSize: 15,
                                 color: Color(0xFF3E5F52),
                               ),
                             ),
@@ -97,10 +97,10 @@ class PrivacyScreen extends StatelessWidget {
                             SizedBox(width: 10),
                             Text(
                               "البيانات التي نجمعها",
-                              style: GoogleFonts.ibmPlexSans(
+                              style: GoogleFonts.scheherazadeNew(
                                 color: AppColor.getBlack(context),
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
+                                fontSize: 19,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ],
@@ -115,10 +115,10 @@ class PrivacyScreen extends StatelessWidget {
                         ),
                         child: Text(
                           "أسانيد نموذج أولي يعمل بالكامل دون اتصال. لا تُرسَل أي بيانات شخصية إلى أي خادم. البيانات الوحيدة المخزّنة هي تقدم قراءتك وعلاماتك المرجعية، وتُحفظ في تخزين المتصفح على جهازك (localStorage).",
-                          style: GoogleFonts.ibmPlexSans(
-                            fontSize: 16,
+                          style: GoogleFonts.scheherazadeNew(
+                            fontSize: 15,
                             color: AppColor.grey,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
@@ -148,10 +148,10 @@ class PrivacyScreen extends StatelessWidget {
                             SizedBox(width: 10),
                             Text(
                               "التخزين المحلي",
-                              style: GoogleFonts.ibmPlexSans(
+                              style: GoogleFonts.scheherazadeNew(
                                 color: AppColor.getBlack(context),
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
+                                fontSize: 19,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ],
@@ -166,10 +166,10 @@ class PrivacyScreen extends StatelessWidget {
                         ),
                         child: Text(
                           "جميع البيانات (المحفوظات، تقدم القراءة، التفضيلات) تُخزَّن حصراً في localStorage بمتصفحك تحت المفاتيح 'asaneed_*'. لا تغادر هذه البيانات جهازك أبداً. مسح تخزين المتصفح سيؤدي إلى حذف جميع البيانات المحفوظة.",
-                          style: GoogleFonts.ibmPlexSans(
-                            fontSize: 16,
+                          style: GoogleFonts.scheherazadeNew(
+                            fontSize: 15,
                             color: AppColor.grey,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
@@ -198,10 +198,10 @@ class PrivacyScreen extends StatelessWidget {
                             SizedBox(width: 10),
                             Text(
                               "كيف تُستخدم بياناتك",
-                              style: GoogleFonts.ibmPlexSans(
+                              style: GoogleFonts.scheherazadeNew(
                                 color: AppColor.getBlack(context),
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
+                                fontSize: 19,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ],
@@ -216,10 +216,10 @@ class PrivacyScreen extends StatelessWidget {
                         ),
                         child: Text(
                           "تُستخدم بياناتك المخزّنة محلياً فقط لتوفير تجربة دراسة سلسة: استئناف القراءة، وعرض محفوظاتك، وتذكّر إعدادات العرض. لا يجري أي تتبع أو تحليل من أي نوع.",
-                          style: GoogleFonts.ibmPlexSans(
-                            fontSize: 16,
+                          style: GoogleFonts.scheherazadeNew(
+                            fontSize: 15,
                             color: AppColor.grey,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
@@ -248,10 +248,10 @@ class PrivacyScreen extends StatelessWidget {
                             SizedBox(width: 10),
                             Text(
                               "حقوقك",
-                              style: GoogleFonts.ibmPlexSans(
+                              style: GoogleFonts.scheherazadeNew(
                                 color: AppColor.getBlack(context),
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
+                                fontSize: 19,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ],
@@ -266,10 +266,10 @@ class PrivacyScreen extends StatelessWidget {
                         ),
                         child: Text(
                           "بما أن جميع البيانات تُخزَّن محلياً على جهازك، فلديك السيطرة الكاملة عليها. يمكنك حذف جميع البيانات المخزّنة في أي وقت بمسح localStorage في متصفحك. لا حاجة لطلب حذف حساب لأنه لا توجد بيانات محفوظة على أي خادم.",
-                          style: GoogleFonts.ibmPlexSans(
-                            fontSize: 16,
+                          style: GoogleFonts.scheherazadeNew(
+                            fontSize: 15,
                             color: AppColor.grey,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
@@ -298,10 +298,10 @@ class PrivacyScreen extends StatelessWidget {
                             SizedBox(width: 10),
                             Text(
                               "التواصل",
-                              style: GoogleFonts.ibmPlexSans(
+                              style: GoogleFonts.scheherazadeNew(
                                 color: AppColor.getBlack(context),
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
+                                fontSize: 19,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ],
@@ -316,10 +316,10 @@ class PrivacyScreen extends StatelessWidget {
                         ),
                         child: Text(
                           "هذا تطبيق نموذجي للأغراض التوضيحية فقط. للاستفسار عن مشروع أسانيد، يرجى التواصل مع فريق التطوير عبر مستودع المشروع.",
-                          style: GoogleFonts.ibmPlexSans(
-                            fontSize: 16,
+                          style: GoogleFonts.scheherazadeNew(
+                            fontSize: 15,
                             color: AppColor.grey,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),

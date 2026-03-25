@@ -46,9 +46,9 @@ class OptionItem extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: GoogleFonts.ibmPlexSans(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
+                    style: GoogleFonts.scheherazadeNew(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
                       color: AppColor.getBlack(context),
                     ),
                   ),
@@ -56,8 +56,8 @@ class OptionItem extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       subtitle!,
-                      style: GoogleFonts.ibmPlexSans(
-                        fontSize: 16,
+                      style: GoogleFonts.scheherazadeNew(
+                        fontSize: 15,
                         color: AppColor.grey,
                       ),
                     ),

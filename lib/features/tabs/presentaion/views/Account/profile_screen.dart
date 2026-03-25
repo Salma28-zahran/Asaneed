@@ -1,4 +1,4 @@
-import 'package:asaneed/features/tabs/presentaion/views/profile/widgets/option_item.dart';
+import 'package:asaneed/features/tabs/presentaion/views/Account/widgets/option_item.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -15,15 +15,18 @@ class MyAccount extends StatelessWidget {
     final isDark = context.watch<AppThemeManager>().isDarkMode;
 
     return Scaffold(
-      backgroundColor: isDark ? Color(0xFF111814) : Color(0xFFF6F5F0),
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: isDark ? const Color(0xFF111814) : Colors.white,
-        centerTitle: true,
-        title: Text(
-          "حسابي",
-          style: GoogleFonts.ibmPlexSans(
-            fontSize: 22,
-            fontWeight: FontWeight.w600,
+        backgroundColor:       AppColor.getAppBarColor(context),
+
+        title: Align(
+          alignment: Alignment.centerRight,
+          child: Text(
+            "حسابي",
+            style: GoogleFonts.scheherazadeNew(
+              fontSize: 21,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
 
@@ -70,17 +73,17 @@ class MyAccount extends StatelessWidget {
                           children: [
                             Text(
                               "محمد مصطفي",
-                              style: GoogleFonts.ibmPlexSans(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
+                              style: GoogleFonts.scheherazadeNew(
+                                fontSize: 19,
+                                fontWeight: FontWeight.w500,
                                 color: AppColor.getBlack(context),
                               ),
                             ),
                             SizedBox(height: 4),
                             Text(
                               "mohamed@gmail.com",
-                              style: GoogleFonts.ibmPlexSans(
-                                fontSize: 16,
+                              style: GoogleFonts.scheherazadeNew(
+                                fontSize: 15,
                                 color: AppColor.grey3,
                               ),
                             ),
@@ -96,10 +99,10 @@ class MyAccount extends StatelessWidget {
                               ),
                               child: Text(
                                 "طالب",
-                                style: GoogleFonts.ibmPlexSans(
+                                style: GoogleFonts.scheherazadeNew(
                                   color: AppColor.getBlack(context),
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),
@@ -133,10 +136,10 @@ class MyAccount extends StatelessWidget {
                             SizedBox(width: 10),
                             Text(
                               "المظهر",
-                              style: GoogleFonts.ibmPlexSans(
+                              style: GoogleFonts.scheherazadeNew(
                                 color: AppColor.getBlack(context),
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ],
@@ -173,9 +176,9 @@ class MyAccount extends StatelessWidget {
                                   children: [
                                     Text(
                                       isDark ? "الوضع النهاري" : "الوضع الليلي",
-                                      style: GoogleFonts.ibmPlexSans(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
+                                      style: GoogleFonts.scheherazadeNew(
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.w500,
                                         color: AppColor.getBlack(context),
                                       ),
                                     ),
@@ -184,8 +187,8 @@ class MyAccount extends StatelessWidget {
                                       isDark
                                           ? "الحالي: مفعل"
                                           : "الحالي: غير مفعل",
-                                      style: GoogleFonts.ibmPlexSans(
-                                        fontSize: 16,
+                                      style: GoogleFonts.scheherazadeNew(
+                                        fontSize: 15,
                                         color: AppColor.grey,
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -205,9 +208,9 @@ class MyAccount extends StatelessWidget {
                                 ),
                                 child: Text(
                                   isDark ? "إيقاف" : "تشغيل",
-                                  style: GoogleFonts.ibmPlexSans(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
+                                  style: GoogleFonts.scheherazadeNew(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
                                     color: AppColor.getBlack(context),
                                   ),
                                 ),
@@ -242,10 +245,10 @@ class MyAccount extends StatelessWidget {
                             SizedBox(width: 10),
                             Text(
                               "الدعم والقانوني",
-                              style: GoogleFonts.ibmPlexSans(
+                              style: GoogleFonts.scheherazadeNew(
                                 color: AppColor.getBlack(context),
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ],
@@ -297,10 +300,10 @@ class MyAccount extends StatelessWidget {
                               SizedBox(width: 10),
                               Text(
                                 "تسجيل الخروج",
-                                style: GoogleFonts.ibmPlexSans(
+                                style: GoogleFonts.scheherazadeNew(
                                   color: Colors.red,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ],
@@ -345,9 +348,9 @@ class MyAccount extends StatelessWidget {
                     ),
                     child: Text(
                       isDark ? "ليلي" : "نهاري",
-                      style: GoogleFonts.ibmPlexSans(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                      style: GoogleFonts.scheherazadeNew(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                   ),
@@ -355,9 +358,9 @@ class MyAccount extends StatelessWidget {
                   Expanded(
                     child: Text(
                       isDark ? "الوضع النهاري" : "الوضع الليلي",
-                      style: GoogleFonts.ibmPlexSans(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
+                      style: GoogleFonts.scheherazadeNew(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
@@ -387,10 +390,10 @@ class MyAccount extends StatelessWidget {
                   SizedBox(width: 15),
                   Text(
                     "تسجيل الخروج",
-                    style: GoogleFonts.ibmPlexSans(
+                    style: GoogleFonts.scheherazadeNew(
                       color: Colors.red,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],

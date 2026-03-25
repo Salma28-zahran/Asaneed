@@ -16,8 +16,8 @@ add_executable(${BINARY_NAME} WIN32
   "runner.exe.manifest"
 )
 
-# Apply the standard set of build profile. This can be removed for applications
-# that need different build profile.
+# Apply the standard set of build Account. This can be removed for applications
+# that need different build Account.
 apply_standard_settings(${BINARY_NAME})
 
 # Add preprocessor definitions for the build version.
