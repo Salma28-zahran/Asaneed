@@ -27,10 +27,13 @@ class MyAccount extends StatelessWidget {
               fontSize: 21,
               fontWeight: FontWeight.w500,
             ),
+
           ),
         ),
 
-        leading: buildPopMenu(context),
+        leading: IconButton(onPressed: (){
+          Navigator.pushNamed(context, PageRouteName.homeScreen);
+        }, icon: Icon(Icons.arrow_back)),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

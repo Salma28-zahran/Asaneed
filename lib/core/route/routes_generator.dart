@@ -9,20 +9,21 @@ import 'package:asaneed/features/details/presentation/views/sahaba_details.dart'
 import 'package:asaneed/features/home/presentation/views/home_screen.dart';
 import 'package:asaneed/features/onboarding/onboarding.dart';
 import 'package:asaneed/features/profile/presentation/views/profile_screen.dart';
+import 'package:asaneed/features/tabs/presentaion/views/Account/contact_us.dart';
+import 'package:asaneed/features/tabs/presentaion/views/Account/privacy_policy.dart';
+import 'package:asaneed/features/tabs/presentaion/views/Account/profile_screen.dart';
+import 'package:asaneed/features/tabs/presentaion/views/Account/terms_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/asaneed/presentation/views/asaneed_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/book/book_details.dart';
 import 'package:asaneed/features/tabs/presentaion/views/book/book_screen.dart';
+import 'package:asaneed/features/tabs/presentaion/views/hadith/presentation/views/hadethscreen.dart';
+import 'package:asaneed/features/tabs/presentaion/views/hadith/presentation/views/hadith_details.dart';
 import 'package:asaneed/features/tabs/presentaion/views/rawah_screen.dart';
-import 'package:asaneed/features/tabs/presentaion/views/hadethscreen.dart';
-import 'package:asaneed/features/tabs/presentaion/views/profile/contact_us.dart';
-import 'package:asaneed/features/tabs/presentaion/views/profile/profile_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/search_screen.dart';
 import 'package:asaneed/features/tree/presentation/views/tree_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:asaneed/core/widgets/background_screen.dart';
 
-import '../../features/tabs/presentaion/views/profile/privacy_policy.dart';
-import '../../features/tabs/presentaion/views/profile/terms_screen.dart';
 
 class RoutesGenerator {
   static Route<dynamic> onGenerateRoutes(RouteSettings settings) {
@@ -173,6 +174,19 @@ class RoutesGenerator {
           ),
           settings: settings,
         );
+      case PageRouteName.hadithDetails:
+        final args = settings.arguments as Map;
+        return MaterialPageRoute(
+          builder:
+              (context) => BackgroundScreen(
+            child: HadithDetails(
+              number: args["number"],
+              status: args["status"],
+            ),
+          ),
+          settings: settings,
+        );
+
 
 
       default:

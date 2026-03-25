@@ -14,107 +14,36 @@ class CustomBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 120,
-      child: Stack(
-        clipBehavior: Clip.none,
-        alignment: Alignment.center,
-        children: [
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: SafeArea(
-              child: Container(
-                height: 70,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(.08),
-                      blurRadius: 10,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: Theme(
-                    data: Theme.of(context).copyWith(
-                      splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                    ),
-                    child: BottomNavigationBar(
-                      currentIndex: currentIndex,
-                      onTap: onTap,
-                      type: BottomNavigationBarType.fixed,
-                      backgroundColor:
-                      Theme.of(context).brightness == Brightness.dark
-                          ? const Color(0xff2c2b2b)
-                          : Colors.white,
-                      selectedItemColor: AppColor.primary,
-                      unselectedItemColor: Colors.grey,
-                      showSelectedLabels: false,
-                      showUnselectedLabels: false,
-                      iconSize: 26,
-                      items: [
-                        _buildNavItem(const Icon(Icons.group), 0),
-                        _buildNavItem(const Icon(Icons.bookmark_border), 1),
-
-                        const BottomNavigationBarItem(
-                          icon: SizedBox(width: 50),
-                          label: "",
-                        ),
-
-                        _buildNavItem(const Icon(Icons.menu_book), 3),
-                        _buildNavItem(const Icon(Icons.home_outlined), 4),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-
-          Positioned(
-            bottom: 40,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, PageRouteName.asaneed);
-              },
-              child: Container(
-                height: 65,
-                width: 65,
-                decoration: BoxDecoration(
-                  color: AppColor.primary,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(.2),
-                      blurRadius: 10,
-                      offset: const Offset(0, 5),
-                    ),
-                  ],
-                ),
-                child: const Icon(
-                  Icons.account_tree_outlined,
-                  color: Colors.white,
-                  size: 30,
-                ),
-              ),
-            ),
-          ),
-        ],
+    return BottomAppBar(
+      shape: const CircularNotchedRectangle(), // لعمل فتحة للزر
+      notchMargin: 8,
+      color: Theme.of(context).brightness == Brightness.dark
+          ? const Color(0xff2c2b2b)
+          : Colors.white,
+      elevation: 10,
+      child: SizedBox(
+        height: 70,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            _buildNavItem(context, const Icon(Icons.group), 0),
+            _buildNavItem(context, const Icon(Icons.bookmark_border), 1),
+            _buildNavItem(context, const Icon(Icons.receipt_long_outlined), 2),
+            const SizedBox(width: 65), // مساحة للزر الكبير
+            _buildNavItem(context, const Icon(Icons.menu_book), 4),
+            _buildNavItem(context, const Icon(Icons.home_outlined), 5),
+          ],
+        ),
       ),
     );
   }
 
-  BottomNavigationBarItem _buildNavItem(Widget icon, int index) {
+  Widget _buildNavItem(BuildContext context, Widget icon, int index) {
     final bool isSelected = currentIndex == index;
 
-    return BottomNavigationBarItem(
-      label: "",
-      icon: Container(
+    return GestureDetector(
+      onTap: () => onTap(index),
+      child: Container(
         padding: const EdgeInsets.all(6),
         decoration: BoxDecoration(
           color: isSelected ? AppColor.primary : Colors.transparent,
