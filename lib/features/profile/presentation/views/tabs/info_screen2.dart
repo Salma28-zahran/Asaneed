@@ -23,7 +23,6 @@ class InfoScreen2 extends StatelessWidget {
             padding: const EdgeInsets.only(top: 15),
             child: Column(
               children: [
-                ////////الكارد الاول ///
                 Container(
                   width: 351,
                   height: 440,
@@ -49,7 +48,7 @@ class InfoScreen2 extends StatelessWidget {
                           textDirection: TextDirection.rtl,
                           children: [
                             Image.asset(
-                              AssetsManager.icon,
+                              AssetsManager.hicon,
                                 color: Color(0xff9CA3AF),
         
                             ),

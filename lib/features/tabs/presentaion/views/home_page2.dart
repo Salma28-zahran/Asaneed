@@ -1,8 +1,8 @@
 import 'package:asaneed/core/route/routes.dart';
+import 'package:asaneed/features/tabs/presentaion/views/hadith/presentation/widgets/hadith_card.dart';
 import 'package:asaneed/features/tabs/presentaion/widgets/ItemRow.dart';
 import 'package:asaneed/features/tabs/presentaion/widgets/home/StatsSection.dart';
 import 'package:asaneed/features/tabs/presentaion/widgets/home/WelcomeBanner.dart';
-import 'package:asaneed/features/tabs/presentaion/widgets/home/hadith_of_the_day_card.dart';
 
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,26 @@ class HomePage2 extends StatefulWidget {
   State<HomePage2> createState() => _HomePage2State();
 }
 
+class Hadith {
+  final int number;
+  final String text;
+  final String status;
+
+  Hadith({
+    required this.number,
+    required this.text,
+    required this.status,
+  });
+}
+
 class _HomePage2State extends State<HomePage2> {
+  // الحديث الذي سيظهر في الصفحة الرئيسية
+  final featuredHadith = Hadith(
+    number: 1,
+    text: "إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى.",
+    status: "صحيح",
+  );
+
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
@@ -28,88 +47,100 @@ class _HomePage2State extends State<HomePage2> {
     final themeManager = context.watch<AppThemeManager>();
     final isDark = themeManager.isDarkMode;
 
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: width * 0.04),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(height: height * 0.020),
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: width * 0.04),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: height * 0.020),
 
-            /// Welcome Banner
-            const WelcomeBanner(),
+              /// Welcome Banner
+              const WelcomeBanner(),
 
-            SizedBox(height: height * 0.020),
+              SizedBox(height: height * 0.020),
 
-            /// Stats Section
-            const StatsSection(),
+              /// Stats Section
+              const StatsSection(),
 
-            SizedBox(height: 24),
+              SizedBox(height: 24),
 
-            /// Hadith Of The Day
-            const HadithOfTheDayCard(),
-
-            SizedBox(height: height * 0.018),
-
-            /// Quick Actions
-            Row(
-              children: [
-                Expanded(
-                  child: ActionButton(
-                    title: "بحث",
-                    icon: Icons.search,
-                    onTap: () {
-                      Navigator.pushNamed(context, PageRouteName.search);
-                    },
-                  ),
-                ),
-                const SizedBox(width: 12),
-
-                Expanded(
-                  child: ActionButton(
-                    title: "رواة",
-                    icon: Icons.people_outline,
-                    onTap: () {
-                      Navigator.pushNamed(context, PageRouteName.rawah);
-                    },
-                  ),
-                ),
-                const SizedBox(width: 12),
-
-                Expanded(
-                  child: ActionButton(
-                    title: "أحاديث",
-                    icon: Icons.menu_book_outlined,
-                    onTap: () {
-                      Navigator.pushNamed(context, PageRouteName.hadethScreen);
-                    },
-                  ),
-                ),
-              ],
-            ),
-
-            SizedBox(height: 20),
-
-            Align(
-              alignment: Alignment.topRight,
-              child: Text(
-                "رواة شوهدوا مؤخراً",
-                style: AppColor.textBlack(context)
-                    .copyWith(fontSize: width * 0.045),
+              /// **Featured Hadith Card**
+               Align(
+                        alignment: Alignment.topRight,
+                         child: Text("حديث اليوم", style: AppColor.textBlack(context)),
+                      ),
+              SizedBox(height: 14),
+              HadithCard2(
+                number: featuredHadith.number,
+                text: featuredHadith.text,
+                status: featuredHadith.status,
               ),
-            ),
 
-            SizedBox(height: height * 0.012),
+              SizedBox(height: height * 0.018),
 
-            PersonCard(
-              name: "علي بن أبي طالب",
-              badgeText: "صحابي",
-              badgeColor: AppColor.green,
-              deathYear: 40,
-              onTap: () {
-                Navigator.pushNamed(context, PageRouteName.profile);
-              },
-            ),
-          ],
+              /// Quick Actions
+              Row(
+                children: [
+                  Expanded(
+                    child: ActionButton(
+                      title: "بحث",
+                      icon: Icons.search,
+                      onTap: () {
+                        Navigator.pushNamed(context, PageRouteName.search);
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+
+                  Expanded(
+                    child: ActionButton(
+                      title: "رواة",
+                      icon: Icons.people_outline,
+                      onTap: () {
+                        Navigator.pushNamed(context, PageRouteName.rawah);
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+
+                  Expanded(
+                    child: ActionButton(
+                      title: "أحاديث",
+                      icon: Icons.menu_book_outlined,
+                      onTap: () {
+                        Navigator.pushNamed(context, PageRouteName.hadethScreen);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 20),
+
+              Align(
+                alignment: Alignment.topRight,
+                child: Text(
+                  "رواة شوهدوا مؤخراً",
+                  style: AppColor.textBlack(context)
+                      .copyWith(fontSize: width * 0.045),
+                ),
+              ),
+
+              SizedBox(height: height * 0.012),
+
+              PersonCard(
+                name: "علي بن أبي طالب",
+                badgeText: "صحابي",
+                badgeColor: AppColor.green,
+                deathYear: 40,
+                onTap: () {
+                  Navigator.pushNamed(context, PageRouteName.profile);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
