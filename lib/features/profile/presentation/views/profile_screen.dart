@@ -1,7 +1,9 @@
+import 'package:asaneed/core/resources/app_assets_manager.dart';
 import 'package:asaneed/core/route/routes.dart';
 import 'package:asaneed/features/profile/presentation/views/tabs/info_screen2.dart';
 import 'package:asaneed/features/profile/presentation/views/tabs/morwayat_screen.dart'
     show MorwayatScreen;
+import 'package:asaneed/features/profile/presentation/views/tabs/notes.dart';
 import 'package:asaneed/features/profile/presentation/views/tabs/person_screen.dart';
 import 'package:asaneed/features/profile/presentation/views/tabs/students_screen.dart';
 import 'package:asaneed/features/profile/presentation/widgets/buildTabIcon.dart';
@@ -25,7 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
-  static const int tabsCount = 4;
+  final int tabsCount = 5;
 
   @override
   void initState() {
@@ -196,21 +198,22 @@ class _ProfileScreenState extends State<ProfileScreen>
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 InfoCard(
-                  number: "0",
-                  title: "مرويات",
-                  icon: Icons.menu_book,
+                  number: "2",
+                  title: "احاديثه",
+                  imagePath: "assets/images/png/h_icon2.png",
                   iconColor: AppColor.primary,
                 ),
+
                 SizedBox(width: 12),
                 InfoCard(
-                  number: "5",
+                  number: "4",
                   title: "تلاميذه",
                   icon: Icons.group,
                   iconColor: AppColor.blue,
                 ),
                 SizedBox(width: 12),
                 InfoCard(
-                  number: "1",
+                  number: "4",
                   title: "شيوخه",
                   icon: Icons.person,
                   iconColor: AppColor.primary3,
@@ -224,7 +227,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             Center(
               child: Container(
                 height: 64,
-                width: 360,
+                width: 500,
                 padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
                   color: AppColor.getContainerColor(context),
@@ -244,7 +247,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                         0,
                       ),
                       child: Container(
-                        width: 290 / tabsCount,
+                        width: (390 - 12) / tabsCount,
                         height: 45,
                         decoration: BoxDecoration(
                           color: AppColor.primary,
@@ -257,33 +260,57 @@ class _ProfileScreenState extends State<ProfileScreen>
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        buildTabIcon(
-                          icon: Icons.menu_book_outlined,
+                        /// 0 - Notes (آخر واحدة شمال)
+                        Expanded(
+                          child: buildTabIcon(
+                            title: "الملاحظات",
+                            count: "3",
 
-                          isSelected: _tabController.index == 0,
-                          onTap: () =>
-                              setState(() => _tabController.index = 0),
+                            isSelected: _tabController.index == 0,
+                            onTap: () => setState(() => _tabController.index = 0),
+                          ),
                         ),
-                        buildTabIcon(
-                          icon: Icons.person_outline,
-                          isSelected: _tabController.index == 1,
-                          onTap: () =>
-                              setState(() => _tabController.index = 1),
+
+                        /// 1 - Morwayat
+                        Expanded(
+                          child: buildTabIcon(
+                            title: "احاديثه",
+                            count: "2",
+                            isSelected: _tabController.index == 1,
+                            onTap: () => setState(() => _tabController.index = 1),
+                          ),
                         ),
-                        buildTabIcon(
-                          icon: Icons.group_outlined,
-                          isSelected: _tabController.index == 2,
-                          onTap: () =>
-                              setState(() => _tabController.index = 2),
+
+                        /// 2 - Person
+                        Expanded(
+                          child: buildTabIcon(
+                            title: "الشيوخ",
+                            count: "4",
+                            isSelected: _tabController.index == 2,
+                            onTap: () => setState(() => _tabController.index = 2),
+                          ),
                         ),
-                        buildTabIcon(
-                          icon: Icons.info_outline,
-                          isSelected: _tabController.index == 3,
-                          onTap: () =>
-                              setState(() => _tabController.index = 3),
+
+                        /// 3 - Students
+                        Expanded(
+                          child: buildTabIcon(
+                            title: "التلاميذ",
+                            count: "4",
+                            isSelected: _tabController.index == 3,
+                            onTap: () => setState(() => _tabController.index = 3),
+                          ),
+                        ),
+
+                        /// 4 - Info (أول واحدة يمين 👈)
+                        Expanded(
+                          child: buildTabIcon(
+                            title: "السيره ",
+                            isSelected: _tabController.index == 4,
+                            onTap: () => setState(() => _tabController.index = 4),
+                          ),
                         ),
                       ],
-                    ),
+                    )
                   ],
                 ),
               ),
@@ -294,13 +321,15 @@ class _ProfileScreenState extends State<ProfileScreen>
             /// -------- Content --------
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.6,
-              child: IndexedStack(
+              child:
+              IndexedStack(
                 index: _tabController.index,
-                children: const [
-                  MorwayatScreen(),
-                  PersonScreen(),
-                  StudentsScreen(),
-                  InfoScreen2(),
+                children: [
+                  Notes(),                // 0
+                  const MorwayatScreen(), // 1
+                  const PersonScreen(),   // 2
+                  const StudentsScreen(), // 3
+                  const InfoScreen2(),    // 4
                 ],
               ),
             ),

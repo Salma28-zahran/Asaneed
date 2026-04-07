@@ -24,6 +24,8 @@ abstract class AssetsManager {
 
   static const String brand = "assets/images/png/brand.png";
   static const String hicon = "assets/images/png/h_icon.png";
+  static const String hicon2 = "assets/images/png/h_icon2.png";
+
 
 
 
