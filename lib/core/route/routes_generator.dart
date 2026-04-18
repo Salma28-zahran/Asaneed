@@ -1,8 +1,8 @@
 import 'package:asaneed/core/route/routes.dart';
-import 'package:asaneed/features/auth/presentation/views/forget_pass/forget_email.dart';
-import 'package:asaneed/features/auth/presentation/views/forget_pass/new_pass.dart';
-import 'package:asaneed/features/auth/presentation/views/login_screen.dart';
-import 'package:asaneed/features/auth/presentation/views/register_screen.dart';
+import 'package:asaneed/features/auth/presentation/views/forget_pass/views/forget_email.dart';
+import 'package:asaneed/features/auth/presentation/views/forget_pass/views/new_pass.dart';
+import 'package:asaneed/features/auth/presentation/views/login/views/login_screen.dart';
+import 'package:asaneed/features/auth/presentation/views/register/views/register_screen.dart';
 import 'package:asaneed/features/auth/presentation/views/verify_otp.dart';
 import 'package:asaneed/features/circle/presentation/views/circle1.dart';
 import 'package:asaneed/features/details/presentation/views/sahaba_details.dart';

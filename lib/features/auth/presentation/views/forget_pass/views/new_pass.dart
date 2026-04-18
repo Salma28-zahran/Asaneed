@@ -4,7 +4,7 @@ import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../../../../../core/resources/app_assets_manager.dart';
+import '../../../../../../core/resources/app_assets_manager.dart';
 
 class NewPass extends StatefulWidget {
   const NewPass({super.key});
