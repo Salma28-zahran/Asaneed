@@ -1,23 +1,23 @@
 import 'package:asaneed/core/resources/app_assets_manager.dart';
 import 'package:asaneed/core/route/routes.dart';
-import 'package:asaneed/features/auth/presentation/views/activation/bloc/activ_cubit.dart';
-import 'package:asaneed/features/auth/presentation/views/activation/bloc/activ_state.dart';
+import 'package:asaneed/features/auth/presentation/views/forget_pass/bloc/forget_cubit.dart';
+import 'package:asaneed/features/auth/presentation/views/forget_pass/bloc/forget_state.dart';
+import 'package:asaneed/features/auth/presentation/views/forget_pass/views/new_pass.dart';
 import 'package:asaneed/theme/AppThemeManager.dart';
+import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../theme/app_theme.dart';
-
-class VerifyOtp extends StatefulWidget {
-  const VerifyOtp({super.key});
+class PassOtp extends StatefulWidget {
+  const PassOtp({super.key});
 
   @override
-  State<VerifyOtp> createState() => _VerifyOtpState();
+  State<PassOtp> createState() => _PassOtpState();
 }
 
-class _VerifyOtpState extends State<VerifyOtp> {
+class _PassOtpState extends State<PassOtp> {
   bool hasError = false;
   bool isSuccess = false;
 
@@ -43,7 +43,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
   }
 
   String getCode() {
-    return controllers.map((e) => e.text).join();
+    return controllers.map((c) => c.text).join();
   }
 
   @override
@@ -51,17 +51,24 @@ class _VerifyOtpState extends State<VerifyOtp> {
     final themeManager = context.watch<AppThemeManager>();
     final isDark = themeManager.isDarkMode;
 
+    // email جاي من الصفحة اللي قبلها (ForgetEmail)
+    final String email =
+        ModalRoute.of(context)?.settings.arguments as String? ?? "";
+
     return BlocProvider(
-      create: (_) => ActivateCubit(),
-      child: BlocConsumer<ActivateCubit, ActivState>(
+      create: (_) => PasswordResetCubit(),
+      child: BlocConsumer<PasswordResetCubit, PasswordResetState>(
         listener: (context, state) {
-          if (state is ActivateSuccessState) {
+          if (state is VerifyCodeSuccessState) {
             setState(() {
               isSuccess = true;
+              hasError = false;
             });
+
+            Navigator.pushNamed(context, PageRouteName.new_pass);
           }
 
-          if (state is FailedToActivateState) {
+          if (state is VerifyCodeErrorState) {
             setState(() {
               hasError = true;
             });
@@ -136,7 +143,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
                         ),
                         child: isSuccess
                             ? _buildSuccess()
-                            : _buildOtpContent(context, state),
+                            : _buildOtpContent(context, email, state),
                       ),
                     ),
                   ],
@@ -149,9 +156,11 @@ class _VerifyOtpState extends State<VerifyOtp> {
     );
   }
 
-  // ================= OTP CONTENT =================
-
-  Widget _buildOtpContent(BuildContext context, ActivState state) {
+  Widget _buildOtpContent(
+      BuildContext context,
+      String email,
+      PasswordResetState state,
+      ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -178,7 +187,27 @@ class _VerifyOtpState extends State<VerifyOtp> {
           ],
         ),
 
-        const SizedBox(height: 20),
+        const SizedBox(height: 6),
+
+        Text(
+          "أرسلنا رمز مكون من 6 أرقام إلى",
+          style: GoogleFonts.ibmPlexSansArabic(
+            fontSize: 14,
+            color: const Color(0xff6B7280),
+          ),
+        ),
+
+        const SizedBox(height: 2),
+
+        Text(
+          email.isEmpty ? "you@example.com" : email,
+          style: GoogleFonts.ibmPlexSansArabic(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+
+        const SizedBox(height: 16),
 
         if (hasError)
           Container(
@@ -188,9 +217,10 @@ class _VerifyOtpState extends State<VerifyOtp> {
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
-              "الرمز غير صحيح",
+              "الرمز غير صحيح، يرجى المحاولة مرة أخرى.",
               style: GoogleFonts.ibmPlexSansArabic(
                 color: Colors.red,
+                fontSize: 13,
               ),
             ),
           ),
@@ -230,12 +260,14 @@ class _VerifyOtpState extends State<VerifyOtp> {
           width: double.infinity,
           height: 50,
           child: ElevatedButton(
-            onPressed: () {
+            onPressed: state is VerifyCodeLoadingState
+                ? null
+                : () {
               final code = getCode();
 
-              context.read<ActivateCubit>().activateAccount(
-                email: "you@example.com",
-                activationCode: code,
+              context.read<PasswordResetCubit>().verifyCode(
+                email: email,
+                code: code,
               );
             },
             style: ElevatedButton.styleFrom(
@@ -244,11 +276,13 @@ class _VerifyOtpState extends State<VerifyOtp> {
                 borderRadius: BorderRadius.circular(30),
               ),
             ),
-            child: state is ActivateLoadingState
+            child: state is VerifyCodeLoadingState
                 ? const CircularProgressIndicator(color: Colors.white)
                 : Text(
               "تحقق من الرمز",
               style: GoogleFonts.ibmPlexSansArabic(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
                 color: Colors.white,
               ),
             ),
@@ -256,37 +290,23 @@ class _VerifyOtpState extends State<VerifyOtp> {
         ),
 
         const SizedBox(height: 14),
-
-        Center(
-          child: Text(
-            "إعادة إرسال الرمز",
-            style: GoogleFonts.ibmPlexSansArabic(
-              color: AppColor.primary,
-            ),
-          ),
-        ),
       ],
     );
   }
 
-  // ================= SUCCESS =================
-
   Widget _buildSuccess() {
     return Column(
       children: [
-        const Icon(Icons.check, size: 40, color: Colors.green),
+        Container(
+          padding: const EdgeInsets.all(18),
+          decoration: const BoxDecoration(
+            color: Color(0xffE6F4EA),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(Icons.check, size: 40, color: AppColor.primary),
+        ),
         const SizedBox(height: 16),
-        Text(
-          "تم التفعيل بنجاح",
-          style: GoogleFonts.ibmPlexSansArabic(fontSize: 18),
-        ),
-        const SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, PageRouteName.login);
-          },
-          child: const Text("العودة لتسجيل الدخول"),
-        ),
+        const Text("تم التحقق بنجاح"),
       ],
     );
   }
