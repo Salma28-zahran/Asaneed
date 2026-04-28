@@ -1,6 +1,7 @@
 import 'package:asaneed/core/route/routes.dart';
 import 'package:asaneed/features/auth/presentation/views/forget_pass/views/forget_email.dart';
 import 'package:asaneed/features/auth/presentation/views/forget_pass/views/new_pass.dart';
+import 'package:asaneed/features/auth/presentation/views/forget_pass/views/pass_otp.dart';
 import 'package:asaneed/features/auth/presentation/views/login/views/login_screen.dart';
 import 'package:asaneed/features/auth/presentation/views/register/views/register_screen.dart';
 import 'package:asaneed/features/auth/presentation/views/activation/views/verify_otp.dart';
@@ -171,6 +172,13 @@ class RoutesGenerator {
         return MaterialPageRoute(
           builder: (context) => const BackgroundScreen(
             child: BookDetails(),
+          ),
+          settings: settings,
+        );
+      case PageRouteName.passotp:
+        return MaterialPageRoute(
+          builder: (context) => const BackgroundScreen(
+            child: PassOtp(),
           ),
           settings: settings,
         );

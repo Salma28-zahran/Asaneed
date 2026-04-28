@@ -11,38 +11,57 @@ class LoginCubit extends Cubit<LoginState> {
     required String email,
     required String password,
   }) async {
-    if (email.isEmpty) {
-      emit(FailedToLogInState(message: "Invalid email or password."));
-      return;
-    }
+    print("🚀 Login started");
 
-    if (password.isEmpty) {
-      emit(FailedToLogInState(message: "Invalid email or password."));
+    if (email.isEmpty || password.isEmpty) {
+      print("❌ Empty fields");
+      emit(FailedToLogInState(message: "Email and password are required"));
       return;
     }
 
     emit(LogInLoadingState());
+    print("⏳ Loading...");
 
     try {
+      final url =
+          "http://167.99.94.194:8000/en/api/v1/accounts/auth/login/";
+
+      print("📡 URL: $url");
+
+      final body = {
+        "email": email,
+        "password": password,
+      };
+
+      print("📦 Request Body: $body");
+
       final response = await http.post(
-        Uri.parse(""),
-        body: {
-          'email': email,
-          'password': password,
+        Uri.parse(url),
+        headers: {
+          "accept": "application/json",
+          "Content-Type": "application/json",
         },
+        body: jsonEncode(body),
       );
 
-      final responseBody = jsonDecode(response.body);
+      print("📥 Status Code: ${response.statusCode}");
+      print("📥 Response: ${response.body}");
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        print(responseBody);
+      final data = jsonDecode(response.body);
+
+      if (response.statusCode == 200 ||
+          response.statusCode == 201) {
+        print("✅ Login Success");
         emit(LogInSuccessState());
       } else {
-        print(responseBody);
-        emit(FailedToLogInState(message: "Invalid email or password."));
+        print("❌ Login Failed");
+        emit(FailedToLogInState(
+          message: data["message"] ?? "Invalid email or password",
+        ));
       }
     } catch (e) {
-      emit(FailedToLogInState(message: "Invalid email or password."));
+      print("🔥 Error: $e");
+      emit(FailedToLogInState(message: e.toString()));
     }
   }
 }
