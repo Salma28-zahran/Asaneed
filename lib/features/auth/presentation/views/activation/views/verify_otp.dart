@@ -23,12 +23,19 @@ class _VerifyOtpState extends State<VerifyOtp> {
 
   late List<TextEditingController> controllers;
   late List<FocusNode> focusNodes;
+  late String email;
 
   @override
   void initState() {
     super.initState();
     controllers = List.generate(6, (_) => TextEditingController());
     focusNodes = List.generate(6, (_) => FocusNode());
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    email = ModalRoute.of(context)!.settings.arguments as String;
   }
 
   @override
@@ -87,9 +94,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
                                 ? Icons.nightlight_round
                                 : Icons.wb_sunny_rounded,
                             size: 24,
-                            color: isDark
-                                ? Colors.grey[700]
-                                : AppColor.primary,
+                            color: isDark ? Colors.grey[700] : AppColor.primary,
                           ),
                         ),
                       ),
@@ -134,9 +139,10 @@ class _VerifyOtpState extends State<VerifyOtp> {
                             width: 1,
                           ),
                         ),
-                        child: isSuccess
-                            ? _buildSuccess()
-                            : _buildOtpContent(context, state),
+                        child:
+                            isSuccess
+                                ? _buildSuccess()
+                                : _buildOtpContent(context, state),
                       ),
                     ),
                   ],
@@ -189,9 +195,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
             ),
             child: Text(
               "الرمز غير صحيح",
-              style: GoogleFonts.ibmPlexSansArabic(
-                color: Colors.red,
-              ),
+              style: GoogleFonts.ibmPlexSansArabic(color: Colors.red),
             ),
           ),
 
@@ -201,7 +205,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(
             6,
-                (index) => Container(
+            (index) => Container(
               width: 38,
               height: 44,
               margin: const EdgeInsets.symmetric(horizontal: 4),
@@ -234,7 +238,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
               final code = getCode();
 
               context.read<ActivateCubit>().activateAccount(
-                email: "you@example.com",
+                email: email,
                 activationCode: code,
               );
             },
@@ -244,14 +248,13 @@ class _VerifyOtpState extends State<VerifyOtp> {
                 borderRadius: BorderRadius.circular(30),
               ),
             ),
-            child: state is ActivateLoadingState
-                ? const CircularProgressIndicator(color: Colors.white)
-                : Text(
-              "تحقق من الرمز",
-              style: GoogleFonts.ibmPlexSansArabic(
-                color: Colors.white,
-              ),
-            ),
+            child:
+                state is ActivateLoadingState
+                    ? const CircularProgressIndicator(color: Colors.white)
+                    : Text(
+                      "تحقق من الرمز",
+                      style: GoogleFonts.ibmPlexSansArabic(color: Colors.white),
+                    ),
           ),
         ),
 
@@ -260,9 +263,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
         Center(
           child: Text(
             "إعادة إرسال الرمز",
-            style: GoogleFonts.ibmPlexSansArabic(
-              color: AppColor.primary,
-            ),
+            style: GoogleFonts.ibmPlexSansArabic(color: AppColor.primary),
           ),
         ),
       ],

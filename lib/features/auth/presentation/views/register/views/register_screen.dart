@@ -70,7 +70,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: BlocConsumer<RegisterCubit, RegisterState>(
             listener: (context, state) {
               if (state is RegisterSuccessState) {
-                Navigator.pushNamed(context, PageRouteName.verify_otp);
+                Navigator.pushNamed(
+                  context,
+                  PageRouteName.verify_otp,
+                  arguments: emailController.text,
+                );
               } else if (state is FailedToRegisterState) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(state.message)),
