@@ -2,11 +2,14 @@ import 'package:asaneed/features/tabs/presentaion/views/hadith/presentation/widg
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../../theme/AppThemeManager.dart';
 import '../../../../../../../theme/app_theme.dart';
-import '../../../../../../details/presentation/views/tabs/rwah2/widgets/hadith_card.dart';
+import '../../data/services/hadith_services.dart';
+import '../../logic/bloc/cubit/hadith_cubit.dart';
+import '../../logic/bloc/state/hadith_state.dart';
 import '../widgets/hadith_filter_bottom_sheet.dart';
+import '../../data/models/hadith_model.dart';
 
 class Hadethscreen extends StatefulWidget {
   const Hadethscreen({super.key});
@@ -14,25 +17,16 @@ class Hadethscreen extends StatefulWidget {
   @override
   State<Hadethscreen> createState() => _HadethscreenState();
 }
-class Hadith {
-  final int number;
-  final String text;
-  final String status;
 
-  Hadith({
-    required this.number,
-    required this.text,
-    required this.status,
-  });
-}
 class _HadethscreenState extends State<Hadethscreen> {
-
+  List<HadithModel> allHadith = [];
+  bool isLoading = true;
   String selectedStatus = "كل الدرجات";
 
   @override
   void initState() {
     super.initState();
-
+    context.read<HadithCubit>().loadHadith();
   }
 
   @override
@@ -42,31 +36,7 @@ class _HadethscreenState extends State<Hadethscreen> {
     final themeManager = context.watch<AppThemeManager>();
     final isDark = themeManager.isDarkMode;
 
-    List<Hadith> allHadith = [
-      Hadith(
-        number: 1,
-        text: "إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى.",
-        status: "صحيح",
-      ),
-      Hadith(
-        number: 2,
-        text: "بني الإسلام على خمس: شهادة أن لا إله إلا الله...",
-        status: "حسن",
-      ),
-      Hadith(
-        number: 3,
-        text: "لا يؤمن أحدكم حتى يحب لأخيه ما يحب لنفسه.",
-        status: "صحيح",
-      ),
-    ];
-    List<Hadith> filteredHadith;
 
-    if (selectedStatus == "كل الدرجات") {
-      filteredHadith = allHadith;
-    } else {
-      filteredHadith =
-          allHadith.where((h) => h.status == selectedStatus).toList();
-    }
     return Scaffold(
       backgroundColor: Colors.transparent,
 
@@ -83,11 +53,9 @@ class _HadethscreenState extends State<Hadethscreen> {
               fontSize: 22,
               fontWeight: FontWeight.bold,
             ),
-
           ),
         ),
         automaticallyImplyLeading: false,
-
       ),
 
       body: Directionality(
@@ -105,7 +73,7 @@ class _HadethscreenState extends State<Hadethscreen> {
                       decoration: BoxDecoration(
                         color: AppColor.getContainerColor(context),
                         borderRadius: BorderRadius.circular(25),
-                        border: Border.all(color: AppColor.border,width: 1.5),
+                        border: Border.all(color: AppColor.border, width: 1.5),
                       ),
                       child: TextField(
                         textAlign: TextAlign.right,
@@ -136,22 +104,25 @@ class _HadethscreenState extends State<Hadethscreen> {
                         context: context,
                         backgroundColor: AppColor.getContainerColor(context),
                         isScrollControlled: true,
-                        shape:  RoundedRectangleBorder(
+                        shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.vertical(
                             top: Radius.circular(25),
                           ),
                         ),
                         builder: (context) {
-                          return  FilterBottomSheet();
+                          return FilterBottomSheet();
                         },
                       );
                     },
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 14,
+                      ),
                       decoration: BoxDecoration(
                         color: AppColor.getContainerColor(context),
                         borderRadius: BorderRadius.circular(25),
-                        border: Border.all(color: AppColor.border,width: 1.5),
+                        border: Border.all(color: AppColor.border, width: 1.5),
                       ),
                       child: Icon(
                         Icons.tune,
@@ -160,14 +131,30 @@ class _HadethscreenState extends State<Hadethscreen> {
                       ),
                     ),
                   ),
-
                 ],
               ),
 
               SizedBox(height: 15),
-              Text(
-                filteredHadith.length.toString(),
-                style: TextStyle(color: AppColor.grey3,fontSize: 16),
+              BlocBuilder<HadithCubit, HadithState>(
+                builder: (context, state) {
+                  if (state is HadithLoaded) {
+                    final data = state.data;
+
+                    final filtered =
+                        selectedStatus == "كل الدرجات"
+                            ? data
+                            : data
+                                .where((h) => h.status == selectedStatus)
+                                .toList();
+
+                    return Text(
+                      filtered.length.toString(),
+                      style: TextStyle(color: AppColor.grey3, fontSize: 16),
+                    );
+                  }
+
+                  return const SizedBox();
+                },
               ),
               SizedBox(height: 10),
 
@@ -200,26 +187,53 @@ class _HadethscreenState extends State<Hadethscreen> {
               ),
 
               SizedBox(height: 20),
+
               /// List
               Expanded(
-                child: filteredHadith.isEmpty
-                    ? _emptyState()
-                    : ListView.builder(
-                  itemCount: filteredHadith.length,
-                  itemBuilder: (context, index) {
-                    final hadith = filteredHadith[index];
+                child: BlocBuilder<HadithCubit, HadithState>(
+                  builder: (context, state) {
+                    if (state is HadithLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
 
-                    return Padding(
-                      padding:  EdgeInsets.only(bottom: 10),
-                      child: HadithCard2(
-                        number: hadith.number,
-                        text: hadith.text,
-                        status: hadith.status,
-                      ),
-                    );
+                    if (state is HadithLoaded) {
+                      final data = state.data;
+
+                      final filtered =
+                          selectedStatus == "كل الدرجات"
+                              ? data
+                              : data
+                                  .where((h) => h.status == selectedStatus)
+                                  .toList();
+                      if (filtered.isEmpty) {
+                        return _emptyState();
+                      }
+                      return ListView.builder(
+                        itemCount: filtered.length,
+                        itemBuilder: (context, index) {
+                          final hadith = filtered[index];
+
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 12),
+                            child: HadithCard2(
+                              id: hadith.id,
+                              code: hadith.number,
+                              text: hadith.text,
+                              status: hadith.status,
+                            ),
+                          );
+                        },
+                      );
+                    }
+
+                    if (state is HadithError) {
+                      return Center(child: Text(state.error));
+                    }
+
+                    return const SizedBox();
                   },
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -228,11 +242,7 @@ class _HadethscreenState extends State<Hadethscreen> {
   }
 
   /// Filter Chip
-  Widget filterChip(
-      String text,
-      Color bgColor,
-      Color textColor,
-      ) {
+  Widget filterChip(String text, Color bgColor, Color textColor) {
     final isSelected = selectedStatus == text;
     final themeManager = context.watch<AppThemeManager>();
     final isDark = themeManager.isDarkMode;
@@ -250,9 +260,7 @@ class _HadethscreenState extends State<Hadethscreen> {
           color: bgColor,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isSelected
-                ? ( AppColor.primary)
-                : Colors.grey.shade300,
+            color: isSelected ? (AppColor.primary) : Colors.grey.shade300,
           ),
         ),
         child: Text(
@@ -265,6 +273,7 @@ class _HadethscreenState extends State<Hadethscreen> {
       ),
     );
   }
+
   ///if body is empty
   Widget _emptyState() {
     return Center(
@@ -274,17 +283,19 @@ class _HadethscreenState extends State<Hadethscreen> {
           Container(
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? Color(0xff1F3A32) // Dark background
-                  : Color(0xffE5ECE8), // Light background
+              color:
+                  Theme.of(context).brightness == Brightness.dark
+                      ? Color(0xff1F3A32) // Dark background
+                      : Color(0xffE5ECE8), // Light background
               borderRadius: BorderRadius.circular(16),
             ),
             child: Icon(
               Icons.search_off,
               size: 40,
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? Color(0xff8FB7A7) // Dark icon
-                  : Color(0xff3A6B57), // Light icon
+              color:
+                  Theme.of(context).brightness == Brightness.dark
+                      ? Color(0xff8FB7A7) // Dark icon
+                      : Color(0xff3A6B57), // Light icon
             ),
           ),
 
@@ -295,7 +306,7 @@ class _HadethscreenState extends State<Hadethscreen> {
             style: GoogleFonts.scheherazadeNew(
               fontSize: 22,
               fontWeight: FontWeight.bold,
-              color: AppColor.getBlack(context)
+              color: AppColor.getBlack(context),
             ),
           ),
 
@@ -306,7 +317,7 @@ class _HadethscreenState extends State<Hadethscreen> {
             style: GoogleFonts.scheherazadeNew(
               fontSize: 16,
               color: AppColor.grey,
-              fontWeight: FontWeight.w400
+              fontWeight: FontWeight.w400,
             ),
           ),
 
@@ -327,9 +338,13 @@ class _HadethscreenState extends State<Hadethscreen> {
             },
             child: Text(
               "إعادة ضبط",
-              style: GoogleFonts.scheherazadeNew(fontSize: 20,color: AppColor.white,fontWeight: FontWeight.bold),
+              style: GoogleFonts.scheherazadeNew(
+                fontSize: 20,
+                color: AppColor.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          )
+          ),
         ],
       ),
     );

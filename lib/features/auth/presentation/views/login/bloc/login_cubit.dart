@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -52,7 +52,16 @@ class LoginCubit extends Cubit<LoginState> {
       if (response.statusCode == 200 ||
           response.statusCode == 201) {
         print("✅ Login Success");
+        final prefs = await SharedPreferences.getInstance();
+
+        final username = data['username'] ?? "مستخدم";
+        final userEmail = email;
+
+        prefs.setString("name", username);
+        prefs.setString("email", userEmail);
+        prefs.setString("token", data['token']);
         emit(LogInSuccessState());
+
       } else {
         print("❌ Login Failed");
         emit(FailedToLogInState(

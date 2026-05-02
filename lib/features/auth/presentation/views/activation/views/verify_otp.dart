@@ -76,76 +76,83 @@ class _VerifyOtpState extends State<VerifyOtp> {
         },
         builder: (context, state) {
           return Scaffold(
-            backgroundColor: Colors.white,
-            body: SafeArea(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: Padding(
-                        padding: const EdgeInsets.all(18),
-                        child: GestureDetector(
-                          onTap: () {
-                            themeManager.toggleTheme();
-                          },
-                          child: Icon(
-                            isDark
-                                ? Icons.nightlight_round
-                                : Icons.wb_sunny_rounded,
-                            size: 24,
-                            color: isDark ? Colors.grey[700] : AppColor.primary,
+            backgroundColor: isDark ? const Color(0xff111814) : Colors.white,
+
+            body: SingleChildScrollView(
+              child: SafeArea(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Padding(
+                          padding: const EdgeInsets.all(18),
+                          child: GestureDetector(
+                            onTap: () {
+                              themeManager.toggleTheme();
+                            },
+                            child: Icon(
+                              isDark
+                                  ? Icons.nightlight_round
+                                  : Icons.wb_sunny_rounded,
+                              size: 24,
+                              color:
+                                  isDark ? Colors.grey[700] : AppColor.primary,
+                            ),
                           ),
                         ),
                       ),
-                    ),
 
-                    Image.asset(AssetsManager.logo4, width: 85),
+                      Image.asset(AssetsManager.logo4, width: 85),
 
-                    Text(
-                      "أسانيد",
-                      style: GoogleFonts.scheherazadeNew(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600,
-                        color: AppColor.primary,
-                      ),
-                    ),
-
-                    const SizedBox(height: 2),
-
-                    Text(
-                      "الأحاديث النبوية وعلم الأسانيد",
-                      style: GoogleFonts.ibmPlexSansArabic(
-                        fontSize: 14,
-                        color: const Color(0xff6B7280),
-                      ),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Container(
-                        width: double.infinity,
-                        margin: const EdgeInsets.only(
-                          top: 20,
-                          right: 20,
-                          left: 16,
+                      Text(
+                        "أسانيد",
+                        style: GoogleFonts.scheherazadeNew(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                          color:
+                              isDark ? Colors.white : const Color(0xff1F2923),
                         ),
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: const Color(0xffF9F7F2),
-                          borderRadius: BorderRadius.circular(28),
-                          border: Border.all(
-                            color: const Color(0xffD1D5DB),
-                            width: 1,
+                      ),
+
+                      const SizedBox(height: 4),
+
+                      Text(
+                        "الأحاديث النبوية وعلم الأسانيد",
+                        style: GoogleFonts.ibmPlexSansArabic(
+                          fontSize: 14,
+                          color:
+                              isDark
+                                  ? const Color(0xff9CA3AF)
+                                  : const Color(0xff6B7280),
+                        ),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Container(
+                          width: double.infinity,
+                          margin: const EdgeInsets.only(
+                            top: 20,
+                            right: 20,
+                            left: 16,
                           ),
+                          padding: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color:
+                                isDark
+                                    ? const Color(0xff16221D)
+                                    : const Color(0xffF9F7F2),
+                            borderRadius: BorderRadius.circular(28),
+                          ),
+                          child:
+                              isSuccess
+                                  ? _buildSuccess()
+                                  : _buildOtpContent(context, state),
                         ),
-                        child:
-                            isSuccess
-                                ? _buildSuccess()
-                                : _buildOtpContent(context, state),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -215,7 +222,6 @@ class _VerifyOtpState extends State<VerifyOtp> {
               ),
               child: TextField(
                 controller: controllers[index],
-                focusNode: focusNodes[index],
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.number,
                 maxLength: 1,
@@ -223,6 +229,13 @@ class _VerifyOtpState extends State<VerifyOtp> {
                   counterText: "",
                   border: InputBorder.none,
                 ),
+                onChanged: (value) {
+                  if (value.isNotEmpty) {
+                    FocusScope.of(context).nextFocus();
+                  } else {
+                    FocusScope.of(context).previousFocus();
+                  }
+                },
               ),
             ),
           ),
