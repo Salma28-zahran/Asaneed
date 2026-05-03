@@ -75,6 +75,7 @@ class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
+        centerTitle: true,
         elevation: 0,
         backgroundColor: AppColor.getAppBarColor(context),
         surfaceTintColor: Colors.transparent,
@@ -154,10 +155,7 @@ class _Circle1State extends State<Circle1> with SingleTickerProviderStateMixin {
           },
         ),
       ),
-      bottomNavigationBar: CustomBottomNavBar(
-        currentIndex: _currentIndex,
-        onTap: _onTabTapped,
-      ),
+
     );
   }
 }

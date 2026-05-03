@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
@@ -31,8 +31,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     print("⏳ Loading state emitted");
 
     try {
-      final url =
-          "http://167.99.94.194:8000/en/api/v1/accounts/auth/register/";
+      final url = "http://167.99.94.194:8000/en/api/v1/accounts/auth/register/";
 
       print("📡 Sending request to: $url");
 
@@ -41,7 +40,6 @@ class RegisterCubit extends Cubit<RegisterState> {
         "password": password,
         "password_confirmation": confirmPassword,
         "full_name": name,
-
       };
 
       print("📦 Request Body: $requestBody");
@@ -62,15 +60,18 @@ class RegisterCubit extends Cubit<RegisterState> {
 
       print("📊 Parsed Response: $responseBody");
 
-      if (response.statusCode == 200 ||
-          response.statusCode == 201) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final prefs = await SharedPreferences.getInstance();
+
+        prefs.setString("name", name);
+        prefs.setString("email", email);
         print("✅ Registration Success");
         emit(RegisterSuccessState());
       } else {
         final errorMessage =
             responseBody['message'] ??
-                responseBody['error'] ??
-                responseBody.toString();
+            responseBody['error'] ??
+            responseBody.toString();
 
         print("❌ Registration Failed");
         print("❗ Error Message: $errorMessage");

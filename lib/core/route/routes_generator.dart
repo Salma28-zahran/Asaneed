@@ -24,6 +24,10 @@ import 'package:asaneed/features/tabs/presentaion/views/search_screen.dart';
 import 'package:asaneed/features/tree/presentation/views/tree_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:asaneed/core/widgets/background_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../features/tabs/presentaion/views/hadith/data/services/hadith_services.dart';
+import '../../features/tabs/presentaion/views/hadith/logic/bloc/cubit/hadith_details_cubit.dart';
 
 
 class RoutesGenerator {
@@ -183,13 +187,13 @@ class RoutesGenerator {
           settings: settings,
         );
       case PageRouteName.hadithDetails:
-        final args = settings.arguments as Map;
+        final id = settings.arguments as int;
+
         return MaterialPageRoute(
-          builder:
-              (context) => BackgroundScreen(
-            child: HadithDetails(
-              number: args["number"],
-              status: args["status"],
+          builder: (context) => BlocProvider(
+            create: (_) => HadithDetailsCubit(HadithService()),
+            child: BackgroundScreen(
+              child: HadithDetails(id: id),
             ),
           ),
           settings: settings,

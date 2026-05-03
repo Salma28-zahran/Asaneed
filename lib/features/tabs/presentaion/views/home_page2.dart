@@ -3,12 +3,17 @@ import 'package:asaneed/features/tabs/presentaion/views/hadith/presentation/widg
 import 'package:asaneed/features/tabs/presentaion/widgets/ItemRow.dart';
 import 'package:asaneed/features/tabs/presentaion/widgets/home/StatsSection.dart';
 import 'package:asaneed/features/tabs/presentaion/widgets/home/WelcomeBanner.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../theme/AppThemeManager.dart';
 import '../widgets/PersonCard.dart';
+import 'hadith/data/services/hadith_services.dart';
+import 'hadith/data/models/hadith_model.dart';
+import 'hadith/logic/bloc/cubit/hadith_cubit.dart';
+import 'hadith/logic/bloc/state/hadith_state.dart';
+
 
 class HomePage2 extends StatefulWidget {
   final void Function(int)? onTabChange;
@@ -19,25 +24,17 @@ class HomePage2 extends StatefulWidget {
   State<HomePage2> createState() => _HomePage2State();
 }
 
-class Hadith {
-  final int number;
-  final String text;
-  final String status;
 
-  Hadith({
-    required this.number,
-    required this.text,
-    required this.status,
-  });
-}
 
 class _HomePage2State extends State<HomePage2> {
-  // الحديث الذي سيظهر في الصفحة الرئيسية
-  final featuredHadith = Hadith(
-    number: 1,
-    text: "إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى.",
-    status: "صحيح",
-  );
+
+
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<HadithCubit>().loadHadith();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,31 +53,52 @@ class _HomePage2State extends State<HomePage2> {
             children: [
               SizedBox(height: height * 0.020),
 
-              /// Welcome Banner
               const WelcomeBanner(),
-
               SizedBox(height: height * 0.020),
 
-              /// Stats Section
               const StatsSection(),
-
               SizedBox(height: 24),
 
-              /// **Featured Hadith Card**
-               Align(
-                        alignment: Alignment.topRight,
-                         child: Text("حديث اليوم", style: AppColor.textBlack(context)),
-                      ),
+              Align(
+                alignment: Alignment.topRight,
+                child: Text(
+                  "حديث اليوم",
+                  style: AppColor.textBlack(context),
+                ),
+              ),
+
               SizedBox(height: 14),
-              HadithCard2(
-                number: featuredHadith.number,
-                text: featuredHadith.text,
-                status: featuredHadith.status,
+
+              BlocBuilder<HadithCubit, HadithState>(
+                builder: (context, state) {
+                  if (state is HadithLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  if (state is HadithLoaded) {
+                    final data = state.data;
+                    final featured = data.isNotEmpty ? data.first : null;
+
+                    if (featured == null) return const SizedBox();
+
+                    return HadithCard2(
+                      id: featured.id,
+                      code: featured.number,
+                      text: featured.text,
+                      status: featured.status,
+                    );
+                  }
+
+                  if (state is HadithError) {
+                    return Text(state.error);
+                  }
+
+                  return const SizedBox();
+                },
               ),
 
               SizedBox(height: height * 0.018),
 
-              /// Quick Actions
               Row(
                 children: [
                   Expanded(
@@ -93,7 +111,6 @@ class _HomePage2State extends State<HomePage2> {
                     ),
                   ),
                   const SizedBox(width: 12),
-
                   Expanded(
                     child: ActionButton(
                       title: "رواة",
@@ -104,7 +121,6 @@ class _HomePage2State extends State<HomePage2> {
                     ),
                   ),
                   const SizedBox(width: 12),
-
                   Expanded(
                     child: ActionButton(
                       title: "أحاديث",
@@ -145,8 +161,9 @@ class _HomePage2State extends State<HomePage2> {
       ),
     );
   }
-}
 
+
+}
 class ActionButton extends StatelessWidget {
   final String title;
   final IconData icon;
@@ -189,4 +206,5 @@ class ActionButton extends StatelessWidget {
       ),
     );
   }
+
 }

@@ -1,15 +1,35 @@
 import 'package:asaneed/features/tabs/presentaion/views/Account/widgets/custom_app_bar_account.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HadithDetails extends StatelessWidget {
-  final int number;
-  final String status;
+import '../../logic/bloc/cubit/hadith_details_cubit.dart';
+import '../../logic/bloc/state/hadith_details_state.dart';
 
-  const HadithDetails({super.key, required this.number, required this.status});
+
+
+class HadithDetails extends StatefulWidget {
+
+  final int id;
+
+  const HadithDetails({
+    super.key,
+    required this.id,
+
+  });
 
   @override
+  State<HadithDetails> createState() => _HadithDetailsState();
+}
+
+class _HadithDetailsState extends State<HadithDetails> {
+  @override
+  @override
+  void initState() {
+    super.initState();
+    context.read<HadithDetailsCubit>().getHadithDetails(widget.id);
+  }
   Widget build(BuildContext context) {
     Color _statusColor(String status) {
       switch (status) {
@@ -23,9 +43,28 @@ class HadithDetails extends StatelessWidget {
           return Colors.grey;
       }
     }
-    final isDark = Theme
-        .of(context)
-        .brightness == Brightness.dark;
+    Color _getBgColor(int index) {
+      switch (index % 3) {
+        case 0:
+          return Color(0xffE8F5E9);
+        case 1:
+          return Color(0xffE3F2FD);
+        default:
+          return Color(0xffFFF3E0);
+      }
+    }
+
+    Color _getColor(int index) {
+      switch (index % 3) {
+        case 0:
+          return Colors.green;
+        case 1:
+          return Colors.blue;
+        default:
+          return Colors.orange;
+      }
+    }
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -49,112 +88,140 @@ class HadithDetails extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      Row(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 3,
-                            ),
-                            decoration: BoxDecoration(
-                              color: _statusColor(status).withOpacity(.15),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Text(
-                              status,
-                              style: GoogleFonts.scheherazadeNew(
-                                color: _statusColor(status),
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 10),
-                          Expanded(
-                            child: Text(
-                              "# $number • علوم الحديث الموقوف والمقطوع",
-                              textAlign: TextAlign.right,
-                              textDirection: TextDirection.rtl,
+                      BlocBuilder<HadithDetailsCubit, HadithDetailsState>(
+                        builder: (context, state) {
 
-                              style: GoogleFonts.scheherazadeNew(
-                                fontSize: 16,
-                                color: AppColor.grey,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ],
+                          if (state is HadithDetailsLoading) {
+                            return Center(child: CircularProgressIndicator());
+                          }
+
+                          if (state is HadithDetailsLoaded) {
+                            final hadith = state.data;
+
+                            return Column(
+                              children: [
+
+                                Row(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                                      decoration: BoxDecoration(
+                                        color: _statusColor(hadith.status).withOpacity(.15),                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: Text(
+                                        hadith.status,
+                                        style: GoogleFonts.scheherazadeNew(
+                                          color: _statusColor(hadith.status),
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(width: 10),
+                                    Expanded(
+                                      child: Text(
+                                        hadith.code,
+                                        textAlign: TextAlign.right,
+                                        textDirection: TextDirection.rtl,
+                                        style: GoogleFonts.scheherazadeNew(
+                                          fontSize: 16,
+                                          color: AppColor.grey,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                SizedBox(height: 8),
+
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        hadith.text,
+                                        textAlign: TextAlign.right,
+                                        style: GoogleFonts.scheherazadeNew(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColor.getBlack(context),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                SizedBox(height: 8),
+
+                                /// Row 3 (source)
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.person_outlined,
+                                      color: AppColor.grey,
+                                      size: 18,
+                                    ),
+                                    SizedBox(width: 5),
+                                    Expanded(
+                                      child: Text(
+                                        hadith.source,
+                                        textAlign: TextAlign.right,
+                                        style: GoogleFonts.scheherazadeNew(
+                                          color: AppColor.grey,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                SizedBox(height: 1),
+                                Divider(color: AppColor.border),
+                                SizedBox(height: 10),
+
+                                /// Actions (زي ما هي)
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    _actionButton(
+                                      icon: Icons.bookmark_border,
+                                      label: "حفظ",
+                                      isDark: isDark,
+                                    ),
+                                    _actionButton(
+                                      icon: Icons.copy,
+                                      label: "نسخ",
+                                      isDark: isDark,
+                                    ),
+                                    _actionButton(
+                                      icon: Icons.share,
+                                      label: "مشاركة",
+                                      isDark: isDark,
+                                    ),
+                                    _actionButton(
+                                      icon: Icons.book,
+                                      label: "قراءة",
+                                      selectedBgColor: AppColor.primary,
+                                      selectedColor: Colors.white,
+                                      isDark: isDark,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          }
+
+                          if (state is HadithDetailsError) {
+                            return Center(child: Text("Error: ${state.error}"));
+                          }
+
+                          return SizedBox();
+                        },
                       ),
-                      SizedBox(height: 8),
+                      SizedBox(width: 10),
 
-                      /// النص
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              "إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى.",
-                              textAlign: TextAlign.right,
-                              style: GoogleFonts.scheherazadeNew(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                                color: AppColor.black,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 8),
 
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.person_outlined,
-                            color: AppColor.grey,
-                            size: 18,
-                          ),
-                          SizedBox(width: 5),
-                          Expanded(
-                            child: Text(
-                              "عمر بن الخطاب",
-                              textAlign: TextAlign.right,
-                              style: GoogleFonts.scheherazadeNew(
-                                color: AppColor.grey,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 1),
-                      Divider(color: AppColor.border),
-                      SizedBox(height: 10),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _actionButton(
-                            icon: Icons.bookmark_border,
-                            label: "حفظ",
-                            isDark: isDark,
-                          ),
-                          _actionButton(icon: Icons.copy,
-                            label: "نسخ",
-                            isDark: isDark,),
-
-                          _actionButton(icon: Icons.share,
-                            label: "مشاركة",
-                            isDark: isDark,),
-
-                          _actionButton(
-                            icon: Icons.book,
-                            label: "قراءة",
-                            selectedBgColor: AppColor.primary,
-                            selectedColor: Colors.white,
-                            isDark: isDark,
-                          ),
-                        ],
-                      ),
                     ],
                   ),
                 ),
@@ -170,7 +237,6 @@ class HadithDetails extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-
                       /// العنوان
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -215,7 +281,7 @@ class HadithDetails extends StatelessWidget {
                       Divider(color: AppColor.border),
                       Text(
                         "يضع علماء الحديث هذه الرواية في مقدمة مصنفاتهم لأنها تجمع روح العمل الإسلامي. واعتبرها النووي واحدة من المحاور التي يدور عليها الفقه الإسلامي. "
-                            "والسند موثوق: الراوي الأول صحابي تُقبل روايته بإجماع العلماء.",
+                        "والسند موثوق: الراوي الأول صحابي تُقبل روايته بإجماع العلماء.",
                         textAlign: TextAlign.right,
                         style: GoogleFonts.scheherazadeNew(
                           fontWeight: FontWeight.w500,
@@ -227,61 +293,81 @@ class HadithDetails extends StatelessWidget {
                       SizedBox(height: 10),
 
                       Container(
-                          padding: EdgeInsets.all(14),
-                          decoration: BoxDecoration(
-                            color: isDark
-                                ? AppColor.primary.withOpacity(0.2)
-                                : Color(0xffE8F0EC),
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("الحكم الفقهي", textAlign: TextAlign.right,
-                                style: GoogleFonts.scheherazadeNew(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16,
-                                  color: AppColor.primary,
-                                ),),
-                              SizedBox(height: 5,),
-                              Text(
-                                "العبادات تشترط النية الواعية، والأفعال التي تؤدى دون نية تعتبر ناقصة من الناحية الشرعية.",
-                                style: GoogleFonts.scheherazadeNew(
-                                  fontSize: 14,
-                                  color: AppColor.getBlack(context),
-                                ),
-                                textAlign: TextAlign.right,
+                        padding: EdgeInsets.all(14),
+                        decoration: BoxDecoration(
+                          color:
+                              isDark
+                                  ? AppColor.primary.withOpacity(0.2)
+                                  : Color(0xffE8F0EC),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "الحكم الفقهي",
+                              textAlign: TextAlign.right,
+                              style: GoogleFonts.scheherazadeNew(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: AppColor.primary,
                               ),
-                            ],
-                          )
+                            ),
+                            SizedBox(height: 5),
+                            Text(
+                              "العبادات تشترط النية الواعية، والأفعال التي تؤدى دون نية تعتبر ناقصة من الناحية الشرعية.",
+                              style: GoogleFonts.scheherazadeNew(
+                                fontSize: 14,
+                                color: AppColor.getBlack(context),
+                              ),
+                              textAlign: TextAlign.right,
+                            ),
+                          ],
+                        ),
                       ),
-
                     ],
                   ),
                 ),
                 SizedBox(height: 16),
-                Row(children: [
-                  Text('الرواة بنظرة',textAlign: TextAlign.right,style: GoogleFonts.scheherazadeNew(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: AppColor.grey,
-                  ) ,)
-                ], ),
-                  SizedBox(height: 16,),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Wrap(
-                      spacing: 8,
-                    children: [
-                      _rawiChip(
-                          "عمر بن الخطاب", 1, Color(0xffE8F5E9), Colors.green),
-                      _rawiChip(
-                          "ابن شهاب الزهري", 2, Color(0xffE3F2FD), Colors.blue),
-                      _rawiChip(
-                          "مالك بن أنس", 3, Color(0xffFFF3E0), Colors.orange),
-                    ],
-                                    ),
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      'الرواة بنظرة',
+                      textAlign: TextAlign.right,
+                      style: GoogleFonts.scheherazadeNew(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: AppColor.grey,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16),
+                BlocBuilder<HadithDetailsCubit, HadithDetailsState>(
+                  builder: (context, state) {
+
+                    if (state is HadithDetailsLoaded) {
+                      final hadith = state.data;
+
+                      return Align(
+                        alignment: Alignment.centerRight,
+                        child: Wrap(
+                          spacing: 8,
+                          children: hadith.narratorChain.map((narrator) {
+                            return _rawiChip(
+                              narrator.narratorName,
+                              narrator.position,
+                              _getBgColor(narrator.position),
+                              _getColor(narrator.position),
+                            );
+                          }).toList(),
+                        ),
+                      );
+                    }
+
+                    return SizedBox();
+                  },
+                ),
 
                 SizedBox(height: 16),
                 Container(
@@ -297,14 +383,17 @@ class HadithDetails extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Icon(Icons.menu_book_outlined, size: 18,
-                              color: AppColor.grey),
+                          Icon(
+                            Icons.menu_book_outlined,
+                            size: 18,
+                            color: AppColor.grey,
+                          ),
                           SizedBox(width: 6),
                           Text(
                             "المصدر",
                             style: GoogleFonts.scheherazadeNew(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
                               color: AppColor.getBlack(context),
                             ),
                           ),
@@ -315,16 +404,17 @@ class HadithDetails extends StatelessWidget {
 
                       Container(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 12),
+                          horizontal: 12,
+                          vertical: 12,
+                        ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(14),
                           border: Border.all(color: AppColor.border),
                         ),
-                        child:Column(
+                        child: Column(
                           children: [
                             Row(
                               children: [
-
                                 Expanded(
                                   child: Text(
                                     "علوم الحديث الموقوف والمقطوع",
@@ -332,47 +422,53 @@ class HadithDetails extends StatelessWidget {
                                     style: GoogleFonts.scheherazadeNew(
                                       fontSize: 18,
                                       color: AppColor.getBlack(context),
-                                      fontWeight: FontWeight.w500
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                 ),
-                                Icon(Icons.arrow_forward_ios, size: 16,
-                                    color: AppColor.grey),
-                              ],
-                            ),
-                            SizedBox(height: 16,),
-                            Row(
-                              children: [
-
-                                Text(
-                                    "حديث # $number .",
-
-                                  textAlign: TextAlign.right,
-                                  style: GoogleFonts.scheherazadeNew(
-                                    fontSize: 16,
-                                    color: AppColor.grey,
-                                  ),
-                                ),
-                                SizedBox(width: 10,),
-                                Text(
-                                  status,
-                                  style: GoogleFonts.scheherazadeNew(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: AppColor.grey,
-
-                                  ),
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 16,
+                                  color: AppColor.grey,
                                 ),
                               ],
                             ),
+                            SizedBox(height: 16),
+                            BlocBuilder<HadithDetailsCubit, HadithDetailsState>(
+                              builder: (context, state) {
 
+                                if (state is HadithDetailsLoaded) {
+                                  final hadith = state.data;
 
+                                  return Row(
+                                    children: [
+                                      Text(
+                                        "حديث # ${hadith.code} .",
+                                        textAlign: TextAlign.right,
+                                        style: GoogleFonts.scheherazadeNew(
+                                          fontSize: 16,
+                                          color: AppColor.grey,
+                                        ),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Text(
+                                        hadith.status,
+                                        style: GoogleFonts.scheherazadeNew(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: AppColor.grey,
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                }
+
+                                return SizedBox();
+                              },
+                            ),
                           ],
-                        )
-
-
+                        ),
                       ),
-
                     ],
                   ),
                 ),
@@ -431,19 +527,10 @@ class HadithDetails extends StatelessWidget {
         children: [
           Text(
             "$number",
-            style: TextStyle(
-              color: color,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(color: color, fontWeight: FontWeight.bold),
           ),
           SizedBox(width: 4),
-          Text(
-            name,
-            style: TextStyle(
-              color: color,
-              fontSize: 13,
-            ),
-          ),
+          Text(name, style: TextStyle(color: color, fontSize: 13)),
         ],
       ),
     );

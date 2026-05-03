@@ -76,7 +76,8 @@ class _PassOtpState extends State<PassOtp> {
         },
         builder: (context, state) {
           return Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: isDark ? const Color(0xff111814) : Colors.white,
+
             body: SafeArea(
               child: SingleChildScrollView(
                 child: Column(
@@ -94,9 +95,7 @@ class _PassOtpState extends State<PassOtp> {
                                 ? Icons.nightlight_round
                                 : Icons.wb_sunny_rounded,
                             size: 24,
-                            color: isDark
-                                ? Colors.grey[700]
-                                : AppColor.primary,
+                            color: isDark ? Colors.grey[700] : AppColor.primary,
                           ),
                         ),
                       ),
@@ -109,17 +108,20 @@ class _PassOtpState extends State<PassOtp> {
                       style: GoogleFonts.scheherazadeNew(
                         fontSize: 22,
                         fontWeight: FontWeight.w600,
-                        color: AppColor.primary,
+                        color: isDark ? Colors.white : const Color(0xff1F2923),
                       ),
                     ),
 
-                    const SizedBox(height: 2),
+                    const SizedBox(height: 4),
 
                     Text(
                       "الأحاديث النبوية وعلم الأسانيد",
                       style: GoogleFonts.ibmPlexSansArabic(
                         fontSize: 14,
-                        color: const Color(0xff6B7280),
+                        color:
+                            isDark
+                                ? const Color(0xff9CA3AF)
+                                : const Color(0xff6B7280),
                       ),
                     ),
 
@@ -134,16 +136,16 @@ class _PassOtpState extends State<PassOtp> {
                         ),
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          color: const Color(0xffF9F7F2),
+                          color:
+                              isDark
+                                  ? const Color(0xff16221D)
+                                  : const Color(0xffF9F7F2),
                           borderRadius: BorderRadius.circular(28),
-                          border: Border.all(
-                            color: const Color(0xffD1D5DB),
-                            width: 1,
-                          ),
                         ),
-                        child: isSuccess
-                            ? _buildSuccess()
-                            : _buildOtpContent(context, email, state),
+                        child:
+                            isSuccess
+                                ? _buildSuccess()
+                                : _buildOtpContent(context, email, state),
                       ),
                     ),
                   ],
@@ -157,10 +159,10 @@ class _PassOtpState extends State<PassOtp> {
   }
 
   Widget _buildOtpContent(
-      BuildContext context,
-      String email,
-      PasswordResetState state,
-      ) {
+    BuildContext context,
+    String email,
+    PasswordResetState state,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -231,7 +233,7 @@ class _PassOtpState extends State<PassOtp> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(
             6,
-                (index) => Container(
+            (index) => Container(
               width: 38,
               height: 44,
               margin: const EdgeInsets.symmetric(horizontal: 4),
@@ -241,7 +243,6 @@ class _PassOtpState extends State<PassOtp> {
               ),
               child: TextField(
                 controller: controllers[index],
-                focusNode: focusNodes[index],
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.number,
                 maxLength: 1,
@@ -249,6 +250,13 @@ class _PassOtpState extends State<PassOtp> {
                   counterText: "",
                   border: InputBorder.none,
                 ),
+                onChanged: (value) {
+                  if (value.isNotEmpty) {
+                    FocusScope.of(context).nextFocus();
+                  } else {
+                    FocusScope.of(context).previousFocus();
+                  }
+                },
               ),
             ),
           ),
@@ -260,32 +268,34 @@ class _PassOtpState extends State<PassOtp> {
           width: double.infinity,
           height: 50,
           child: ElevatedButton(
-            onPressed: state is VerifyCodeLoadingState
-                ? null
-                : () {
-              final code = getCode();
+            onPressed:
+                state is VerifyCodeLoadingState
+                    ? null
+                    : () {
+                      final code = getCode();
 
-              context.read<PasswordResetCubit>().verifyCode(
-                email: email,
-                code: code,
-              );
-            },
+                      context.read<PasswordResetCubit>().verifyCode(
+                        email: email,
+                        code: code,
+                      );
+                    },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColor.primary,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
             ),
-            child: state is VerifyCodeLoadingState
-                ? const CircularProgressIndicator(color: Colors.white)
-                : Text(
-              "تحقق من الرمز",
-              style: GoogleFonts.ibmPlexSansArabic(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: Colors.white,
-              ),
-            ),
+            child:
+                state is VerifyCodeLoadingState
+                    ? const CircularProgressIndicator(color: Colors.white)
+                    : Text(
+                      "تحقق من الرمز",
+                      style: GoogleFonts.ibmPlexSansArabic(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                      ),
+                    ),
           ),
         ),
 

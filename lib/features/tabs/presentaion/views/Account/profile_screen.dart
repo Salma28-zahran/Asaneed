@@ -4,13 +4,38 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:asaneed/theme/AppThemeManager.dart';
 import 'package:asaneed/theme/app_theme.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../core/route/routes.dart';
 
-class MyAccount extends StatelessWidget {
+class MyAccount extends StatefulWidget {
   const MyAccount({super.key});
 
   @override
+
+  State<MyAccount> createState() => _MyAccountState();
+}
+
+class _MyAccountState extends State<MyAccount> {
+  String name = "";
+  String email = "";
+  @override
+  void initState() {
+    super.initState();
+    loadUserData();
+  }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    loadUserData();
+  }
+  void loadUserData() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      name = prefs.getString("name") ?? "مستخدم";
+      email = prefs.getString("email") ?? "example@email.com";
+    });
+  }
   Widget build(BuildContext context) {
     final isDark = context.watch<AppThemeManager>().isDarkMode;
 
@@ -75,7 +100,7 @@ class MyAccount extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "محمد مصطفي",
+                             name,
                               style: GoogleFonts.scheherazadeNew(
                                 fontSize: 19,
                                 fontWeight: FontWeight.w500,
@@ -84,31 +109,13 @@ class MyAccount extends StatelessWidget {
                             ),
                             SizedBox(height: 4),
                             Text(
-                              "mohamed@gmail.com",
+                              email,
                               style: GoogleFonts.scheherazadeNew(
                                 fontSize: 15,
                                 color: AppColor.grey3,
                               ),
                             ),
-                            SizedBox(height: 6),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 4,
-                              ),
-                              decoration: BoxDecoration(
-                                color: AppColor.primary.withOpacity(0.15),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Text(
-                                "طالب",
-                                style: GoogleFonts.scheherazadeNew(
-                                  color: AppColor.getBlack(context),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
+
                           ],
                         ),
                       ),

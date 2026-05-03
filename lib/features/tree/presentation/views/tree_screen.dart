@@ -67,6 +67,7 @@ class TreeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: AppColor.getAppBarColor(context),
         title: Text(
           "شجرة الاسنادية",

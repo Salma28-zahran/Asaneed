@@ -5,16 +5,19 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../../../../core/route/routes.dart';
 
 class HadithCard2 extends StatelessWidget {
-  final int number;
+  final String code;
   final String text;
   final String status;
-
+  final int id;
   const HadithCard2({
     super.key,
-    required this.number,
+    required this.code,
     required this.text,
     required this.status,
+    required this.id,
+
   });
+
 
   Color _statusColor() {
     switch (status) {
@@ -40,10 +43,7 @@ class HadithCard2 extends StatelessWidget {
           Navigator.pushNamed(
             context,
             PageRouteName.hadithDetails,
-            arguments: {
-              "number": number,
-              "status": status,
-            },
+            arguments: id,
           );        },
         child: Container(
           padding: EdgeInsets.all(16),
@@ -59,7 +59,7 @@ class HadithCard2 extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "# $number • علوم الحديث الموقوف والمقطوع",
+                    code,
                     style: GoogleFonts.scheherazadeNew(
                       fontSize: 16,
                       color: AppColor.grey,
