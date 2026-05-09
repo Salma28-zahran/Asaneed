@@ -5,6 +5,10 @@ import 'package:asaneed/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../tabs/presentaion/views/Account/bloc/acc_cubit.dart';
+import '../../../tabs/presentaion/views/Account/bloc/acc_states.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -14,79 +18,88 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     final themeManager = context.watch<AppThemeManager>();
     final isDark = themeManager.isDarkMode;
 
-    return AppBar(
-      backgroundColor: AppColor.getAppBarColor(context),
-      elevation: 0,
-      centerTitle: false,
+    return BlocListener<LogoutCubit, LogoutState>(
+      listener: (context, state) {
+        if (state is LogoutSuccess) {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            PageRouteName.login,
+                (route) => false,
+          );
+        }
 
-      title: Padding(
-        padding: const EdgeInsets.only(bottom: 6),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+        if (state is LogoutError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.message)),
+          );
+        }
+      },
+      child: AppBar(
+        backgroundColor: AppColor.getAppBarColor(context),
+        elevation: 0,
+        centerTitle: false,
+      
+        title: Padding(
+          padding: const EdgeInsets.only(bottom: 6),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    "أسانيـد",
+                    style: GoogleFonts.tajawal(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.getBlack(context),
+                    ),
+                  ),
+                  Text(
+                    "استكشاف الأسانيـد بصريًا",
+                    style: GoogleFonts.tajawal(
+                      fontSize: 12,
+                      color: AppColor.getBlack(context),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(width: 6),
+              Image.asset(
+                AssetsManager.brand,
+                color: AppColor.primary,
+                height: 55,
+              ),
+            ],
+          ),
+        ),
+      
+        leadingWidth: 150,
+        leading: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  "أسانيـد",
-                  style: GoogleFonts.tajawal(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: AppColor.getBlack(context),
-                  ),
-                ),
-                Text(
-                  "استكشاف الأسانيـد بصريًا",
-                  style: GoogleFonts.tajawal(
-                    fontSize: 12,
-                    color: AppColor.getBlack(context),
-                  ),
-                ),
-              ],
+            IconButton(
+              icon: const Icon(Icons.more_vert, color: AppColor.primary),
+              onPressed: () {
+                showOptionsSheet(context);
+              },
             ),
-            const SizedBox(width: 6),
-            Image.asset(
-              AssetsManager.brand,
-              color: AppColor.primary,
-              height: 55,
+      
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, PageRouteName.search);
+              },
+              icon: Icon(Icons.search, color: AppColor.primary, size: 22),
+            ),
+      
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, PageRouteName.profile2);
+              },
+              icon: Icon(Icons.person, color: AppColor.primary, size: 22),
             ),
           ],
         ),
-      ),
-
-      leadingWidth: 150,
-      leading: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          IconButton(
-            icon: const Icon(Icons.more_vert,color: AppColor.primary,),
-            onPressed: () {
-              showOptionsSheet(context);
-            },
-          ),
-
-
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, PageRouteName.search);
-            },
-            icon: Icon(
-              Icons.search,
-              color: AppColor.primary,
-              size: 22,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, PageRouteName.profile2);
-            },
-            icon: Icon(
-              Icons.person,
-              color: AppColor.primary,
-              size: 22,
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -104,9 +117,9 @@ void showOptionsSheet(BuildContext context) {
     builder: (context) {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        decoration:  BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColor.getContainerColor(context),
-          borderRadius: BorderRadius.vertical(
+          borderRadius: const BorderRadius.vertical(
             top: Radius.circular(30),
           ),
         ),
@@ -116,7 +129,6 @@ void showOptionsSheet(BuildContext context) {
 
             const SizedBox(height: 10),
 
-            /// handle
             Container(
               width: 40,
               height: 4,
@@ -128,23 +140,14 @@ void showOptionsSheet(BuildContext context) {
 
             const SizedBox(height: 20),
 
-            /// header
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
                   icon: const Icon(Icons.close, color: Colors.grey),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
+                  onPressed: () => Navigator.pop(context),
                 ),
-                const Text(
-                  "خيارات",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                const Text("خيارات"),
               ],
             ),
 
@@ -156,10 +159,7 @@ void showOptionsSheet(BuildContext context) {
                 isDark ? Icons.wb_sunny_outlined : Icons.nightlight_outlined,
                 color: Colors.grey,
               ),
-              title: Text(
-                isDark ? "الوضع الصباحي" : "الوضع الليلي",
-                style: const TextStyle(fontSize: 18),
-              ),
+              title: Text(isDark ? "الوضع الصباحي" : "الوضع الليلي"),
               onTap: () {
                 themeManager.toggleTheme();
                 Navigator.pop(context);
@@ -170,38 +170,25 @@ void showOptionsSheet(BuildContext context) {
 
             /// Account
             ListTile(
-              trailing: const Icon(
-                Icons.person_outline,
-                color: Colors.grey,
-              ),
-              title: const Text(
-                "الحساب",
-                style: TextStyle(fontSize: 18),
-              ),
+              trailing: const Icon(Icons.person_outline),
+              title: const Text("الحساب"),
               onTap: () {
                 Navigator.pop(context);
-
                 Navigator.pushNamed(context, PageRouteName.profile2);
               },
             ),
 
             const Divider(),
 
-            /// Logout
+            /// 🔥 LOGOUT (زي MyAccount 100%)
             ListTile(
-              trailing: const Icon(
-                Icons.logout,
-                color: Colors.red,
-              ),
+              trailing: const Icon(Icons.logout, color: Colors.red),
               title: const Text(
                 "تسجيل الخروج",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.red,
-                ),
+                style: TextStyle(color: Colors.red),
               ),
               onTap: () {
-                Navigator.pushNamed(context, PageRouteName.login);
+                context.read<LogoutCubit>().logout();
               },
             ),
 

@@ -1,32 +1,36 @@
-import 'dart:convert';
-import 'package:asaneed/features/tabs/presentaion/views/Account/bloc/acc_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'acc_states.dart';
 import 'package:http/http.dart' as http;
 
-
 class LogoutCubit extends Cubit<LogoutState> {
-  LogoutCubit() : super(LogoutInitialState());
+  LogoutCubit() : super(LogoutInitial());
 
-  Future<void> logout({required String token}) async {
-    emit(LogoutLoadingState());
+  Future<void> logout() async {
+    emit(LogoutLoading());
 
     try {
-      final response = await http.post(
-        Uri.parse(""),
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('token');
 
-      );
-
-      final data = jsonDecode(response.body);
-
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        emit(LogoutSuccessState());
-      } else {
-        emit(LogoutErrorState(
-          message: data["message"] ?? "Logout failed",
-        ));
+      // 🔹 call API (optional)
+      if (token != null) {
+        await http.post(
+          Uri.parse(
+            "http://167.99.94.194:8000/en/api/v1/accounts/users/logout/",
+          ),
+          headers: {
+            "Authorization": "Bearer $token",
+          },
+        );
       }
+
+      // 🔹 remove token
+      await prefs.remove('token');
+
+      emit(LogoutSuccess());
     } catch (e) {
-      emit(LogoutErrorState(message: e.toString()));
+      emit(LogoutError(e.toString()));
     }
   }
 }
