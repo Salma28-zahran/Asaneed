@@ -1,12 +1,12 @@
 abstract class LogoutState {}
 
-class LogoutInitialState extends LogoutState {}
+class LogoutInitial extends LogoutState {}
 
-class LogoutLoadingState extends LogoutState {}
+class LogoutLoading extends LogoutState {}
 
-class LogoutSuccessState extends LogoutState {}
+class LogoutSuccess extends LogoutState {}
 
-class LogoutErrorState extends LogoutState {
+class LogoutError extends LogoutState {
   final String message;
-  LogoutErrorState({required this.message});
+  LogoutError(this.message);
 }
