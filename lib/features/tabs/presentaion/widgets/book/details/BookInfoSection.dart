@@ -3,7 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:asaneed/theme/app_theme.dart';
 
 class BookInfoSection extends StatelessWidget {
-  const BookInfoSection({super.key});
+  final String publisher;
+  final String editor;
+  final int editionNumber;
+
+  const BookInfoSection({
+    super.key,
+    required this.publisher,
+    required this.editor,
+    required this.editionNumber,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +22,9 @@ class BookInfoSection extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColor.getContainerColor(context),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(
+          color: Colors.grey.shade300,
+        ),
       ),
       child: Column(
         children: [
@@ -32,12 +43,30 @@ class BookInfoSection extends StatelessWidget {
 
           const SizedBox(height: 10),
 
-          // صفوف المعلومات
-          InfoRowWithIcon(icon: Icons.article_outlined, title: "الناشر", value: "ناشر تجريبي"),
+          // الناشر
+          InfoRowWithIcon(
+            icon: Icons.article_outlined,
+            title: "الناشر",
+            value: publisher,
+          ),
+
           const CustomDivider(),
-          InfoRowWithIcon(icon: Icons.edit_outlined, title: "المحقق", value: "محقق تجريبي"),
+
+          // المحقق
+          InfoRowWithIcon(
+            icon: Icons.edit_outlined,
+            title: "المحقق",
+            value: editor,
+          ),
+
           const CustomDivider(),
-          InfoRowWithIcon(icon: Icons.layers_outlined, title: "الطبعة", value: "1st"),
+
+          // الطبعة
+          InfoRowWithIcon(
+            icon: Icons.layers_outlined,
+            title: "الطبعة",
+            value: editionNumber.toString(),
+          ),
         ],
       ),
     );
@@ -64,11 +93,32 @@ class InfoRowWithIcon extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: [
-          Icon(icon, size: 18, color: Colors.grey[600]),
+          Icon(
+            icon,
+            size: 18,
+            color: Colors.grey[600],
+          ),
+
           const SizedBox(width: 6),
-          Text(title, style: TextStyle(color: Colors.grey[700])),
+
+          Text(
+            title,
+            style: TextStyle(
+              color: Colors.grey[700],
+            ),
+          ),
+
           const Spacer(),
-          Text(value, style: const TextStyle(fontSize: 14)),
+
+          Expanded(
+            child: Text(
+              value,
+              textAlign: TextAlign.left,
+              style: const TextStyle(
+                fontSize: 14,
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -80,6 +130,9 @@ class CustomDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Divider(color: Colors.grey.shade300, height: 1);
+    return Divider(
+      color: Colors.grey.shade300,
+      height: 1,
+    );
   }
 }

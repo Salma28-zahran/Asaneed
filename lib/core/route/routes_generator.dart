@@ -15,8 +15,9 @@ import 'package:asaneed/features/tabs/presentaion/views/Account/privacy_policy.d
 import 'package:asaneed/features/tabs/presentaion/views/Account/profile_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/Account/terms_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/asaneed/presentation/views/asaneed_screen.dart';
-import 'package:asaneed/features/tabs/presentaion/views/book/book_details.dart';
-import 'package:asaneed/features/tabs/presentaion/views/book/book_screen.dart';
+import 'package:asaneed/features/tabs/presentaion/views/book/presentation/views/BookPagesScreen.dart';
+import 'package:asaneed/features/tabs/presentaion/views/book/presentation/views/book_details.dart';
+import 'package:asaneed/features/tabs/presentaion/views/book/presentation/views/book_screen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/hadith/presentation/views/hadethscreen.dart';
 import 'package:asaneed/features/tabs/presentaion/views/hadith/presentation/views/hadith_details.dart';
 import 'package:asaneed/features/tabs/presentaion/views/rawah_screen.dart';
@@ -173,9 +174,20 @@ class RoutesGenerator {
           settings: settings,
         );
       case PageRouteName.book_details:
+        final int id = settings.arguments as int;
+
         return MaterialPageRoute(
-          builder: (context) => const BackgroundScreen(
-            child: BookDetails(),
+          builder: (context) => BackgroundScreen(
+            child: BookDetails(id: id),
+          ),
+          settings: settings,
+        );
+      case PageRouteName.pages:
+        final int id = settings.arguments as int;
+
+        return MaterialPageRoute(
+          builder: (context) => BackgroundScreen(
+            child: BookPagesScreen(),
           ),
           settings: settings,
         );

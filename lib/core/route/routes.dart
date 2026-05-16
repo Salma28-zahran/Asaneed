@@ -23,6 +23,9 @@ class PageRouteName{
   static const String book_details = '/book_details';
   static const String hadithDetails = '/hadithDetails';
   static const String passotp = '/passotp';
+  static const String pages = '/pages';
+
+
 
 
 

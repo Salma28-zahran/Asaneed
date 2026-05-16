@@ -3,7 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:asaneed/theme/app_theme.dart';
 
 class BookStatsGrid extends StatelessWidget {
-  const BookStatsGrid({super.key});
+  final int size;
+  final int numberOfParts;
+  final String hijriDate;
+
+  const BookStatsGrid({
+    super.key,
+    required this.size,
+    required this.numberOfParts,
+    required this.hijriDate,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +23,30 @@ class BookStatsGrid extends StatelessWidget {
       crossAxisSpacing: 12,
       mainAxisSpacing: 12,
       childAspectRatio: 1.4,
-      children: const [
-        StatsCard(icon: Icons.description, number: "160", label: "صفحة"),
-        StatsCard(icon: Icons.layers, number: "1", label: "أجزاء"),
-        StatsCard(icon: Icons.storage, number: "640 KB", label: "الحجم"),
-        StatsCard(icon: Icons.calendar_today, number: "20 شعبان 1447 هـ", label: "أضيف"),
+      children: [
+        const StatsCard(
+          icon: Icons.description,
+          number: "160",
+          label: "صفحة",
+        ),
+
+        StatsCard(
+          icon: Icons.layers,
+          number: numberOfParts.toString(),
+          label: "أجزاء",
+        ),
+
+        StatsCard(
+          icon: Icons.storage,
+          number: "$size KB",
+          label: "الحجم",
+        ),
+
+        StatsCard(
+          icon: Icons.calendar_today,
+          number: hijriDate,
+          label: "أضيف",
+        ),
       ],
     );
   }
@@ -44,23 +72,33 @@ class StatsCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColor.getContainerColor(context),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColor.getborder(context)),
+        border: Border.all(
+          color: AppColor.getborder(context),
+        ),
       ),
       padding: const EdgeInsets.all(12),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: Colors.grey),
+          Icon(
+            icon,
+            color: Colors.grey,
+          ),
+
           const SizedBox(height: 6),
+
           Text(
             number,
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: AppColor.getBlack(context),
             ),
           ),
+
           const SizedBox(height: 4),
+
           Text(
             label,
             style: GoogleFonts.inter(
