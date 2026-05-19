@@ -5,14 +5,16 @@ import 'package:google_fonts/google_fonts.dart';
 class InfoCard extends StatelessWidget {
   final String number;
   final String title;
-  final IconData icon;
+  final IconData? icon;
+  final String? imagePath; // اضفنا
   final Color iconColor;
 
   const InfoCard({
     super.key,
     required this.number,
     required this.title,
-    required this.icon,
+    this.icon,
+    this.imagePath,
     required this.iconColor,
   });
 
@@ -29,11 +31,24 @@ class InfoCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(icon, color: iconColor, size: 30),
+            // هنا نعرض صورة لو موجودة، وإلا أيقونة
+            if (imagePath != null)
+              Image.asset(
+                imagePath!,
+                width: 30,
+                height: 30,
+                color: iconColor, // لو عايزة تغيري لون الصورة لو كانت PNG شفاف
+              )
+            else if (icon != null)
+              Icon(
+                icon,
+                color: iconColor,
+                size: 30,
+              ),
             const SizedBox(height: 8),
             Text(
               number,
-              style:  GoogleFonts.roboto(
+              style: GoogleFonts.roboto(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: AppColor.getBlack(context),
@@ -42,7 +57,7 @@ class InfoCard extends StatelessWidget {
             const SizedBox(height: 4),
             Text(
               title,
-              style:  GoogleFonts.roboto(
+              style: GoogleFonts.roboto(
                 fontSize: 16,
                 color: AppColor.getBlack(context),
               ),

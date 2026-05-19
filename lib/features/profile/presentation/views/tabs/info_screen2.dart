@@ -89,8 +89,8 @@ class InfoScreen2 extends StatelessWidget {
                 //////////الكارد التاني /////
                 SizedBox(height: 15,),
                 Container(
-                  width:351 ,
-                  height: 110,
+                  width: 351,
+                  padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     color: AppColor.getContainerColor(context),
                     borderRadius: BorderRadius.circular(16),
@@ -105,7 +105,7 @@ class InfoScreen2 extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(10),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end, // << يلتصق على اليمين
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Row(
@@ -114,17 +114,27 @@ class InfoScreen2 extends StatelessWidget {
                           children: [
                             Icon(Icons.person,color: AppColor.primary,),
                             SizedBox(width: 7,),
-
-                            Text("السيرة الذاتية",style: AppColor.textprimary.copyWith(fontSize: 16),),
+                            Text(
+                              "السيرة الذاتية",
+                              style: AppColor.textprimary.copyWith(fontSize: 16),
+                            ),
                           ],
                         ),
                         SizedBox(height: 20,),
-                        Text("أول الخلفاء الراشدين، وأفضل البشر بعد الأنبياء.",style: GoogleFonts.scheherazadeNew(color: AppColor.getBlack(context),fontSize: 18),),
-
+                        Text(
+                          "أبو بكر الصديق هو أول الخلفاء الراشدين وأحد أقرب الصحابة إلى النبي محمد ﷺ.\n"
+                              "اسمه عبد الله بن أبي قحافة، ولقّب بالصديق لتصديقه حادثة الإسراء والمعراج.\n"
+                              "كان أول من أسلم من الرجال، ورافق النبي ﷺ في الهجرة إلى المدينة.\n"
+                              "تولى الخلافة بعد وفاة النبي ﷺ، وثبّت الدولة الإسلامية وقاد حروب الردة بحكمة وثبات.",
+                          style: GoogleFonts.scheherazadeNew(
+                            color: AppColor.getBlack(context),
+                            fontSize: 18,
+                          ),
+                          textAlign: TextAlign.right, // << الكلام يلتصق على اليمين
+                        ),
                       ],
                     ),
                   ),
-        
                 ),
                 //////////الكارد الثالث /////
                 SizedBox(height: 15,),
