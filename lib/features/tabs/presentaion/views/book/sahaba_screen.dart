@@ -1,5 +1,5 @@
-import 'package:asaneed/features/tabs/presentaion/views/book/widgets/sahaba_card.dart';
-import 'package:asaneed/features/tabs/presentaion/views/book/widgets/sahaba_filter_bottom_sheet.dart';
+import 'package:asaneed/features/tabs/presentaion/views/book/presentation/widgets/sahaba_card.dart';
+import 'package:asaneed/features/tabs/presentaion/views/book/presentation/widgets/sahaba_filter_bottom_sheet.dart';
 import 'package:asaneed/features/tabs/presentaion/views/hadith/presentation/widgets/hadith_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

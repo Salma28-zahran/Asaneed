@@ -1,10 +1,10 @@
+import 'package:asaneed/core/route/routes.dart';
+import 'package:asaneed/theme/AppThemeManager.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:asaneed/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../core/route/routes.dart';
-import '../../../../../../theme/AppThemeManager.dart';
 
 class SahabaCard extends StatelessWidget {
   final String name;
