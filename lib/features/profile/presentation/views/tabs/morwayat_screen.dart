@@ -64,13 +64,15 @@ class _MorwayatScreenState extends State<MorwayatScreen> {
                     color: AppColor.getBlack(context)),),
                 SizedBox(height: 10,),
                 HadithCard2(
-                  number: featuredHadith.number,
+                  id: featuredHadith.number,
+                  code: featuredHadith.number.toString(),
                   text: featuredHadith.text,
                   status: featuredHadith.status,
                 ),
                 SizedBox(height: 16,),
                 HadithCard2(
-                  number: featuredHadith.number,
+                  id: featuredHadith.number,
+                  code: featuredHadith.number.toString(),
                   text: featuredHadith.text,
                   status: featuredHadith.status,
                 ),
