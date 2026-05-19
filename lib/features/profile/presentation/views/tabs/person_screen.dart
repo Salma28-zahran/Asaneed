@@ -9,11 +9,10 @@ class PersonScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final themeManager = context.watch<AppThemeManager>();
     final isDark = themeManager.isDarkMode;
-
     final bool hasData = true;
-
     return Scaffold(
      backgroundColor: Colors.transparent,
       body: SafeArea(
